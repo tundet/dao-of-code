@@ -9,8 +9,10 @@ import { Dev1Component } from './dev1/dev1.component';
 import { Dev2Component } from './dev2/dev2.component';
 import { Dev3Component } from './dev3/dev3.component';
 import {RouterModule, Routes} from "@angular/router";
+import { HomepageComponent } from './homepage/homepage.component';
 
 const appRoutes: Routes = [
+  { path: '', component: HomepageComponent },
   { path: 'dev1', component: Dev1Component },
   { path: 'dev2', component: Dev2Component },
   { path: 'dev3', component: Dev3Component },
@@ -23,7 +25,8 @@ const appRoutes: Routes = [
     PageNotFoundComponent,
     Dev1Component,
     Dev2Component,
-    Dev3Component
+    Dev3Component,
+    HomepageComponent
   ],
   imports: [
     BrowserModule,
