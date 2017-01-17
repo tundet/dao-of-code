@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {HttpapiService} from "../httpapi.service";
+import {Response} from "@angular/http";
 
 @Component({
   selector: 'app-dev3',
@@ -15,13 +16,14 @@ export class Dev3Component implements OnInit {
   };
 
   private onSignup() {
-    this.httpApi.post("users", this.newUser).do((res: any) => console.log(res));
+    console.log("Singup! start");
+    var response = this.httpApi.post("users", this.newUser);
+    console.log(response);
+    console.log("Singup! end");
   }
 
 
-  constructor(
-    private httpApi: HttpapiService
-  ) { }
+  constructor( private httpApi: HttpapiService ) { }
 
   ngOnInit() {
   }

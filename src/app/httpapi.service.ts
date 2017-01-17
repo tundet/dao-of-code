@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Headers, Http, Response } from '@angular/http';
+import {Headers, Http, Response} from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/Rx';
 import 'rxjs/add/observable/throw';
@@ -38,7 +38,7 @@ export class HttpapiService {
       .map(this.getJson)
   }
 
-  post(path: string, body): Observable<any> {
+  post(path: string, body) {
     return this.http.post(
       `${this.api_url}${path}`,
       JSON.stringify(body),
@@ -46,7 +46,7 @@ export class HttpapiService {
     )
       .map(this.checkForError)
       .catch(err => Observable.throw(err))
-      .map(this.getJson)
+      .map((res:Response) => res.json())
   }
 
   delete(path: string): Observable<any> {

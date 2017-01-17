@@ -10,6 +10,7 @@ import { Dev2Component } from './dev2/dev2.component';
 import { Dev3Component } from './dev3/dev3.component';
 import {RouterModule, Routes} from "@angular/router";
 import { HomepageComponent } from './homepage/homepage.component';
+import {HttpapiService} from "./httpapi.service";
 
 const appRoutes: Routes = [
   { path: '', component: HomepageComponent },
@@ -34,7 +35,7 @@ const appRoutes: Routes = [
     HttpModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [],
+  providers: [ HttpapiService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
