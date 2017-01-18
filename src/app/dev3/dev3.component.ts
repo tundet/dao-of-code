@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {HttpapiService} from "../httpapi.service";
-import {Response} from "@angular/http";
 
 @Component({
   selector: 'app-dev3',
@@ -8,6 +7,9 @@ import {Response} from "@angular/http";
   styleUrls: ['./dev3.component.css']
 })
 export class Dev3Component implements OnInit {
+
+  signInMode: boolean = true;
+  linkText: string = 'Don\'t have an account?';
 
   newUser = {
     username: '',
@@ -19,6 +21,16 @@ export class Dev3Component implements OnInit {
     username: '',
     password: ''
   };
+
+  changeMode() {
+    if (this.signInMode === true) {
+      this.signInMode = false;
+      this.linkText = 'Already have an account?'
+    } else {
+      this.signInMode = true;
+      this.linkText = 'Don\'t have an account?';
+    }
+  }
 
   private onSignup() {
     console.log("Singup! start");

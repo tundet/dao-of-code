@@ -1,5 +1,21 @@
-
-<form (ngSubmit)="onSignup()">
+<form (ngSubmit)="onSignin()" *ngIf="signInMode">
+  <input
+    type="text"
+    required
+    [(ngModel)]="signinUser.username"
+    name="username"
+    placeholder="Username"
+  >
+  <input
+    type="password"
+    required
+    [(ngModel)]="signinUser.password"
+    name="password"
+    placeholder="Password"
+  >
+  <button type="submit">Singin</button>
+</form>
+<form (ngSubmit)="onSignup()" *ngIf="!signInMode">
   <input
     type="text"
     required
@@ -22,31 +38,15 @@
     placeholder="E-mail"
   >
   <button type="submit">Singup</button>
-</form><br>
-<form (ngSubmit)="onSignin()">
-  <input
-    type="text"
-    required
-    [(ngModel)]="signinUser.username"
-    name="username"
-    placeholder="Username"
-  >
-  <input
-    type="password"
-    required
-    [(ngModel)]="signinUser.password"
-    name="password"
-    placeholder="Password"
-  >
-  <button type="submit">Singin</button>
 </form>
+<a (click)="changeMode()" class="btn-light link">
+  {{ linkText }}
+</a>
 
 <div>
   <p>
     todo: <br>
-    < >make button to switch between signup and signin<br>
-    <*>send signup form to http://media.mw.metropolia.fi/wbma/users<br>
-    < >send signin form to http://media.mw.metropolia.fi/wbma/login whitout email<br>
-    < >hide email in signin form and dont send it
+    < > save token to some where<br>
+    < > inform user that user account has been made<br>
   </p>
 </div>
