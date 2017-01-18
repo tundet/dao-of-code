@@ -9,6 +9,7 @@ import {HttpapiService} from "../httpapi.service";
 export class Dev3Component implements OnInit {
 
   loggedinMode: boolean = false;
+  newUserHasBeenMade: boolean = false;
   signInMode: boolean = true;
   linkText: string = 'Don\'t have an account?';
 
@@ -28,13 +29,29 @@ export class Dev3Component implements OnInit {
     token: ''
   };
 
+  private resetJson (json){
+    for (var i in json) {
+      json[i] = '';
+    }
+  }
+
+  private resetAllJsons () {
+    this.resetJson(this.newUser);
+    this.resetJson(this.loggedinUser);
+    this.resetJson(this.signinUser);
+  }
+
   changeSignupMode() {
     if (this.signInMode === true) {
       this.signInMode = false;
+      this.newUserHasBeenMade = false;
       this.linkText = 'Already have an account?'
+      this.resetAllJsons();
     } else {
       this.signInMode = true;
+      this.newUserHasBeenMade = false;
       this.linkText = 'Don\'t have an account?';
+      this.resetAllJsons();
     }
   }
 
@@ -42,6 +59,8 @@ export class Dev3Component implements OnInit {
     console.log("Singup! start");
     this.httpApi.post("users", this.newUser).subscribe(response => {
       console.log(response);
+      this.newUserHasBeenMade = true;
+      this.signInMode = true;
     });
     console.log("Singup! end");
   }
@@ -53,6 +72,7 @@ export class Dev3Component implements OnInit {
       this.loggedinUser.username = this.signinUser.username;
       this.loggedinUser.token = response.token;
       this.loggedinMode = true;
+      this.resetJson(this.signinUser);
     });
     console.log("Singin! end");
   }

@@ -1,4 +1,7 @@
 <div *ngIf="!loggedinMode">
+  <div *ngIf="newUserHasBeenMade">
+    New user has been made! Username: {{ newUser.username }}, Email: {{ newUser.email }}
+  </div>
   <form (ngSubmit)="onSignin()" *ngIf="signInMode">
     <input
       type="text"
