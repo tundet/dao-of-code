@@ -24,8 +24,20 @@
   <button type="submit">Singup</button>
 </form><br>
 <form (ngSubmit)="onSignin()">
-  <input type="text" name="username" placeholder="Username">
-  <input type="password" name="password" placeholder="Password">
+  <input
+    type="text"
+    required
+    [(ngModel)]="signinUser.username"
+    name="username"
+    placeholder="Username"
+  >
+  <input
+    type="password"
+    required
+    [(ngModel)]="signinUser.password"
+    name="password"
+    placeholder="Password"
+  >
   <button type="submit">Singin</button>
 </form>
 
