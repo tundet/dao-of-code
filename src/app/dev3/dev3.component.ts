@@ -17,8 +17,9 @@ export class Dev3Component implements OnInit {
 
   private onSignup() {
     console.log("Singup! start");
-    var response = this.httpApi.post("users", this.newUser);
-    console.log(response);
+    this.httpApi.post("users", this.newUser).subscribe(response => {
+      console.log(response);
+    });
     console.log("Singup! end");
   }
 
