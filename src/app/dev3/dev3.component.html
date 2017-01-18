@@ -1,48 +1,52 @@
-<form (ngSubmit)="onSignin()" *ngIf="signInMode">
-  <input
-    type="text"
-    required
-    [(ngModel)]="signinUser.username"
-    name="username"
-    placeholder="Username"
-  >
-  <input
-    type="password"
-    required
-    [(ngModel)]="signinUser.password"
-    name="password"
-    placeholder="Password"
-  >
-  <button type="submit">Singin</button>
-</form>
-<form (ngSubmit)="onSignup()" *ngIf="!signInMode">
-  <input
-    type="text"
-    required
-    [(ngModel)]="newUser.username"
-    name="username"
-    placeholder="Username"
-  >
-  <input
-    type="password"
-    required
-    [(ngModel)]="newUser.password"
-    name="password"
-    placeholder="Password"
-  >
-  <input
-    type="email"
-    required
-    [(ngModel)]="newUser.email"
-    name="email"
-    placeholder="E-mail"
-  >
-  <button type="submit">Singup</button>
-</form>
-<a (click)="changeMode()" class="btn-light link">
-  {{ linkText }}
-</a>
-
+<div *ngIf="!loggedinMode">
+  <form (ngSubmit)="onSignin()" *ngIf="signInMode">
+    <input
+      type="text"
+      required
+      [(ngModel)]="signinUser.username"
+      name="username"
+      placeholder="Username"
+    >
+    <input
+      type="password"
+      required
+      [(ngModel)]="signinUser.password"
+      name="password"
+      placeholder="Password"
+    >
+    <button type="submit">Singin</button>
+  </form>
+  <form (ngSubmit)="onSignup()" *ngIf="!signInMode">
+    <input
+      type="text"
+      required
+      [(ngModel)]="newUser.username"
+      name="username"
+      placeholder="Username"
+    >
+    <input
+      type="password"
+      required
+      [(ngModel)]="newUser.password"
+      name="password"
+      placeholder="Password"
+    >
+    <input
+      type="email"
+      required
+      [(ngModel)]="newUser.email"
+      name="email"
+      placeholder="E-mail"
+    >
+    <button type="submit">Singup</button>
+  </form>
+  <a (click)="changeSignupMode()" class="mode-change-link">
+    {{ linkText }}
+  </a>
+</div>
+<div *ngIf="loggedinMode">
+  Username: {{ loggedinUser.username }}, Token: {{ loggedinUser.token }}
+</div>
 <div>
   <p>
     todo: <br>
