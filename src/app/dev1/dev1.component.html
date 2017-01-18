@@ -12,10 +12,10 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let person of searchResults; let i=index">
+        <tr *ngFor="let user of searchResults; let i=index">
             <td>{{user.name}}</td>
             <td>{{user.post}}</td>
-            <td>{{post.tag}}<br/>
+            <td>{{user.post.tag}}<br/>
             </td>
         </tr>
     </tbody>
