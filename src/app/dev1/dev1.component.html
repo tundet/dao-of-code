@@ -3,3 +3,20 @@
     <input type="search" name="query" [(ngModel)]="query" (keyup.enter)="search()">
     <button type="button" (click)="search()">Search</button>
 </form>
+<table *ngIf="searchResults">
+    <thead>
+        <tr>
+            <th>Username</th>
+            <th>Post</th>
+            <th>Tag</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let person of searchResults; let i=index">
+            <td>{{user.name}}</td>
+            <td>{{user.post}}</td>
+            <td>{{post.tag}}<br/>
+            </td>
+        </tr>
+    </tbody>
+</table>
