@@ -13,6 +13,8 @@ export class Dev3Component implements OnInit {
   signInMode: boolean = true;
   linkText: string = 'Don\'t have an account?';
 
+  JWT_KEY: string = 'dao_jwt';
+
   newUser = {
     username: '',
     password: '',
@@ -55,30 +57,51 @@ export class Dev3Component implements OnInit {
     }
   }
 
-  private onSignup() {
-    console.log("Singup! start");
+  onSignup() {
+    console.log("Signup! start");
     this.httpApi.post("users", this.newUser).subscribe(response => {
       console.log(response);
       this.newUserHasBeenMade = true;
       this.signInMode = true;
     });
-    console.log("Singup! end");
+    console.log("Signup! end");
   }
 
-  private onSignin() {
-    console.log("Singin! start");
+  onSignin() {
+    console.log("Signin! start");
     this.httpApi.post("login", this.signinUser).subscribe(response => {
       console.log(response);
+      this.setJwt(response.token);
       this.loggedinUser.username = this.signinUser.username;
       this.loggedinUser.token = response.token;
       this.loggedinMode = true;
       this.resetJson(this.signinUser);
     });
-    console.log("Singin! end");
+    console.log("Signin! end");
   }
 
+  signout() {
+    window.localStorage.removeItem(this.JWT_KEY);
+    this.resetAllJsons();
+    this.loggedinMode = false;
+    this.httpApi.headers.delete('Authorization');
+    console.log(this.httpApi.headers.toJSON());
+    console.log("Signout end!");
+  }
 
-  constructor( private httpApi: HttpapiService ) { }
+  constructor( private httpApi: HttpapiService ) {
+    const token = window.localStorage.getItem(this.JWT_KEY);
+    if (token) {
+      this.setJwt(token);
+      this.loggedinMode = true;
+    }
+  }
+
+  setJwt(jwt: string) {
+    window.localStorage.setItem(this.JWT_KEY, jwt);
+    this.httpApi.setHeaders({'Authorization': `Bearer ${jwt}`});
+  }
+
 
   ngOnInit() {
   }
