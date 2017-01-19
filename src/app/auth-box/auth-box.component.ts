@@ -4,7 +4,7 @@ import {HttpapiService} from "../httpapi.service";
 @Component({
   selector: 'app-auth-box',
   templateUrl: './auth-box.component.html',
-  styleUrls: ['./auth-box.component.css']
+  styleUrls: ['auth-box.component.scss']
 })
 export class AuthBoxComponent implements OnInit {
 
