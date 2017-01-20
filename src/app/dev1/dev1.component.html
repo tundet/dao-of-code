@@ -1,22 +1,43 @@
-<h2>Search</h2>
-<form>
-    <input type="search" name="query" [(ngModel)]="query" (keyup.enter)="search()">
-    <button type="button" (click)="search()">Search</button>
-</form>
-<table *ngIf="searchResults">
-    <thead>
-        <tr>
-            <th>Username</th>
-            <th>Post</th>
-            <th>Tag</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let id of mediajson">
-            <td>{{user.name}}</td>
-            <td>{{user.post}}</td>
-            <td>{{user.post.tag}}<br/>
-            </td>
-        </tr>
-    </tbody>
-</table>
+<div class="container">
+    <h2>Trending now</h2>
+    <img src="http://larics.fer.hr/wp-content/uploads/2016/04/default-placeholder.png" width="300">
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
+        dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+</div>
+
+<div class="container">
+    <h2>Search</h2>
+    <form>
+        <input type="search" name="query" [(ngModel)]="query" (keyup.enter)="search()">
+        <button type="button" (click)="search()">Search</button>
+    </form>
+    <table *ngIf="searchResults">
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Post</th>
+                <th>Tag</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let username of user">
+                <td>{{user.username}}}</td>
+            </tr>
+            <tr *ngFor="let title of media">
+                <td>{{media.title}}</td>
+            </tr>
+            <tr *ngFor="let tag of media">
+                <td>{{user.post.tag}}<br/>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="container">
+    <h2>Pick a language</h2>
+    <ul *ngFor="let tag of mad">
+        <li><img src="http://larics.fer.hr/wp-content/uploads/2016/04/default-placeholder.png"></li>
+        <li>{{media.tag}}</li>
+    </ul>
+</div>
