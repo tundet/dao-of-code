@@ -69,7 +69,7 @@ export class AuthBoxComponent implements OnInit {
 
   onSignin() {
     console.log("Signin! start");
-    this.httpApi.post("login", this.signinUser).subscribe(response => {
+    this.httpApi.post("signin", this.signinUser).subscribe(response => {
       console.log(response);
       this.setJwt(response.token);
       this.loggedinUser.username = this.signinUser.username;
