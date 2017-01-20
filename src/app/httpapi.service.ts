@@ -12,7 +12,7 @@ export class HttpapiService {
     Accept: 'application/json'
   });
 
-  api_url: string = 'http://media.mw.metropolia.fi/wbma/';
+  api_url: string = 'https://dao-api.othnet.ga/';
 
   constructor(private http: Http) {
   }

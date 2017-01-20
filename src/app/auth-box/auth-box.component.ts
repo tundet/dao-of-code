@@ -13,7 +13,7 @@ export class AuthBoxComponent implements OnInit {
   signInMode: boolean = true;
   linkText: string = 'Don\'t have an account?';
 
-  JWT_KEY: string = 'dao_jwt';
+  JWT_KEY: string = 'dao_token';
 
   newUser = {
     username: '',
