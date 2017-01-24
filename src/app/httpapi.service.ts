@@ -13,6 +13,7 @@ export class HttpapiService {
   });
 
   api_url: string = 'https://dao-api.othnet.ga/';
+  JWT_KEY: string = 'dao_token';
 
   constructor(private http: Http) {
   }
@@ -32,7 +33,16 @@ export class HttpapiService {
     }
   }
 
+  logout(): Observable<any> {
+    this.setXAccessToken();
+    return this.http.post(`${this.api_url}signout`, {} )
+      .map(this.checkForError)
+      .catch(err => Observable.throw(err))
+      .map(this.getJson);
+  }
+
   get(path: string): Observable<any> {
+    this.setXAccessToken();
     return this.http.get(`${this.api_url}${path}`, {headers: this.headers})
       .map(this.checkForError)
       .catch(err => Observable.throw(err))
@@ -40,6 +50,7 @@ export class HttpapiService {
   }
 
   post(path: string, body): Observable<any> {
+    this.setXAccessToken();
     return this.http.post(
       `${this.api_url}${path}`,
       JSON.stringify(body),
@@ -58,6 +69,15 @@ export class HttpapiService {
       .map(this.checkForError)
       .catch(err => Observable.throw(err))
       .map(this.getJson)
+  }
+
+  setXAccessToken () {
+    let xAToken: string = window.localStorage.getItem(this.JWT_KEY);
+    // console.log(xAToken);
+    if (xAToken) {
+      this.setHeaders({ 'x-access-token': xAToken });
+      // console.log(this.headers.get('x-access-token'))
+    }
   }
 
   setHeaders(headers) {
