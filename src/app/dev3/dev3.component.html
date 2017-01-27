@@ -1,43 +1,28 @@
 <div>
   <app-auth-box></app-auth-box>
+  <app-user-info-box></app-user-info-box>
 </div>
-
 <div>
-  <div>
-    <form (ngSubmit)="onGetUser()">
-      <input
-        placeholder="Username/id"
-        type="text"
-        required
-        [(ngModel)]="getValue.value"
-        name="username"
-      >
-      <button type="submit">Get</button>
-    </form>
-  </div>
-  <div *ngIf="gotUser.id != ''">
-    <h3>User info:</h3>
-    <p>Id: {{ gotUser.id }}</p>
-    <p>Username: {{ gotUser.username }}</p>
-    <p>Email: {{ gotUser.email }}</p>
-    <p>Created: {{ gotUser.created_at }}</p>
-  </div>
-  <div *ngIf="userMedias != null">
-    <h3>User Medias:</h3>
-    <div *ngFor="let media of userMedias">
-      <p>Id: {{ media.id }}</p>
-      <p>User_id: {{ media.user_id }}</p>
-      <p>File name: {{ media.file_name }}</p>
-      <p>Title: {{ media.title }}</p>
-      <p>Description: {{ media.description }}</p>
-      <p>Tag: {{ media.tag }}</p>
-      <p>Media type: {{ media.media_type }}</p>
-    </div>
-  </div>
-  <div *ngIf="TODO">
-    <h3>TODO</h3>
-    <p>do something!</p>
-    <p>Todo:</p>
-    <p>< > something!</p>
-  </div>
+  <form>
+    <ul>
+      <li><input type="file"></li>
+      <li><input type="text" placeholder="title"></li>
+      <li><input type="text" placeholder="description"></li>
+
+      <li>Tags:<select>
+        <option value="1">Java</option>
+        <option value="2">Php</option>
+      </select></li>
+    </ul>
+  </form>
+</div>
+<div *ngIf="TODO">
+  <h3>TODO</h3>
+  <p>File upload:</p>
+  <p>Todo:</p>
+  <p>< > Form</p>
+  <p>< > Preview</p>
+  <p>< > Grouping</p>
+  <p>< > Cropping</p>
+  <p>< > Something!</p>
 </div>

@@ -12,6 +12,7 @@ import {RouterModule, Routes} from "@angular/router";
 import { HomepageComponent } from './homepage/homepage.component';
 import {HttpapiService} from "./httpapi.service";
 import { AuthBoxComponent } from './auth-box/auth-box.component';
+import { UserInfoBoxComponent } from './user-info-box/user-info-box.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomepageComponent },
@@ -29,7 +30,8 @@ const appRoutes: Routes = [
     Dev2Component,
     Dev3Component,
     HomepageComponent,
-    AuthBoxComponent
+    AuthBoxComponent,
+    UserInfoBoxComponent
   ],
   imports: [
     BrowserModule,
