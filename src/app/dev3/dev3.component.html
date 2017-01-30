@@ -1,26 +1,74 @@
 <div>
-  <app-auth-box></app-auth-box>
-  <app-user-info-box></app-user-info-box>
-</div>
-<div>
   <form>
     <ul>
-      <li><input type="file"></li>
+      <li>
+        <input
+          type="checkbox"
+          name="file"
+          [(ngModel)]="typeFile"
+          (change)="typeChange($event)"
+        >
+        <input
+          type="file"
+          [disabled]="!typeFile"
+        > | Txt, image, video
+      </li>
+      <li>
+        <input
+          type="checkbox"
+          name="youtube"
+          [(ngModel)]="typeYoutube"
+          (change)="typeChange($event)"
+        >
+        <input
+          type="text"
+          placeholder="youtube video url"
+          [disabled]="!typeYoutube"
+        >
+      </li>
       <li><input type="text" placeholder="title"></li>
       <li><input type="text" placeholder="description"></li>
-
-      <li>Tags:<select>
-        <option value="1">Java</option>
-        <option value="2">Php</option>
-      </select></li>
+      <li>
+        <input
+          type="checkbox"
+          name="gNew"
+          [(ngModel)]="groupNew"
+          (change)="typeChange($event)"
+        > New group;
+        <input
+          type="text"
+          [disabled]="!groupNew"
+          placeholder="New group name"
+        > | Optional
+      </li>
+      <li>Language:
+        <select [disabled]="!groupNew">
+          <option *ngFor="let lang of languages" value="{{ lang.value }}">{{ lang.name }}</option>
+        </select>
+      </li>
+      <li>
+        <input
+          type="checkbox"
+          name="gOld"
+          [(ngModel)]="groupOld"
+          (change)="typeChange($event)"
+        > Old group
+        <select [disabled]="!groupOld">
+          <option *ngFor="let group of oldGroups; let i = index;" value="{{ i }}">
+            {{ group.name }}
+          </option>
+        </select>
+      </li>
+      <li>Langage:</li>
     </ul>
+    <button type="submit">Upload</button>
   </form>
 </div>
 <div *ngIf="TODO">
   <h3>TODO</h3>
   <p>File upload:</p>
   <p>Todo:</p>
-  <p>< > Form</p>
+  <p><*> Form</p>
   <p>< > Preview</p>
   <p>< > Grouping</p>
   <p>< > Cropping</p>
