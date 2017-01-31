@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {HttpapiService} from "../httpapi.service";
 
 @Component({
   selector: 'app-dev1',
@@ -7,9 +8,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class Dev1Component implements OnInit {
 
-  constructor() { }
+  private id: any = 1;
+  private image: any = {};
+  private api_url: string = 'https://dao-api.othnet.ga/';
+
+  constructor(private httpApi: HttpapiService) {
+  }
+
+  getMedia() {
+    this.httpApi.get('media/'+ this.id).subscribe(response => {
+      this.image = response;
+      console.log(this.image);
+    });
+  }
 
   ngOnInit() {
+    this.getMedia();
+
   }
 
 }
