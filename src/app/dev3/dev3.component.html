@@ -1,7 +1,9 @@
 <div>
+  <canvas #myCanvas>
+  </canvas>
   <form (submit)="submitNewMedia()">
     <ul>
-      <li>
+     <li>
         <input
           type="checkbox"
           name="videocb"
@@ -106,15 +108,10 @@
           </option>
         </select>
       </li>
-      <li>Langage: {{ oldGroupsSelectedTag }}</li>
+      <li>Language: {{ oldGroupsSelectedTag }}</li>
     </ul>
     <button type="submit">Upload</button>
   </form>
-  <div *ngIf="typeImageFile">
-    <canvas #myCanvas>
-
-    </canvas>
-  </div>
 </div>
 <div *ngIf="TODO">
   <h3>TODO</h3>

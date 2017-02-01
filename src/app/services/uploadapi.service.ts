@@ -1,22 +1,16 @@
 import {Injectable} from '@angular/core';
-import {Headers, Http, Response} from '@angular/http';
-import {Observable} from 'rxjs/Observable';
-import 'rxjs/Rx';
-import 'rxjs/add/observable/throw';
+import {Http, Headers, Response} from "@angular/http";
+import {Observable} from "rxjs";
 
 @Injectable()
-export class HttpapiService {
+export class UploadapiService {
 
   headers: Headers = new Headers({
-    'Content-Type': 'application/json',
     'Accept': 'application/json'
   });
 
   api_url: string = 'https://dao-api.othnet.ga/';
   JWT_KEY: string = 'dao_token';
-
-  constructor(private http: Http) {
-  }
 
   private getJson(response: Response) {
     return response.json();
@@ -33,27 +27,10 @@ export class HttpapiService {
     }
   }
 
-  logout(): Observable<any> {
+  makeGroup(body): Observable<any> {
     this.setXAccessToken();
-    return this.http.post(`${this.api_url}signout`, {} )
-      .map(this.checkForError)
-      .catch(err => Observable.throw(err))
-      .map(this.getJson);
-  }
-
-  get(path: string): Observable<any> {
-    this.setXAccessToken();
-    return this.http.get(`${this.api_url}${path}`, {headers: this.headers})
-      .map(this.checkForError)
-      .catch(err => Observable.throw(err))
-      .map(this.getJson)
-  }
-
-  post(path: string, body): Observable<any> {
-    this.setXAccessToken();
-    return this.http.post(
-      `${this.api_url}${path}`,
-      JSON.stringify(body),
+    return this.http.post(`${this.api_url}/groups`,
+      body,
       {headers: this.headers}
     )
       .map(this.checkForError)
@@ -61,27 +38,33 @@ export class HttpapiService {
       .map((res: Response) => res.json())
   }
 
-  delete(path: string): Observable<any> {
-    return this.http.delete(
+  postUpload(path: string, body): Observable<any> {
+    this.setXAccessToken();
+    this.setHeaders({'Content-Type': 'multipart/form-data'});
+    return this.http.post(
       `${this.api_url}${path}`,
+      body,
       {headers: this.headers}
     )
       .map(this.checkForError)
       .catch(err => Observable.throw(err))
-      .map(this.getJson)
+      .map((res: Response) => res.json())
   }
 
-  setXAccessToken () {
+  setXAccessToken() {
     let xAToken: string = window.localStorage.getItem(this.JWT_KEY);
     // console.log(xAToken);
     if (xAToken) {
-      this.setHeaders({ 'x-access-token': xAToken });
+      this.setHeaders({'x-access-token': xAToken});
       // console.log(this.headers.get('x-access-token'))
     }
   }
 
   setHeaders(headers) {
     Object.keys(headers).forEach(header => this.headers.set(header, headers[header]));
+  }
+
+  constructor(private http: Http) {
   }
 
 }

@@ -13,6 +13,7 @@ import { HomepageComponent } from './homepage/homepage.component';
 import {HttpapiService} from "./httpapi.service";
 import { AuthBoxComponent } from './auth-box/auth-box.component';
 import { UserInfoBoxComponent } from './user-info-box/user-info-box.component';
+import {UploadapiService} from "./services/uploadapi.service";
 
 const appRoutes: Routes = [
   { path: '', component: HomepageComponent },
@@ -39,7 +40,7 @@ const appRoutes: Routes = [
     HttpModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [ HttpapiService ],
+  providers: [ HttpapiService, UploadapiService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

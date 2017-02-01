@@ -1,6 +1,6 @@
 import {Component, ViewChild, OnInit, ElementRef} from '@angular/core';
 import {HttpapiService} from "../httpapi.service";
-import {FILE} from "dns";
+import {UploadapiService} from "../services/uploadapi.service";
 
 @Component({
   selector: 'app-dev3',
@@ -48,7 +48,7 @@ export class Dev3Component implements OnInit {
     {"name": "JavaScript", "value": "javascript"},
     {"name": "Angular", "value": "angular"},
     {"name": "React", "value": "react"}
-  ]
+  ];
 
 
   private resetJson(json) {
@@ -76,8 +76,7 @@ export class Dev3Component implements OnInit {
       if (this.typeVideoFile) {
         this.typeImageFile = false;
       }
-    }
-    if (name == "gNew") {
+    } else if (name == "gNew") {
       if (this.groupNew) {
         this.groupOld = false;
       } else {
@@ -93,7 +92,9 @@ export class Dev3Component implements OnInit {
   }
 
   videoFileChange(fileElement: any) {
-
+    if (fileElement.target.files && fileElement.target.files[0]) {
+      this.formVideoFile = fileElement.target.files[0];
+    }
   }
 
   imageFileChange(fileElement: any) {
@@ -118,41 +119,47 @@ export class Dev3Component implements OnInit {
   };
 
   submitNewMedia() {
-    let data = {
-      "file": null,
-      "youtubelink": '',
-      "title": '',
-      "description": '',
-      "media_type": '',
-      "group_id": '',
-      "tag": ''
+    let formData = new FormData();
+    if (this.typeVideoFile) {
+      formData.append("file", this.formVideoFile);
+      formData.append("media_type", "video");
     }
     if (this.typeImageFile) {
-      data.file = this.formImageFile;
-      data.media_type = "image";
+      formData.append("file", this.formImageFile);
+      formData.append("media_type", "image");
     }
     if (this.typeYoutube && this.formyoutubeLink) {
-      data.youtubelink = this.formyoutubeLink;
+      formData.append("youtube", this.formyoutubeLink);
     }
     if (this.formtitle) {
-      data.title = this.formtitle;
+      formData.append("title", this.formtitle);
     }
     if (this.formdescription) {
-      data.description = this.formdescription;
+      formData.append("description", this.formdescription);
     }
-    if (this.groupNew) {
+    if (this.groupNew && this.formnewgroupname.trim().length >= 4) {
       // make new group and set id and tag in data
+      let newGroupFormData = new FormData();
+      newGroupFormData.append("name", this.formnewgroupname.trim());
+      newGroupFormData.append("tag", this.formnewgrouplang);
+      this.uploadApi.makeGroup(newGroupFormData).subscribe(response => {
+        console.log(response);
+        formData.append("group_id", response.id);
+        formData.append("tag", this.formnewgrouplang);
+      });
     } else {
-      data.group_id = this.oldGroupsSelectedId;
-      data.tag = this.oldGroupsSelectedTag;
+      formData.append("group_id", this.oldGroupsSelectedId);
+      formData.append("tag", this.oldGroupsSelectedTag);
     }
-    console.log(data);
+    this.uploadApi.postUpload("media",formData).subscribe(response => {
+      console.log(response);
+    });
   }
 
-  constructor(private httpApi: HttpapiService) {
+  constructor(private httpApi: HttpapiService, private uploadApi: UploadapiService) {
     let userN = window.localStorage.getItem(this.JWT_USER);
     this.httpApi.get(`users/${userN}/groups`).subscribe(response => {
-      console.log(response);
+      //console.log(response);
       this.oldGroups = response;
       this.oldGroupsSelectedTag = this.oldGroups[0].tag;
       this.oldGroupsSelectedId = this.oldGroups[0].id;
