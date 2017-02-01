@@ -40,7 +40,7 @@ export class UploadapiService {
 
   postUpload(path: string, body): Observable<any> {
     this.setXAccessToken();
-    this.setHeaders({'Content-Type': 'multipart/form-data'});
+    console.log(this.headers);
     return this.http.post(
       `${this.api_url}${path}`,
       body,

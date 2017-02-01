@@ -106,6 +106,7 @@ export class Dev3Component implements OnInit {
         this.image.src = evt.target.result;
         this.image.addEventListener('load', this.resetImage);
       });
+      //console.log(fileElement.target);
       this.formImageFile = fileElement.target.files[0];
       reader.readAsDataURL(fileElement.target.files[0]); // <-- Shows image
     }
@@ -126,6 +127,7 @@ export class Dev3Component implements OnInit {
     }
     if (this.typeImageFile) {
       formData.append("file", this.formImageFile);
+      //console.log(this.formImageFile);
       formData.append("media_type", "image");
     }
     if (this.typeYoutube && this.formyoutubeLink) {
