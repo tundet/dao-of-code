@@ -52,8 +52,9 @@
           name="formtitle"
           [(ngModel)]="formtitle"
           placeholder="title"
+          pattern=".{4,50}"
           required
-        />
+        /> | Minimum 4 letters, maximum 50 letters
       </li>
       <li>
         <textarea
@@ -76,7 +77,8 @@
           [(ngModel)]="formnewgroupname"
           [disabled]="!groupNew"
           placeholder="New group name"
-        > | Optional
+          pattern=".{4,50}"
+        > | Optional, minimum 4 letters, maximum 50 letters
       </li>
       <li>Language:
         <select
@@ -118,8 +120,8 @@
   <p>File upload:</p>
   <p>Todo:</p>
   <p><*> Form</p>
-  <p>< > Preview</p>
+  <p><*> Preview</p>
   <p><*> Grouping</p>
-  <p>< > Cropping</p>
+  <p>< > patterns</p>
   <p>< > Something!</p>
 </div>
