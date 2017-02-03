@@ -14,6 +14,7 @@ import {HttpapiService} from "./httpapi.service";
 import { AuthBoxComponent } from './auth-box/auth-box.component';
 import { UserInfoBoxComponent } from './user-info-box/user-info-box.component';
 import {UploadapiService} from "./services/uploadapi.service";
+import { ThumbnailPipe } from './pipes/thumbnail.pipe';
 
 const appRoutes: Routes = [
   { path: '', component: HomepageComponent },
@@ -32,7 +33,8 @@ const appRoutes: Routes = [
     Dev3Component,
     HomepageComponent,
     AuthBoxComponent,
-    UserInfoBoxComponent
+    UserInfoBoxComponent,
+    ThumbnailPipe
   ],
   imports: [
     BrowserModule,
