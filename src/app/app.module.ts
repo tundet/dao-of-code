@@ -15,6 +15,8 @@ import { AuthBoxComponent } from './auth-box/auth-box.component';
 import { UserInfoBoxComponent } from './user-info-box/user-info-box.component';
 import {UploadapiService} from "./services/uploadapi.service";
 import { ThumbnailPipe } from './pipes/thumbnail.pipe';
+import { MediaPlayerComponent } from './media-player/media-player.component';
+import { GetUsernamePipe } from './pipes/get-username.pipe';
 
 const appRoutes: Routes = [
   { path: '', component: HomepageComponent },
@@ -34,7 +36,9 @@ const appRoutes: Routes = [
     HomepageComponent,
     AuthBoxComponent,
     UserInfoBoxComponent,
-    ThumbnailPipe
+    ThumbnailPipe,
+    MediaPlayerComponent,
+    GetUsernamePipe
   ],
   imports: [
     BrowserModule,

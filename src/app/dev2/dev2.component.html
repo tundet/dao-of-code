@@ -1,3 +1,30 @@
-<p>
-  dev2 works!
-</p>
+<h2>Media Player</h2>
+
+<h3>Title: {{ medium.title }}</h3>
+<p>Description: {{ medium.description }}</p>
+<p>Uploaded by: {{ mediumOwner}}</p>
+<p>Tag: {{ medium.tag }}</p>
+
+
+<p>Users who have liked this image:</p>
+<ul *ngFor="let like of likes">
+  <li>{{ like.user_id }}</li>
+</ul>
+
+<figure *ngIf="medium.media_type === 'image'">
+  <img src="{{ api_url + 'uploads/original/' + medium.file_name }}">
+</figure>
+
+<video controls *ngIf="medium.media_type === 'video'">
+  <source src="{{ api_url + 'uploads/original/' + medium.file_name }}" type="video/mp4">
+  <source src="{{ api_url + 'uploads/original/' + medium.file_name }}" type="video/ogg">
+  Your browser does not support HTML5 video.
+</video>
+
+<audio controls *ngIf="medium.media_type === 'audio'">
+  <source src="{{ api_url + 'uploads/original/' + medium.file_name }}" type="audio/ogg">
+  <source src="{{ api_url + 'uploads/original/' + medium.file_name }}" type="audio/mpeg">
+  Your browser does not support HTML5 audio.
+</audio>
+
+<iframe *ngIf="medium.media_type === 'youtube'" src="{{ medium.youtube_url }}" frameborder="0" allowfullscreen></iframe>
