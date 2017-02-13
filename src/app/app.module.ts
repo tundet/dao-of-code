@@ -1,52 +1,24 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
-
-import { AppComponent } from './app.component';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { Dev1Component } from './dev1/dev1.component';
-import { Dev2Component } from './dev2/dev2.component';
-import { Dev3Component } from './dev3/dev3.component';
-import {RouterModule, Routes} from "@angular/router";
-import { HomepageComponent } from './homepage/homepage.component';
-import {HttpapiService} from "./httpapi.service";
-import { AuthBoxComponent } from './auth-box/auth-box.component';
-import { UserInfoBoxComponent } from './user-info-box/user-info-box.component';
-import {UploadapiService} from "./services/uploadapi.service";
-import { ThumbnailPipe } from './pipes/thumbnail.pipe';
-import { MediaPlayerComponent } from './media-player/media-player.component';
-import { GetUsernamePipe } from './pipes/get-username.pipe';
-
-const appRoutes: Routes = [
-  { path: '', component: HomepageComponent },
-  { path: 'dev1', component: Dev1Component },
-  { path: 'dev2', component: Dev2Component },
-  { path: 'dev3', component: Dev3Component },
-  { path: '**', component: PageNotFoundComponent }
-];
+import { NgModule, ErrorHandler } from '@angular/core';
+import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
+import { MyApp } from './app.component';
+import { Page1 } from '../pages/page1/page1';
+import { Page2 } from '../pages/page2/page2';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    PageNotFoundComponent,
-    Dev1Component,
-    Dev2Component,
-    Dev3Component,
-    HomepageComponent,
-    AuthBoxComponent,
-    UserInfoBoxComponent,
-    ThumbnailPipe,
-    MediaPlayerComponent,
-    GetUsernamePipe
+    MyApp,
+    Page1,
+    Page2
   ],
   imports: [
-    BrowserModule,
-    FormsModule,
-    HttpModule,
-    RouterModule.forRoot(appRoutes)
+    IonicModule.forRoot(MyApp)
   ],
-  providers: [ HttpapiService, UploadapiService ],
-  bootstrap: [AppComponent]
+  bootstrap: [IonicApp],
+  entryComponents: [
+    MyApp,
+    Page1,
+    Page2
+  ],
+  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
 })
-export class AppModule { }
+export class AppModule {}
