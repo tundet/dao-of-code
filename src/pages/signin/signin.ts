@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {NavController, NavParams} from 'ionic-angular';
 import {HttpApi} from "../../providers/http-api";
+import {Page1} from "../page1/page1";
 
 /*
  Generated class for the Signin page.
@@ -102,6 +103,7 @@ export class SigninPage {
       this.resetJson(this.signinUser);
     });
     //console.log("Signin! end");
+    this.navCtrl.push(Page1);
   }
 
   signout() {
