@@ -36,10 +36,10 @@ export class UploadPage {
   private formnewgrouplang: string;
 
   //Preview
-  private image: HTMLImageElement = new Image();
+  /*private image: HTMLImageElement = new Image();
   @ViewChild('myCanvas') canvasRef: ElementRef;
   canvas: HTMLCanvasElement;
-  context: CanvasRenderingContext2D;
+  context: CanvasRenderingContext2D;*/
 
   languages: any = [
     {"name": "Java", "value": "java"},
@@ -124,8 +124,8 @@ export class UploadPage {
 
       reader.addEventListener('load', (evt: any) => {
         console.log(evt.target);
-        this.image.src = evt.target.result;
-        this.image.addEventListener('load', this.resetImage);
+        //this.image.src = evt.target.result;
+        //this.image.addEventListener('load', this.resetImage);
       });
       //console.log(fileElement.target);
       this.formImageFile = fileElement.target.files[0];
@@ -133,12 +133,12 @@ export class UploadPage {
     }
   }
 
-  resetImage = () => {
+  /*resetImage = () => {
     this.canvas.height = this.image.height;
     this.canvas.width = this.image.width;
 
     this.context.drawImage(this.image, 0, 0, this.image.width, this.image.height);
-  };
+  };*/
 
   submitNewMedia() {
     let formData = new FormData();
