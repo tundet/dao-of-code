@@ -3,21 +3,59 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Page Two</ion-title>
+    <ion-title>Browse</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
+
+  <div class="item item-divider">
+    Trending
+  </div>
+
+  <div class="trending">
+    <ion-slides>
+      <ion-slide *ngFor="let pic of newPics" (ionSlideDidChange)="slideChanged()">
+        <ion-item width="50%">
+          <ion-thumbnail item-top (click)="itemTapped($event, pic.id)">
+            <img *ngIf="pic.media_type == 'image'" [alt]="pic.title" [src]='api_url + pic.file_name'/>
+            <img *ngIf="pic.media_type == 'audio'" [alt]="pic.title" [src]='soundimgurl'/>
+            <img *ngIf="pic.media_type == 'video'" [alt]="pic.title" [src]='soundimgurl'/>
+          </ion-thumbnail>
+          <h2 item-bottom>{{ pic.title }}</h2>
+          <p item-bottom>{{ pic.tag }}</p>
+        </ion-item>
+      </ion-slide>
+    </ion-slides>
+  </div>
+
+  <div class="item item-divider">
+    Posts
+  </div>
+
   <ion-list>
-    <button ion-item *ngFor="let item of items" (click)="itemTapped($event, item)">
-      <ion-icon [name]="item.icon" item-left></ion-icon>
-      {{item.title}}
-      <div class="item-note" item-right>
-        {{item.note}}
-      </div>
+    <ion-item *ngFor="let pic of newPics">
+      <ion-thumbnail item-left (click)="itemTapped($event, pic.id)">
+        <img *ngIf="pic.media_type == 'image'" [alt]="pic.title" [src]='api_url + pic.file_name'/>
+        <img *ngIf="pic.media_type == 'audio'" [alt]="pic.title" [src]='soundimgurl'/>
+        <img *ngIf="pic.media_type == 'video'" [alt]="pic.title" [src]='soundimgurl'/>
+      </ion-thumbnail>
+      <h2>{{ pic.title }}</h2>
+      <p>{{ pic.description }}</p>
+      <p item-right>{{ pic.tag }}</p>
+      <button ion-button clear item-right (click)="itemTapped($event, pic.id)">View</button>
+    </ion-item>
+  </ion-list>
+
+  <!--<ion-list>
+    <button ion-item *ngFor="let pic of newPics" (click)="itemTapped($event, pic.id)">
+      <img *ngIf="pic.media_type == 'image'" [alt]="pic.title" [src]='api_url + pic.file_name'/>
+      <img *ngIf="pic.media_type == 'audio'" [alt]="pic.title" [src]='soundimgurl'/>
+      <img *ngIf="pic.media_type == 'video'" [alt]="pic.title" [src]='soundimgurl'/>
     </button>
   </ion-list>
   <div *ngIf="selectedItem" padding>
     You navigated here from <b>{{selectedItem.title}}</b>
-  </div>
+  </div>-->
+
 </ion-content>

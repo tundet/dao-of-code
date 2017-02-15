@@ -1,18 +1,71 @@
 <ion-header>
   <ion-navbar>
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>Page One</ion-title>
+    <ion-title>Login</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <h3>Ionic Menu Starter</h3>
+  <h3>Login</h3>
 
   <p>
     If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will show you the way.
   </p>
 
   <button ion-button secondary menuToggle>Toggle Menu</button>
+
+  <div *ngIf="!loggedinMode">
+    <div *ngIf="newUserHasBeenMade">
+      New user has been made! Username: {{ newUser.username }}, Email: {{ newUser.email }}
+    </div>
+    <form (ngSubmit)="onSignin()" *ngIf="signInMode">
+      <input
+        type="text"
+        required
+        [(ngModel)]="signinUser.username"
+        name="username"
+        placeholder="Username"
+      >
+      <input
+        type="password"
+        required
+        [(ngModel)]="signinUser.password"
+        name="password"
+        placeholder="Password"
+      >
+      <button ion-button type="submit">Singin</button>
+    </form>
+    <form (ngSubmit)="onSignup()" *ngIf="!signInMode">
+      <input
+        type="text"
+        required
+        [(ngModel)]="newUser.username"
+        name="username"
+        placeholder="Username"
+      >
+      <input
+        type="password"
+        required
+        [(ngModel)]="newUser.password"
+        name="password"
+        placeholder="Password"
+      >
+      <input
+        type="email"
+        required
+        [(ngModel)]="newUser.email"
+        name="email"
+        placeholder="E-mail"
+      >
+      <button ion-button type="submit">Singup</button>
+    </form>
+    <a (click)="changeSignupMode()" class="mode-change-link">
+      {{ linkText }}
+    </a>
+  </div>
+  <div *ngIf="loggedinMode">
+    Username: {{ loggedinUser.username }}, Token: {{ loggedinUser.token }}<br>
+    <a (click)="signout()" class="mode-change-link">
+      Signout
+    </a>
+  </div>
 </ion-content>

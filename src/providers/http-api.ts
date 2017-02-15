@@ -6,17 +6,20 @@ import {Observable} from "rxjs";
 @Injectable()
 export class HttpApi {
 
-  constructor(public http: Http) {
-    console.log('Hello HttpApi Provider');
-  }
-
   headers: Headers = new Headers({
-    'Content-Type': 'application/json',
+    'Content-type': 'application/json',
+    'Accept': 'application/json'
+  });
+
+  headers2: Headers = new Headers({
     'Accept': 'application/json'
   });
 
   api_url: string = 'https://dao-api.othnet.ga/';
   JWT_KEY: string = 'dao_token';
+
+  constructor(private http: Http) {
+  }
 
   private getJson(response: Response) {
     return response.json();
@@ -35,10 +38,45 @@ export class HttpApi {
 
   logout(): Observable<any> {
     this.setXAccessToken();
-    return this.http.post(`${this.api_url}signout`, {})
+    return this.http.post(`${this.api_url}signout`, {} )
       .map(this.checkForError)
       .catch(err => Observable.throw(err))
       .map(this.getJson);
+  }
+
+  getNew = (amount: number) => {
+    //GET http://[BASE-URL]/media?start=10&limit=10
+    this.setXAccessToken();
+    return this.http.get(this.api_url + `media/latest/${amount}`, {headers: this.headers});
+  };
+
+  getText = (filename: string) => {
+    console.log(this.api_url + `uploads/original/${filename}`);
+    //this.setXAccessToken();
+    return this.http.get(this.api_url + `uploads/original/${filename}`);
+  };
+
+  makeGroup(body): Observable<any> {
+    this.setXAccessToken();
+    return this.http.post(`${this.api_url}/groups`,
+      body,
+      {headers: this.headers}
+    )
+      .map(this.checkForError)
+      .catch(err => Observable.throw(err))
+      .map((res: Response) => res.json())
+  }
+
+  postUpload(path: string, body): Observable<any> {
+    this.setXAccessToken();
+    return this.http.post(
+      `${this.api_url}${path}`,
+      body,
+      {headers: this.headers2}
+    )
+      .map(this.checkForError)
+      .catch(err => Observable.throw(err))
+      .map((res: Response) => res.json())
   }
 
   get(path: string): Observable<any> {
@@ -71,17 +109,17 @@ export class HttpApi {
       .map(this.getJson)
   }
 
-  setXAccessToken() {
+  setXAccessToken () {
     let xAToken: string = window.localStorage.getItem(this.JWT_KEY);
     // console.log(xAToken);
     if (xAToken) {
-      this.setHeaders({'x-access-token': xAToken});
+      this.setHeaders({ 'x-access-token': xAToken });
       // console.log(this.headers.get('x-access-token'))
     }
   }
 
   setHeaders(headers) {
     Object.keys(headers).forEach(header => this.headers.set(header, headers[header]));
+    Object.keys(headers).forEach(header => this.headers2.set(header, headers[header]));
   }
-
 }

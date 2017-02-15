@@ -1,7 +1,7 @@
-import {Component, ViewChild, ElementRef} from '@angular/core';
+import {Component} from '@angular/core';
 import {NavController, NavParams} from 'ionic-angular';
 import {HttpApi} from "../../providers/http-api";
-import {UploadApi} from "../../providers/upload-api";
+import {Page2} from "../page2/page2";
 
 /*
  Generated class for the Upload page.
@@ -15,31 +15,25 @@ import {UploadApi} from "../../providers/upload-api";
 })
 export class UploadPage {
 
-  private TODO: boolean = true;
   private JWT_USER: string = 'dao_user';
 
-  private typeVideoFile: boolean = false;
-  private typeImageFile: boolean = false;
-  private typeYoutube: boolean = false;
+  private uploadType: string = 'image';
+  private grouptype: string = 'new';
   private groupNew: boolean = true;
   private groupOld: boolean = false;
   private oldGroups = [];
-  private oldGroupsSelectedTag: any = '';
+  private formOldGroupsInSelectedTag: any = [];
   private oldGroupsSelectedId: any = '';
-
   private formImageFile: File;
   private formVideoFile: File;
+  private formTextFile: File;
+  private formAudioFile: File;
   private formyoutubeLink: string;
   private formtitle: string;
   private formdescription: string;
   private formnewgroupname: string;
-  private formnewgrouplang: string;
-
-  //Preview
-  /*private image: HTMLImageElement = new Image();
-  @ViewChild('myCanvas') canvasRef: ElementRef;
-  canvas: HTMLCanvasElement;
-  context: CanvasRenderingContext2D;*/
+  private formlang: any = 'java';
+  private oldgroupsIndex: any;
 
   languages: any = [
     {"name": "Java", "value": "java"},
@@ -56,15 +50,14 @@ export class UploadPage {
     {"name": "React", "value": "react"}
   ];
 
-
-  constructor(public navCtrl: NavController, public navParams: NavParams, private httpApi: HttpApi, private uploadApi: UploadApi) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private httpApi: HttpApi) {
     let userN = window.localStorage.getItem(this.JWT_USER);
     this.httpApi.get(`users/${userN}/groups`).subscribe(response => {
       //console.log(response);
       this.oldGroups = response;
-      this.oldGroupsSelectedTag = this.oldGroups[0].tag;
-      this.oldGroupsSelectedId = this.oldGroups[0].id;
-      this.formnewgrouplang = this.languages[0].value;
+      if (this.oldGroups[0]) {
+        this.formLangChange();
+      }
     });
   }
 
@@ -78,36 +71,28 @@ export class UploadPage {
     }
   }
 
-  newGroupsLangSelectedChange(value) {
-    this.formnewgrouplang = value;
+  newGroupChange(event) {
+    if (this.groupNew) {
+      this.groupOld = false;
+    } else {
+      this.groupOld = true;
+    }
   }
 
-  oldGroupsSelectedChange(id, value) {
-    this.oldGroupsSelectedId = id;
-    this.oldGroupsSelectedTag = value;
+  oldGroupChange(event) {
+    if (this.groupOld) {
+      this.groupNew = false;
+    } else {
+      this.groupNew = true;
+    }
   }
 
-  typeChange(event) {
-    let name = event.target.name;
-    if (name == "imagecb") {
-      if (this.typeImageFile) {
-        this.typeVideoFile = false;
-      }
-    } else if (name == "videocb") {
-      if (this.typeVideoFile) {
-        this.typeImageFile = false;
-      }
-    } else if (name == "gNew") {
-      if (this.groupNew) {
-        this.groupOld = false;
-      } else {
-        this.groupOld = true;
-      }
-    } else if (name == "gOld") {
-      if (this.groupOld) {
-        this.groupNew = false;
-      } else {
-        this.groupNew = true;
+  formLangChange() {
+    this.formOldGroupsInSelectedTag = [];
+    for (let group of this.oldGroups) {
+      if (group.tag == this.formlang) {
+        console.log(group);
+        this.formOldGroupsInSelectedTag.push(group);
       }
     }
   }
@@ -115,43 +100,46 @@ export class UploadPage {
   videoFileChange(fileElement: any) {
     if (fileElement.target.files && fileElement.target.files[0]) {
       this.formVideoFile = fileElement.target.files[0];
+      // filreDER GET TYPE JNE...
     }
   }
 
   imageFileChange(fileElement: any) {
     if (fileElement.target.files && fileElement.target.files[0]) {
-      const reader: FileReader = new FileReader();
-
-      reader.addEventListener('load', (evt: any) => {
-        console.log(evt.target);
-        //this.image.src = evt.target.result;
-        //this.image.addEventListener('load', this.resetImage);
-      });
-      //console.log(fileElement.target);
       this.formImageFile = fileElement.target.files[0];
-      reader.readAsDataURL(fileElement.target.files[0]); // <-- Shows image
     }
   }
 
-  /*resetImage = () => {
-    this.canvas.height = this.image.height;
-    this.canvas.width = this.image.width;
+  textFileChange(fileElement: any) {
+    if (fileElement.target.files && fileElement.target.files[0]) {
+      this.formTextFile = fileElement.target.files[0];
+    }
+  }
 
-    this.context.drawImage(this.image, 0, 0, this.image.width, this.image.height);
-  };*/
+  audioFileChange(fileElement: any) {
+    if (fileElement.target.files && fileElement.target.files[0]) {
+      this.formAudioFile = fileElement.target.files[0];
+    }
+  }
 
   submitNewMedia() {
     let formData = new FormData();
-    if (this.typeVideoFile) {
+    if (this.uploadType == "video") {
       formData.append("file", this.formVideoFile);
       formData.append("media_type", "video");
-    }
-    if (this.typeImageFile) {
+    } else if (this.uploadType == "image") {
       formData.append("file", this.formImageFile);
       //console.log(this.formImageFile);
       formData.append("media_type", "image");
-    }
-    if (this.typeYoutube && this.formyoutubeLink) {
+    } else if (this.uploadType == "text") {
+      formData.append("file", this.formTextFile);
+      //console.log(this.formImageFile);
+      formData.append("media_type", "text");
+    } else if (this.uploadType == "audio") {
+      formData.append("file", this.formAudioFile);
+      //console.log(this.formImageFile);
+      formData.append("media_type", "audio");
+    } else if (this.uploadType == "youtube" && this.formyoutubeLink) {
       formData.append("youtube", this.formyoutubeLink);
     }
     if (this.formtitle) {
@@ -160,23 +148,28 @@ export class UploadPage {
     if (this.formdescription) {
       formData.append("description", this.formdescription);
     }
-    if (this.groupNew && this.formnewgroupname.trim().length >= 4) {
-      // make new group and set id and tag in data
-      let newGroupFormData = new FormData();
-      newGroupFormData.append("name", this.formnewgroupname.trim());
-      newGroupFormData.append("tag", this.formnewgrouplang);
-      this.uploadApi.makeGroup(newGroupFormData).subscribe(response => {
-        console.log(response);
-        formData.append("group_id", response.id);
-        formData.append("tag", this.formnewgrouplang);
-      });
+    if (this.formlang) {
+      formData.append("tag", this.formlang);
+    }
+    if (this.groupNew && this.formnewgroupname) {
+      if ( this.formnewgroupname.trim().length >= 4) {
+        // make new group and set id and tag in data
+        let newGroupFormData = new FormData();
+        newGroupFormData.append("name", this.formnewgroupname.trim());
+        newGroupFormData.append("tag", this.formlang);
+        this.httpApi.makeGroup(newGroupFormData).subscribe(response => {
+          console.log(response);
+          formData.append("group_id", response.id);
+        });
+      }
     } else {
       formData.append("group_id", this.oldGroupsSelectedId);
-      formData.append("tag", this.oldGroupsSelectedTag);
     }
-    this.uploadApi.postUpload("media",formData).subscribe(response => {
+    this.httpApi.postUpload("media", formData).subscribe(response => {
       console.log(response);
+      if (response.message.startsWith("Medium") && response.message.endsWith("has been created.")){
+        this.navCtrl.setRoot(Page2);
+      }
     });
   }
-
 }

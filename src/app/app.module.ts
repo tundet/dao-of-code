@@ -7,14 +7,17 @@ import { SigninPage } from '../pages/signin/signin';
 import { HttpApi } from '../providers/http-api';
 import {UploadPage} from "../pages/upload/upload";
 import {UploadApi} from "../providers/upload-api";
+import {SinglePage} from "../pages/single/single";
+import {LogoutPage} from "../pages/logout/logout";
 
 @NgModule({
   declarations: [
     MyApp,
     Page1,
     Page2,
-    SigninPage,
-    UploadPage
+    SinglePage,
+    UploadPage,
+    LogoutPage
 
   ],
   imports: [
@@ -25,8 +28,9 @@ import {UploadApi} from "../providers/upload-api";
     MyApp,
     Page1,
     Page2,
-    SigninPage,
-    UploadPage
+    SinglePage,
+    UploadPage,
+    LogoutPage
   ],
   providers: [
     {provide: ErrorHandler, useClass: IonicErrorHandler},
