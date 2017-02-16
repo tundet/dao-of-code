@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 
-import { NavController } from 'ionic-angular';
-import { HttpApi } from '../../providers/http-api';
+import {NavController} from 'ionic-angular';
+import {HttpApi} from '../../providers/http-api';
 import {Page2} from "../page2/page2";
 
 @Component({
@@ -21,7 +21,7 @@ export class Page1 {
   newUser = {
     username: '',
     password: '',
-    email:''
+    email: ''
   };
 
   signinUser = {
@@ -29,18 +29,18 @@ export class Page1 {
     password: ''
   };
 
-  loggedinUser =  {
+  loggedinUser = {
     username: '',
     token: ''
   };
 
-  private resetJson (json){
+  private resetJson(json) {
     for (let i in json) {
       json[i] = '';
     }
   }
 
-  private resetAllJsons () {
+  private resetAllJsons() {
     this.resetJson(this.newUser);
     this.resetJson(this.loggedinUser);
     this.resetJson(this.signinUser);
@@ -74,13 +74,18 @@ export class Page1 {
     //console.log("Signin! start");
     this.httpApi.post("signin/", this.signinUser).subscribe(response => {
       console.log(response);
+
+      if (response.status == 403) {
+        return;
+      }
+
       this.setJwt(response.api_token, this.signinUser.username);
       this.loggedinUser.username = this.signinUser.username;
       this.loggedinUser.token = response.api_token;
       this.loggedinMode = true;
       this.resetJson(this.signinUser);
+      this.navCtrl.setRoot(Page2);
     });
-    this.navCtrl.setRoot(Page2);
     //console.log("Signin! end");
   }
 
@@ -95,7 +100,7 @@ export class Page1 {
     //console.log("Signout end!");
   }
 
-  constructor( private httpApi: HttpApi, public navCtrl: NavController ) {
+  constructor(private httpApi: HttpApi, public navCtrl: NavController) {
     const token = window.localStorage.getItem(this.JWT_KEY);
     const userN = window.localStorage.getItem(this.JWT_USER);
     if (token) {
