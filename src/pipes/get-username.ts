@@ -5,7 +5,7 @@ import {HttpApi} from "../providers/http-api";
   Get username of the given user ID.
 */
 @Pipe({
-  name: 'get-username'
+  name: 'GetUsername'
 })
 @Injectable()
 export class GetUsername {

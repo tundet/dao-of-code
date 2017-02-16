@@ -7,6 +7,7 @@ import { HttpApi } from '../providers/http-api';
 import {UploadPage} from "../pages/upload/upload";
 import {SinglePage} from "../pages/single/single";
 import {LogoutPage} from "../pages/logout/logout";
+import {GetUsername} from "../pipes/get-username";
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import {LogoutPage} from "../pages/logout/logout";
     Page2,
     SinglePage,
     UploadPage,
-    LogoutPage
+    LogoutPage,
+    GetUsername
 
   ],
   imports: [
