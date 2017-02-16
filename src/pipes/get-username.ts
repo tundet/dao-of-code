@@ -12,9 +12,13 @@ export class GetUsername {
 
   constructor(private httpApi: HttpApi) {}
 
+  private username: string;
+
   transform(value: any, args?: any): any {
     this.httpApi.get('users/' + value).subscribe(response => {
-      return response.username;
+      this.username = response.username;
     });
+
+    return this.username;
   }
 }
