@@ -18,9 +18,11 @@
       <ion-slide *ngFor="let pic of newPics" (ionSlideDidChange)="slideChanged()">
         <ion-item width="50%">
           <ion-thumbnail item-top (click)="itemTapped($event, pic.id)">
-            <img *ngIf="pic.media_type == 'image'" [alt]="pic.title" [src]='api_url + pic.file_name'/>
-            <img *ngIf="pic.media_type == 'audio'" [alt]="pic.title" [src]='soundimgurl'/>
-            <img *ngIf="pic.media_type == 'video'" [alt]="pic.title" [src]='soundimgurl'/>
+            <img *ngIf="pic.media_type == 'image'" [alt]="pic.title" [src]='api_url + "small/" + pic.file_name'/>
+            <img *ngIf="pic.media_type == 'audio'" [alt]="pic.title" [src]='api_url + "thumbnails/audio.jpg"'/>
+            <img *ngIf="pic.media_type == 'video'" [alt]="pic.title" [src]='api_url + "thumbnails/video.jpg"'/>
+            <img *ngIf="pic.media_type == 'text'" [alt]="pic.title" [src]='api_url + "thumbnails/text.jpg"'/>
+            <img *ngIf="pic.media_type == 'youtube'" [alt]="pic.title" [src]='api_url + "thumbnails/youtube.jpg"'/>
           </ion-thumbnail>
           <h2 item-bottom>{{ pic.title }}</h2>
           <p item-bottom>{{ pic.tag }}</p>
@@ -36,9 +38,11 @@
   <ion-list>
     <ion-item *ngFor="let pic of newPics">
       <ion-thumbnail item-left (click)="itemTapped($event, pic.id)">
-        <img *ngIf="pic.media_type == 'image'" [alt]="pic.title" [src]='api_url + pic.file_name'/>
-        <img *ngIf="pic.media_type == 'audio'" [alt]="pic.title" [src]='soundimgurl'/>
-        <img *ngIf="pic.media_type == 'video'" [alt]="pic.title" [src]='soundimgurl'/>
+        <img *ngIf="pic.media_type == 'image'" [alt]="pic.title" [src]='api_url + "small/" + pic.file_name'/>
+        <img *ngIf="pic.media_type == 'audio'" [alt]="pic.title" [src]='api_url + "thumbnails/audio.jpg"'/>
+        <img *ngIf="pic.media_type == 'video'" [alt]="pic.title" [src]='api_url + "thumbnails/video.jpg"'/>
+        <img *ngIf="pic.media_type == 'text'" [alt]="pic.title" [src]='api_url + "thumbnails/text.jpg"'/>
+        <img *ngIf="pic.media_type == 'youtube'" [alt]="pic.title" [src]='api_url + "thumbnails/youtube.jpg"'/>
       </ion-thumbnail>
       <h2>{{ pic.title }}</h2>
       <p>{{ pic.description }}</p>

@@ -11,8 +11,7 @@ export class Page2 {
   @ViewChild(Slides) slides: Slides;
   selectedItem: any;
   private newPics = [];
-  api_url: string = 'https://dao-api.othnet.ga/uploads/small/';
-  private soundimgurl = "http://www.freeiconspng.com/uploads/sound-png-5.png";
+  api_url: string = 'https://dao-api.othnet.ga/uploads/';
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private httpApi: HttpApi) {
 

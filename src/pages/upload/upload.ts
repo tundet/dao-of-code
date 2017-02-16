@@ -17,17 +17,15 @@ export class UploadPage {
 
   private JWT_USER: string = 'dao_user';
 
-  private uploadType: string = 'image';
-  private grouptype: string = 'new';
+  private uploadType: string = 'file';
   private groupNew: boolean = true;
   private groupOld: boolean = false;
   private oldGroups = [];
   private formOldGroupsInSelectedTag: any = [];
   private oldGroupsSelectedId: any = '';
-  private formImageFile: File;
-  private formVideoFile: File;
-  private formTextFile: File;
-  private formAudioFile: File;
+  private formFile: File;
+  private formFileType: any;
+  private formFileMime_type: any;
   private formyoutubeLink: string;
   private formtitle: string;
   private formdescription: string;
@@ -97,48 +95,28 @@ export class UploadPage {
     }
   }
 
-  videoFileChange(fileElement: any) {
-    if (fileElement.target.files && fileElement.target.files[0]) {
-      this.formVideoFile = fileElement.target.files[0];
-      // filreDER GET TYPE JNE...
-    }
-  }
-
-  imageFileChange(fileElement: any) {
-    if (fileElement.target.files && fileElement.target.files[0]) {
-      this.formImageFile = fileElement.target.files[0];
-    }
-  }
-
-  textFileChange(fileElement: any) {
-    if (fileElement.target.files && fileElement.target.files[0]) {
-      this.formTextFile = fileElement.target.files[0];
-    }
-  }
-
-  audioFileChange(fileElement: any) {
-    if (fileElement.target.files && fileElement.target.files[0]) {
-      this.formAudioFile = fileElement.target.files[0];
+  fileChange(fileElement: any) {
+    if (fileElement.target.files && fileElement.target.files[0]) {""
+      this.formFile = fileElement.target.files[0];
+      console.log(this.formFile.type);
+      this.formFileMime_type = this.formFile.type;
+      if (this.formFile.type.startsWith("video")) {
+        this.formFileType = "video";
+      } else if (this.formFile.type.startsWith("audio")) {
+        this.formFileType = "audio";
+      } else if (this.formFile.type.startsWith("image")) {
+        this.formFileType = "image";
+      } else if (this.formFile.type.startsWith("text") || this.formFile.type.startsWith("application")) {
+        this.formFileType = "text";
+      }
+      console.log(this.formFile.name);
     }
   }
 
   submitNewMedia() {
     let formData = new FormData();
-    if (this.uploadType == "video") {
-      formData.append("file", this.formVideoFile);
-      formData.append("media_type", "video");
-    } else if (this.uploadType == "image") {
-      formData.append("file", this.formImageFile);
-      //console.log(this.formImageFile);
-      formData.append("media_type", "image");
-    } else if (this.uploadType == "text") {
-      formData.append("file", this.formTextFile);
-      //console.log(this.formImageFile);
-      formData.append("media_type", "text");
-    } else if (this.uploadType == "audio") {
-      formData.append("file", this.formAudioFile);
-      //console.log(this.formImageFile);
-      formData.append("media_type", "audio");
+    if (this.uploadType == "file") {
+      formData.append("file", this.formFile);
     } else if (this.uploadType == "youtube" && this.formyoutubeLink) {
       formData.append("youtube", this.formyoutubeLink);
     }

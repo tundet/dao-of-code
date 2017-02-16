@@ -12,45 +12,48 @@
     <ion-title>Upload</ion-title>
   </ion-navbar>
   <ion-segment [(ngModel)]="uploadType">
-    <ion-segment-button value="image">
-      Image
-    </ion-segment-button>
-    <ion-segment-button value="video">
-      Video
-    </ion-segment-button>
-    <ion-segment-button value="text">
-      Text
+    <ion-segment-button value="file">
+      File
     </ion-segment-button>
     <ion-segment-button value="youtube">
       Youtube
-    </ion-segment-button>
-    <ion-segment-button value="audio">
-      Audio
     </ion-segment-button>
   </ion-segment>
 </ion-header>
 <ion-content padding>
   <form>
     <ion-list [ngSwitch]="uploadType">
-      <ion-item *ngSwitchCase="'image'">
+      <ion-item *ngSwitchCase="'file'">
         <input
           type="file"
           name="imagefile"
-          (change)="imageFileChange($event)"
-        >
-      </ion-item>
-      <ion-item *ngSwitchCase="'video'">
-        <input
-          type="file"
-          name="videofile"
-          (change)="videoFileChange($event)"
-        >
-      </ion-item>
-      <ion-item *ngSwitchCase="'text'">
-        <input
-          type="file"
-          name="textfile"
-          (change)="textFileChange($event)"
+          (change)="fileChange($event)"
+          accept="image/gif,
+            image/jpeg,
+            image/png,
+            audio/mpeg3,
+            audio/mpeg,
+            audio/wav,
+            audio/xflac,
+            audio/ogg,
+            audio/mpg,
+            video/avi,
+            video/3gpp,
+            video/ogg,
+            video/mp4,
+            video/mpeg,
+            application/javascript,
+            application/ecmascript,
+            application/sql,
+            application/php,
+            text/plain,
+            text/x-java-source,
+            text/x-script.python,
+            text/x-c,
+            text/x-php,
+            text/php,
+            text/html,
+            text/css"
         >
       </ion-item>
       <ion-item *ngSwitchCase="'youtube'">
@@ -60,13 +63,6 @@
           name="formyoutubeLink"
           [(ngModel)]="formyoutubeLink"
         ></ion-input>
-      </ion-item>
-      <ion-item *ngSwitchCase="'audio'">
-        <input
-          type="file"
-          name="audiofile"
-          (change)="audioFileChange($event)"
-        >
       </ion-item>
       <ion-item>
         <ion-label stacked>Minimum 4 letters, maximum 50 letters</ion-label>
