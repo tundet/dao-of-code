@@ -63,12 +63,6 @@ export class UploadPage {
     console.log('ionViewDidLoad UploadPage');
   }
 
-  private resetJson(json) {
-    for (let i in json) {
-      json[i] = '';
-    }
-  }
-
   newGroupChange(event) {
     if (this.groupNew) {
       this.groupOld = false;
@@ -96,7 +90,7 @@ export class UploadPage {
   }
 
   fileChange(fileElement: any) {
-    if (fileElement.target.files && fileElement.target.files[0]) {""
+    if (fileElement.target.files && fileElement.target.files[0]) {
       this.formFile = fileElement.target.files[0];
       console.log(this.formFile.type);
       this.formFileMime_type = this.formFile.type;
@@ -113,12 +107,33 @@ export class UploadPage {
     }
   }
 
+  youtubeLinkChange() {
+    console.log("modifying....");
+    let orginal_url = this.formyoutubeLink;
+    orginal_url = orginal_url.replace("youtube.com/","youtube.com/embed/");
+    console.log(orginal_url);
+    orginal_url = orginal_url.replace("watch?v=", "");
+    console.log(orginal_url);
+    let end_url = orginal_url.substring(orginal_url.indexOf("embed/"),orginal_url.length);
+    orginal_url = orginal_url.substring(0, orginal_url.indexOf("embed/"));
+    if (end_url.indexOf("?") > 0){
+      orginal_url += end_url.substring(0,end_url.indexOf("?"));
+      console.log(orginal_url);
+    } else {
+      orginal_url += end_url;
+      console.log(orginal_url);
+    }
+    this.formyoutubeLink = orginal_url;
+  }
+
   submitNewMedia() {
     let formData = new FormData();
     if (this.uploadType == "file") {
       formData.append("file", this.formFile);
+      formData.append("media_type", this.formFileType);
     } else if (this.uploadType == "youtube" && this.formyoutubeLink) {
-      formData.append("youtube", this.formyoutubeLink);
+      formData.append("youtube_url", this.formyoutubeLink);
+      formData.append("media_type", "youtube");
     }
     if (this.formtitle) {
       formData.append("title", this.formtitle);

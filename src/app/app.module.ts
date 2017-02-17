@@ -11,6 +11,7 @@ import {GetUsername} from "../pipes/get-username";
 import {LikeBoxComponent} from "../components/like-box/like-box";
 import {Safe} from "../pipes/safe";
 
+
 @NgModule({
   declarations: [
     MyApp,
@@ -22,7 +23,6 @@ import {Safe} from "../pipes/safe";
     GetUsername,
     LikeBoxComponent,
     Safe
-
   ],
   imports: [
     IonicModule.forRoot(MyApp)

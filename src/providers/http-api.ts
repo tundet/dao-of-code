@@ -38,10 +38,15 @@ export class HttpApi {
 
   logout(): Observable<any> {
     this.setXAccessToken();
-    return this.http.post(`${this.api_url}signout`, {} )
+    return this.http.post(`${this.api_url}signout`, {})
       .map(this.checkForError)
       .catch(err => Observable.throw(err))
       .map(this.getJson);
+  }
+
+  getUserName = (value: any) => {
+    this.setXAccessToken();
+    return this.http.get(`${this.api_url}users/` + value, {headers: this.headers});
   }
 
   getNew = (amount: number) => {
@@ -109,11 +114,11 @@ export class HttpApi {
       .map(this.getJson)
   }
 
-  setXAccessToken () {
+  setXAccessToken() {
     let xAToken: string = window.localStorage.getItem(this.JWT_KEY);
     // console.log(xAToken);
     if (xAToken) {
-      this.setHeaders({ 'x-access-token': xAToken });
+      this.setHeaders({'x-access-token': xAToken});
       // console.log(this.headers.get('x-access-token'))
     }
   }

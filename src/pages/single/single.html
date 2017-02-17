@@ -26,6 +26,9 @@
         <source [src]='api_url + mediaInfo.file_name'>
         Your browser does not support the audio element.
       </audio>
+      <iframe *ngIf="mediaInfo.media_type == 'youtube'"
+              src="{{ mediaInfo.youtube_url | safe}}" frameborder="0" >
+      </iframe>
       <ion-card-content *ngIf="mediaInfo.media_type == 'text' && textMediaContent" [innerHtml]="textMediaContent"></ion-card-content>
       <a *ngIf="mediaInfo.media_type == 'text'" ion-button [href]="api_url + mediaInfo.file_name" [target]="_blank">{{mediaInfo.title}}</a>
       <ion-card-content>Uploaded by {{ mediaInfo.user_id | GetUsername }}</ion-card-content>

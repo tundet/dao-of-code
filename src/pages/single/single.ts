@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import {HttpApi} from "../../providers/http-api";
+import {GetUsername} from "../../pipes/get-username";
 
 /*
   Generated class for the Single page.
@@ -10,12 +11,13 @@ import {HttpApi} from "../../providers/http-api";
 */
 @Component({
   selector: 'page-single',
-  templateUrl: 'single.html'
+  templateUrl: 'single.html',
 })
 export class SinglePage {
 
   private mediaInfo;
   private textMediaContent;
+  private username;
   api_url: string = 'https://dao-api.othnet.ga/uploads/original/';
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private httpApi: HttpApi) {
@@ -30,6 +32,9 @@ export class SinglePage {
           console.log(response.text());
         })
       }
+      this.httpApi.getUserName(this.mediaInfo.user_id).subscribe(response => {
+        this.username = response.json().username;
+      })
     });
   }
 
