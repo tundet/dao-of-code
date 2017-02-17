@@ -8,6 +8,9 @@ import {UploadPage} from "../pages/upload/upload";
 import {SinglePage} from "../pages/single/single";
 import {LogoutPage} from "../pages/logout/logout";
 import {GetUsername} from "../pipes/get-username";
+import {LikeBoxComponent} from "../components/like-box/like-box";
+import {Safe} from "../pipes/safe";
+
 
 @NgModule({
   declarations: [
@@ -17,8 +20,9 @@ import {GetUsername} from "../pipes/get-username";
     SinglePage,
     UploadPage,
     LogoutPage,
-    GetUsername
-
+    GetUsername,
+    LikeBoxComponent,
+    Safe
   ],
   imports: [
     IonicModule.forRoot(MyApp)

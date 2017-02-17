@@ -1,9 +1,9 @@
-import { Injectable, Pipe } from '@angular/core';
+import {Injectable, Pipe} from '@angular/core';
 import {HttpApi} from "../providers/http-api";
 
 /*
-  Get username of the given user ID.
-*/
+ Get username of the given user ID.
+ */
 @Pipe({
   name: 'GetUsername',
   pure: false
@@ -11,7 +11,8 @@ import {HttpApi} from "../providers/http-api";
 @Injectable()
 export class GetUsername {
 
-  constructor(private httpApi: HttpApi) {}
+  constructor(private httpApi: HttpApi) {
+  }
 
   private username: string;
 
