@@ -16,7 +16,10 @@ export class SinglePage {
 
   private comments;
   private txtcomment: string = '';
-  private commentInfo;
+  private commentInfo = {
+    medium_id: "",
+    comment: ""
+  };
   private mediaInfo;
   private textMediaContent;
   private username;
@@ -49,12 +52,12 @@ export class SinglePage {
   comment(event: any) {
     this.commentInfo = {
       medium_id: this.mediaInfo.id,
-      Comment: this.txtcomment
+      comment: this.txtcomment
     };
     console.log(this.commentInfo);
     this.httpApi.post("comments", this.commentInfo).subscribe(response => {
       console.log(response);
-    })
+    });
     console.log(this.comments);
     this.txtcomment = "";
   }
