@@ -31,7 +31,6 @@ export class UploadPage {
   private formdescription: string;
   private formnewgroupname: string;
   private formlang: any = 'java';
-  private oldgroupsIndex: any;
 
   languages: any = [
     {"name": "Java", "value": "java"},
