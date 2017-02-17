@@ -15,7 +15,7 @@
 
 <ion-content padding>
   <div *ngIf="mediaInfo">
-    <ion-card >
+    <ion-card>
       <ion-card-header>{{ mediaInfo.title }}</ion-card-header>
       <img *ngIf="mediaInfo.media_type == 'image'" [src]="api_url + mediaInfo.file_name" [alt]="mediaInfo.title"/>
       <video *ngIf="mediaInfo.media_type == 'video'" width="100%" controls>
@@ -26,10 +26,32 @@
         <source [src]='api_url + mediaInfo.file_name'>
         Your browser does not support the audio element.
       </audio>
-      <ion-card-content *ngIf="mediaInfo.media_type == 'text' && textMediaContent" [innerHtml]="textMediaContent"></ion-card-content>
+      <ion-card-content *ngIf="mediaInfo.media_type == 'text' && textMediaContent"
+                        [innerHtml]="textMediaContent"></ion-card-content>
       <a *ngIf="mediaInfo.media_type == 'text'" ion-button [href]="api_url + mediaInfo.file_name" [target]="_blank">{{mediaInfo.title}}</a>
-      <ion-card-content>Uploaded by {{ mediaInfo.user_id | GetUsername }}</ion-card-content>
+      <ion-card-content>Uploaded by {{ mediaInfo.user_id }}</ion-card-content>
       <ion-card-content>{{ mediaInfo.description }}</ion-card-content>
     </ion-card>
   </div>
+
+  <div id='comments'>
+    Comment
+    <form>
+      <ion-input
+        type="textarea"
+        name="txtcomment"
+        [(ngModel)]="txtcomment"
+        placeholder="Your Comment"
+      ></ion-input>
+      <button ion-button (click)="comment($event)">Post Comment</button>
+    </form>
+
+    <h4>Comments</h4>
+    <ul>
+      <li *ngFor="let comnt of comments"> {{ comnt.comment }}</li>
+    </ul>
+
+
+  </div>
+
 </ion-content>
