@@ -57,7 +57,7 @@
         >
       </ion-item>
       <ion-item *ngSwitchCase="'youtube'">
-        <ion-label stacked="">Youtube video link</ion-label>
+        <ion-label color="primary" stacked>Youtube video link</ion-label>
         <ion-input
           type="text"
           name="formyoutubeLink"
@@ -66,7 +66,7 @@
         ></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label stacked>Minimum 4 letters, maximum 50 letters</ion-label>
+        <ion-label color="primary" stacked>Minimum 4 letters, maximum 50 letters</ion-label>
         <ion-input
           type="text"
           name="formtitle"
@@ -77,7 +77,7 @@
         ></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label stacked="">Description</ion-label>
+        <ion-label color="primary" stacked>Description</ion-label>
         <ion-textarea
           name="formdescription"
           [(ngModel)]="formdescription"
@@ -85,7 +85,7 @@
         ></ion-textarea>
       </ion-item>
       <ion-item>
-        <ion-label>Language</ion-label>
+        <ion-label color="primary">Language</ion-label>
         <ion-select
           name="formlangselect"
           [(ngModel)]="formlang"
@@ -96,7 +96,7 @@
         </ion-select>
       </ion-item>
       <ion-item>
-        <ion-label>New Group</ion-label>
+        <ion-label color="primary">New Group</ion-label>
         <ion-checkbox
           name="formnewgroupcb"
           [(ngModel)]="groupNew"
@@ -104,7 +104,7 @@
         ></ion-checkbox>
       </ion-item>
       <ion-item>
-        <ion-label stacked>Optional, minimum 4 letters, maximum 50 letters</ion-label>
+        <ion-label color="primary" stacked>Optional, minimum 4 letters, maximum 50 letters</ion-label>
         <ion-input
           type="text"
           name="newgroupname"
@@ -115,7 +115,7 @@
         ></ion-input>
       </ion-item>
       <ion-item *ngIf="formOldGroupsInSelectedTag[0]">
-        <ion-label>Old Group</ion-label>
+        <ion-label color="primary">Old Group</ion-label>
         <ion-checkbox
           name="formoldgroupcb"
           [(ngModel)]="groupOld"
@@ -123,7 +123,7 @@
         ></ion-checkbox>
       </ion-item>
       <ion-item *ngIf="formOldGroupsInSelectedTag[0]">
-        <ion-label>Select:</ion-label>
+        <ion-label color="primary">Select:</ion-label>
         <ion-select
           name="formoldgroupselect"
           [disabled]="!groupOld"
@@ -136,9 +136,7 @@
           </ion-option>
         </ion-select>
       </ion-item>
-      <ion-item>
-        <button ion-button (click)="submitNewMedia()">Upload</button>
-      </ion-item>
     </ion-list>
+    <button ion-button block (click)="submitNewMedia()">Upload</button>
   </form>
 </ion-content>

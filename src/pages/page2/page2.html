@@ -5,13 +5,16 @@
     </button>
     <ion-title>Browse</ion-title>
   </ion-navbar>
+  <ion-toolbar>
+    <ion-title>Trending</ion-title>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content>
 
-  <div class="item item-divider">
-    Trending
-  </div>
+  <ion-list-header color="light">
+      Trending
+  </ion-list-header>
 
   <div class="trending">
     <ion-slides>
@@ -31,9 +34,17 @@
     </ion-slides>
   </div>
 
-  <div class="item item-divider">
-    Posts
-  </div>
+  <ion-segment [(ngModel)]="courses_posts" color="primary">
+    <ion-segment-button value="courses" (ionSelect)="selectedCourses()">
+      <ion-icon name="book"> </ion-icon>
+      Courses
+    </ion-segment-button>
+    <ion-segment-button value="posts" (ionSelect)="selectedPosts()">
+    <ion-icon name="clipboard" item-top></ion-icon>
+      Posts
+    </ion-segment-button>
+  </ion-segment>
+
 
   <ion-list>
     <ion-item *ngFor="let pic of newPics">

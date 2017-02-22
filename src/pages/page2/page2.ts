@@ -10,6 +10,7 @@ import {HttpApi} from "../../providers/http-api";
 export class Page2 {
   @ViewChild(Slides) slides: Slides;
   selectedItem: any;
+  private courses_posts = "courses";
   private newPics = [];
   api_url: string = 'https://dao-api.othnet.ga/uploads/';
 

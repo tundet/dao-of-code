@@ -1,66 +1,67 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Login</ion-title>
+    <ion-title *ngIf="signInMode">Singin</ion-title>
+    <ion-title *ngIf="!signInMode">Singup</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <h3>Login</h3>
-
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will show you the way.
-  </p>
-
-  <button ion-button secondary menuToggle>Toggle Menu</button>
-
   <div *ngIf="!loggedinMode">
     <div *ngIf="newUserHasBeenMade">
       New user has been made! Username: {{ newUser.username }}, Email: {{ newUser.email }}
     </div>
-    <form (ngSubmit)="onSignin()" *ngIf="signInMode">
-      <input
-        type="text"
-        required
-        [(ngModel)]="signinUser.username"
-        name="username"
-        placeholder="Username"
-      >
-      <input
-        type="password"
-        required
-        [(ngModel)]="signinUser.password"
-        name="password"
-        placeholder="Password"
-      >
-      <button ion-button type="submit">Singin</button>
-    </form>
-    <form (ngSubmit)="onSignup()" *ngIf="!signInMode">
-      <input
-        type="text"
-        required
-        [(ngModel)]="newUser.username"
-        name="username"
-        placeholder="Username"
-      >
-      <input
-        type="password"
-        required
-        [(ngModel)]="newUser.password"
-        name="password"
-        placeholder="Password"
-      >
-      <input
-        type="email"
-        required
-        [(ngModel)]="newUser.email"
-        name="email"
-        placeholder="E-mail"
-      >
-      <button ion-button type="submit">Singup</button>
-    </form>
-    <a (click)="changeSignupMode()" class="mode-change-link">
+    <ion-list *ngIf="signInMode">
+      <ion-item>
+        <ion-label color="primary" stacked>
+          Username:
+        </ion-label>
+        <ion-input
+          [(ngModel)]="signinUser.username"
+        ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label color="primary" stacked>
+          Password:
+        </ion-label>
+        <ion-input
+          type="password"
+          [(ngModel)]="signinUser.password"
+        ></ion-input>
+      </ion-item>
+    </ion-list>
+    <ion-list *ngIf="!signInMode">
+      <ion-item>
+        <ion-label color="primary" stacked>
+          Username:
+        </ion-label>
+        <ion-input
+          [(ngModel)]="newUser.username"
+        ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label color="primary" stacked>
+          Password:
+        </ion-label>
+        <ion-input
+          type="password"
+          [(ngModel)]="newUser.password"
+        ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label color="primary" stacked>
+          Email:
+        </ion-label>
+        <ion-input
+          type="email"
+          [(ngModel)]="newUser.email"
+        ></ion-input>
+      </ion-item>
+    </ion-list>
+    <button *ngIf="signInMode" ion-button block (click)="onSignin()">Singin</button>
+    <button *ngIf="!signInMode" ion-button block (click)="onSignup()">Singup</button>
+    <button ion-button small full outline (click)="changeSignupMode()" class="mode-change-link">
       {{ linkText }}
-    </a>
+    </button>
   </div>
   <div *ngIf="loggedinMode">
     Username: {{ loggedinUser.username }}, Token: {{ loggedinUser.token }}<br>
