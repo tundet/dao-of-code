@@ -107,6 +107,18 @@ export class HttpApi {
       .map((res: Response) => res.json())
   }
 
+  patch(path: string, body): Observable<any> {
+    this.setXAccessToken();
+    console.log(body);
+    return this.http.patch(`${this.api_url}${path}`,
+      body,
+      {headers: this.headers}
+      )
+      .map(this.checkForError)
+      .catch(err => Observable.throw(err))
+      .map((res: Response) => res.json())
+  }
+
   delete(path: string): Observable<any> {
     return this.http.delete(
       `${this.api_url}${path}`,

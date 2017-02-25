@@ -58,7 +58,6 @@ export class SinglePage {
 
     this.httpApi.get(`media/${id}`).subscribe(response => {
       this.mediaInfo = response;
-      this.editMedia = this.mediaInfo;
 
       console.log(this.mediaInfo);
       if (this.mediaInfo.media_type == "text") {
@@ -82,6 +81,7 @@ export class SinglePage {
   }
 
   editClick() {
+    this.editMedia = JSON.parse(JSON.stringify(this.mediaInfo));
     this.edit = true;
     this.httpApi.get(`/users/${this.mediaInfo.user_id}/groups`).subscribe(response => {
       this.userGroups = response;
@@ -89,6 +89,8 @@ export class SinglePage {
   }
 
   langChange() {
+    console.log(this.mediaInfo.tag);
+    console.log(this.editMedia.tag);
     this.userGroupsInSelectedTag = [];
     for (let group of this.userGroups) {
       if (group.tag == this.editMedia.tag) {
@@ -119,7 +121,28 @@ export class SinglePage {
   }
 
   saveClick() {
-    this.edit = false;
+    this.saveMediaChanges();
+  }
+
+  saveMediaChanges() {
+    let data = {};
+    if (this.mediaInfo.title != this.editMedia.title) {
+      data["title"] = this.editMedia.title;
+    }
+    if (this.mediaInfo.tag != this.editMedia.tag) {
+      data["tag"] = this.editMedia.tag;
+    }
+    if (this.mediaInfo.description != this.editMedia.description) {
+      data["description"] = this.editMedia.description;
+    }
+
+    this.httpApi.patch(`media/${this.mediaInfo.id}`, data).subscribe(response => {
+      console.log(response);
+      console.log(this.navCtrl.getViews());
+      this.navCtrl.insert(1,SinglePage, {id: this.mediaInfo.id});
+      console.log(this.navCtrl.getViews());
+      this.navCtrl.pop();
+    });
   }
 
   comment(event: any) {

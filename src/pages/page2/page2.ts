@@ -18,8 +18,8 @@ export class Page2 {
 
   }
 
-  ngOnInit() {
-    //console.log("listing images");
+  // (replaces ngIn..) loads new data when ever or how ever view is getting here
+  ionViewWillEnter() {
     this.httpApi.getNew(10).subscribe(
       resp => {
         //console.log(resp.json());
