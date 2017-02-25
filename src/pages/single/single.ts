@@ -102,8 +102,6 @@ export class SinglePage {
   }
 
   langChange() {
-    console.log(this.mediaInfo.tag);
-    console.log(this.editMedia.tag);
     this.userGroupsInSelectedTag = [];
     for (let group of this.userGroups) {
       if (group.tag == this.editMedia.tag) {

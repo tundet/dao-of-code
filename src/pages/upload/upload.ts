@@ -109,14 +109,14 @@ export class UploadPage {
   youtubeLinkChange() {
     console.log("modifying....");
     let orginal_url = this.formyoutubeLink;
-    orginal_url = orginal_url.replace("youtube.com/","youtube.com/embed/");
+    orginal_url = orginal_url.replace("youtube.com/", "youtube.com/embed/");
     console.log(orginal_url);
     orginal_url = orginal_url.replace("watch?v=", "");
     console.log(orginal_url);
-    let end_url = orginal_url.substring(orginal_url.indexOf("embed/"),orginal_url.length);
+    let end_url = orginal_url.substring(orginal_url.indexOf("embed/"), orginal_url.length);
     orginal_url = orginal_url.substring(0, orginal_url.indexOf("embed/"));
-    if (end_url.indexOf("?") > 0){
-      orginal_url += end_url.substring(0,end_url.indexOf("?"));
+    if (end_url.indexOf("?") > 0) {
+      orginal_url += end_url.substring(0, end_url.indexOf("?"));
       console.log(orginal_url);
     } else {
       orginal_url += end_url;
@@ -144,24 +144,38 @@ export class UploadPage {
       formData.append("tag", this.formlang);
     }
     if (this.groupNew && this.formnewgroupname) {
-      if ( this.formnewgroupname.trim().length >= 4) {
+      if (this.formnewgroupname.trim().length >= 4) {
         // make new group and set id and tag in data
-        let newGroupFormData = new FormData();
-        newGroupFormData.append("name", this.formnewgroupname.trim());
-        newGroupFormData.append("tag", this.formlang);
+        let newGroupFormData = {};
+        newGroupFormData["name"] = this.formnewgroupname.trim();
+        newGroupFormData["tag"] = this.formlang;
         this.httpApi.makeGroup(newGroupFormData).subscribe(response => {
           console.log(response);
           formData.append("group_id", response.id);
+          this.httpApi.postUpload("media", formData).subscribe(response => {
+            console.log(response);
+            if (response.message.startsWith("Medium") && response.message.endsWith("has been created.")) {
+              this.navCtrl.setRoot(Page2);
+            }
+          });
         });
       }
-    } else {
+    } else if (this.groupOld && this.oldGroupsSelectedId) {
       formData.append("group_id", this.oldGroupsSelectedId);
+      this.httpApi.postUpload("media", formData).subscribe(response => {
+        console.log(response);
+        if (response.message.startsWith("Medium") && response.message.endsWith("has been created.")) {
+          this.navCtrl.setRoot(Page2);
+        }
+      });
+    } else {
+      this.httpApi.postUpload("media", formData).subscribe(response => {
+        console.log(response);
+        if (response.message.startsWith("Medium") && response.message.endsWith("has been created.")) {
+          this.navCtrl.setRoot(Page2);
+        }
+      });
     }
-    this.httpApi.postUpload("media", formData).subscribe(response => {
-      console.log(response);
-      if (response.message.startsWith("Medium") && response.message.endsWith("has been created.")){
-        this.navCtrl.setRoot(Page2);
-      }
-    });
   }
+
 }
