@@ -16,7 +16,11 @@
 <ion-content padding [ngSwitch]="edit">
   <div *ngSwitchCase="false">
     <ion-card *ngIf="mediaInfo">
-      <ion-card-title class="center">{{ mediaInfo.title }}</ion-card-title>
+        <ion-item>
+          <h2 *ngIf="groupInfo">{{ groupInfo.name }}</h2>
+          <h2 ion-text item-right color="primary">{{ username }}</h2>
+        </ion-item>
+
       <ion-card-content>
         <img *ngIf="mediaInfo.media_type == 'image'" [src]="api_url + mediaInfo.file_name" [alt]="mediaInfo.title"/>
         <video *ngIf="mediaInfo.media_type == 'video'" width="100%" controls>
@@ -37,7 +41,7 @@
       <ion-card-content *ngIf="mediaInfo.media_type == 'text'">
         <a ion-button [href]="api_url + mediaInfo.file_name" [target]="_blank">{{mediaInfo.title}}</a>
       </ion-card-content>
-      <ion-item><h2>Uploaded by {{ username }}</h2><span item-right>{{mediaInfo.tag | language}}</span></ion-item>
+      <ion-item><h2>{{ mediaInfo.title }}</h2><span ion-text item-right color="primary">{{mediaInfo.tag | language}}</span></ion-item>
       <ion-card-content>{{ mediaInfo.description }}</ion-card-content>
     </ion-card>
     <button *ngIf="owner" ion-button block (click)="editClick()">Edit</button>
@@ -45,10 +49,10 @@
 
   <div *ngSwitchCase="true">
     <ion-card *ngIf="editMedia">
-      <ion-card-title>
-        <ion-label stacked color="primary">Title</ion-label>
-        <ion-input [(ngModel)]="editMedia.title"></ion-input>
-      </ion-card-title>
+      <ion-item>
+      <h2 *ngIf="groupInfo">{{ groupInfo.name }}</h2>
+      <h2 item-right>{{ username }}</h2>
+    </ion-item>
       <ion-card-content>
         <img *ngIf="mediaInfo.media_type == 'image'" [src]="api_url + mediaInfo.file_name" [alt]="mediaInfo.title"/>
         <video *ngIf="mediaInfo.media_type == 'video'" width="100%" controls>
@@ -68,9 +72,10 @@
       <ion-card-content *ngIf="mediaInfo.media_type == 'text'">
         <a ion-button [href]="api_url + mediaInfo.file_name" [target]="_blank">{{mediaInfo.title}}</a>
       </ion-card-content>
-      <ion-item>
-        <h2>Uploaded by {{ username }}</h2>
-      </ion-item>
+      <ion-card-title>
+        <ion-label stacked color="primary">Title</ion-label>
+        <ion-input [(ngModel)]="editMedia.title"></ion-input>
+      </ion-card-title>
       <ion-item>
         <ion-label color="primary">Language</ion-label>
         <ion-select

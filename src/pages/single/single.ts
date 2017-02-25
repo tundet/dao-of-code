@@ -21,6 +21,7 @@ export class SinglePage {
     comment: ""
   };
   private mediaInfo;
+  private groupInfo;
   private textMediaContent;
   private username;
   private userGroups;
@@ -58,7 +59,9 @@ export class SinglePage {
 
     this.httpApi.get(`media/${id}`).subscribe(response => {
       this.mediaInfo = response;
-
+      if (this.mediaInfo.group_id != null) {
+        this.updateGroupInfo(this.mediaInfo.group_id);
+      }
       console.log(this.mediaInfo);
       if (this.mediaInfo.media_type == "text") {
         this.httpApi.getText(this.mediaInfo.file_name).subscribe(response => {
@@ -80,11 +83,21 @@ export class SinglePage {
     });
   }
 
+  updateGroupInfo(id) {
+    this.httpApi.get(`groups/${id}`).subscribe(response => {
+      this.groupInfo = response;
+      this.userGroupsSelectedId = this.groupInfo.id;
+      this.groupNew = false;
+      this.groupOld = true;
+    });
+  }
+
   editClick() {
     this.editMedia = JSON.parse(JSON.stringify(this.mediaInfo));
     this.edit = true;
     this.httpApi.get(`/users/${this.mediaInfo.user_id}/groups`).subscribe(response => {
       this.userGroups = response;
+      this.langChange();
     });
   }
 
@@ -121,11 +134,29 @@ export class SinglePage {
   }
 
   saveClick() {
-    this.saveMediaChanges();
+    let data = {};
+    if (this.groupNew && this.newGroupName) {
+      if (this.newGroupName.trim().length >= 4) {
+        let newGroupFormData = {};
+        newGroupFormData["name"] = this.newGroupName.trim();
+        newGroupFormData["tag"] = this.editMedia.tag;
+        this.httpApi.makeGroup(newGroupFormData).subscribe(response => {
+          console.log(response);
+          data["group_id"] = response.id;
+          this.updateGroupInfo(response.id);
+          this.saveMediaChanges(data);
+        });
+      }
+    } else if (this.groupOld && this.userGroupsSelectedId){
+      data["group_id"] = this.userGroupsSelectedId;
+      this.updateGroupInfo(this.userGroupsSelectedId);
+      this.saveMediaChanges(data);
+    } else {
+      this.saveMediaChanges(data);
+    }
   }
 
-  saveMediaChanges() {
-    let data = {};
+  saveMediaChanges(data) {
     if (this.mediaInfo.title != this.editMedia.title) {
       data["title"] = this.editMedia.title;
     }

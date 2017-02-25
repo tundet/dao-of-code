@@ -66,7 +66,8 @@ export class HttpApi {
 
   makeGroup(body): Observable<any> {
     this.setXAccessToken();
-    return this.http.post(`${this.api_url}/groups`,
+    console.log(body);
+    return this.http.post(`${this.api_url}groups`,
       body,
       {headers: this.headers}
     )
