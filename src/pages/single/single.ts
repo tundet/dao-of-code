@@ -138,10 +138,8 @@ export class SinglePage {
 
     this.httpApi.patch(`media/${this.mediaInfo.id}`, data).subscribe(response => {
       console.log(response);
-      console.log(this.navCtrl.getViews());
-      this.navCtrl.insert(1,SinglePage, {id: this.mediaInfo.id});
-      console.log(this.navCtrl.getViews());
-      this.navCtrl.pop();
+      this.mediaInfo = JSON.parse(JSON.stringify(this.editMedia));
+      this.edit = false;
     });
   }
 
