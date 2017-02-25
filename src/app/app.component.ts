@@ -6,6 +6,7 @@ import {Page1} from '../pages/page1/page1';
 import {Page2} from '../pages/page2/page2';
 import {UploadPage} from "../pages/upload/upload";
 import {LogoutPage} from "../pages/logout/logout";
+import {GroupPage} from "../pages/group/group";
 
 
 @Component({
@@ -25,6 +26,7 @@ export class MyApp {
     this.pages = [
       { icon: 'log-in', title: 'Login', component: Page1 },
       { icon: 'home', title: 'Home', component: Page2 },
+      { icon: '', title: 'Group', component: GroupPage},
       { icon: 'share-alt', title: 'Upload', component: UploadPage },
       { icon: 'log-out', title: 'Logout', component: LogoutPage }
     ];

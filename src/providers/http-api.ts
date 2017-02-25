@@ -46,7 +46,10 @@ export class HttpApi {
 
   getUserName = (value: any) => {
     this.setXAccessToken();
-    return this.http.get(`${this.api_url}users/` + value, {headers: this.headers});
+    return this.http.get(`${this.api_url}users/` + value, {headers: this.headers})
+      .map(this.checkForError)
+      .catch(err => Observable.throw(err))
+      .map(this.getJson);
   }
 
   getNew = (amount: number) => {

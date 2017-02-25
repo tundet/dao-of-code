@@ -4,12 +4,14 @@ import { MyApp } from './app.component';
 import { Page1 } from '../pages/page1/page1';
 import { Page2 } from '../pages/page2/page2';
 import { HttpApi } from '../providers/http-api';
-import {UploadPage} from "../pages/upload/upload";
-import {SinglePage} from "../pages/single/single";
-import {LogoutPage} from "../pages/logout/logout";
-import {GetUsername} from "../pipes/get-username";
-import {LikeBoxComponent} from "../components/like-box/like-box";
-import {Safe} from "../pipes/safe";
+import { UploadPage } from "../pages/upload/upload";
+import { SinglePage } from "../pages/single/single";
+import { GroupPage } from "../pages/group/group";
+import { LogoutPage } from "../pages/logout/logout";
+import { GetUsername } from "../pipes/get-username";
+import { LikeBoxComponent } from "../components/like-box/like-box";
+import { Safe } from "../pipes/safe";
+import { Language } from "../pipes/language"
 
 
 @NgModule({
@@ -18,11 +20,13 @@ import {Safe} from "../pipes/safe";
     Page1,
     Page2,
     SinglePage,
+    GroupPage,
     UploadPage,
     LogoutPage,
     GetUsername,
     LikeBoxComponent,
-    Safe
+    Safe,
+    Language
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -33,6 +37,7 @@ import {Safe} from "../pipes/safe";
     Page1,
     Page2,
     SinglePage,
+    GroupPage,
     UploadPage,
     LogoutPage
   ],

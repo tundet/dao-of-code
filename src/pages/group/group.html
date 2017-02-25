@@ -7,12 +7,38 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>group</ion-title>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title *ngIf="groupInfo">{{ groupInfo.name }}</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-
+  <ion-card *ngIf="groupInfo">
+    <ion-card-header *ngIf="userInfo">Made by: {{ userInfo.username }}</ion-card-header>
+  </ion-card>
+  <ion-item *ngIf="groupInfo">
+    <p>{{ groupInfo.id }}</p>
+    <p>{{ groupInfo.user_id }}</p>
+    <p>{{ groupInfo.name }}</p>
+    <p>{{ groupInfo.tag }}</p>
+  </ion-item>
+  <ion-list *ngIf="groupMedia">
+    <ion-item *ngFor="let media of groupMedia">
+      <ion-thumbnail item-left (click)="itemTapped($event, media.id)">
+        <img *ngIf="media.media_type == 'image'" [alt]="media.title" [src]='api_url + "small/" + media.file_name'/>
+        <img *ngIf="media.media_type == 'audio'" [alt]="media.title" [src]='api_url + "thumbnails/audio.jpg"'/>
+        <img *ngIf="media.media_type == 'video'" [alt]="media.title" [src]='api_url + "thumbnails/video.jpg"'/>
+        <img *ngIf="media.media_type == 'text'" [alt]="media.title" [src]='api_url + "thumbnails/text.jpg"'/>
+        <img *ngIf="media.media_type == 'youtube'" [alt]="media.title" [src]='api_url + "thumbnails/youtube.jpg"'/>
+      </ion-thumbnail>
+      <h2>{{ media.title }}</h2>
+      <p>{{ media.description }}</p>
+      <p item-right>{{ media.tag }}</p>
+      <button ion-button clear item-right (click)="itemTapped($event, media.id)">View</button>
+    </ion-item>
+  </ion-list>
 </ion-content>
