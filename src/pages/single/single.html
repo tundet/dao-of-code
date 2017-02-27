@@ -23,6 +23,8 @@
 
       <ion-card-content>
         <img *ngIf="mediaInfo.media_type == 'image'" [src]="api_url + mediaInfo.file_name" [alt]="mediaInfo.title"/>
+        <like-box></like-box>
+
         <video *ngIf="mediaInfo.media_type == 'video'" width="100%" controls>
           <source [src]='api_url + mediaInfo.file_name'>
           Your browser does not support the video tag.
