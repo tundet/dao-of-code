@@ -1,19 +1,19 @@
 <ion-grid>
   <ion-row>
     <ion-col width-50 *ngIf="(!mediumHasBeenLiked && !mediumHasBeenDisliked) || mediumHasBeenDisliked">
-      <button ion-button full color="secondary" (click)="like($event)">
+      <button ion-button full color="secondary" (click)="like()">
         <ion-icon name="thumbs-up"></ion-icon> <span>Like</span>
       </button>
     </ion-col>
 
     <ion-col width-50 *ngIf="mediumHasBeenLiked || mediumHasBeenDisliked">
-      <button ion-button full color="dark" (click)="removeLike($event)">
+      <button ion-button full color="dark" (click)="removeLike()">
         <ion-icon name="remove-circle"></ion-icon><span>Remove Like</span>
       </button>
     </ion-col>
 
     <ion-col width-50 *ngIf="(!mediumHasBeenLiked && !mediumHasBeenDisliked) || mediumHasBeenLiked">
-      <button ion-button full color="danger" (click)="dislike($event)">
+      <button ion-button full color="danger" (click)="dislike()">
         <ion-icon name="thumbs-down"></ion-icon> <span>Dislike</span>
       </button>
     </ion-col>
