@@ -10,7 +10,7 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title *ngIf="groupInfo">{{ groupInfo.name }}</ion-title>
+    <ion-title>Course menu</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -18,16 +18,15 @@
 
 <ion-content padding>
   <ion-card *ngIf="groupInfo">
-    <ion-card-header *ngIf="userInfo">Made by: {{ userInfo.username }}</ion-card-header>
+    <ion-item *ngIf="userInfo">
+      <h1>{{ groupInfo.name }}</h1>
+      <h2 item-right ion-text color="primary">{{ groupInfo.tag | language }}</h2>
+      <p>Made by: {{ userInfo.username }}</p>
+    </ion-item>
   </ion-card>
-  <ion-item *ngIf="groupInfo">
-    <p>{{ groupInfo.id }}</p>
-    <p>{{ groupInfo.user_id }}</p>
-    <p>{{ groupInfo.name }}</p>
-    <p>{{ groupInfo.tag }}</p>
-  </ion-item>
+  <button ion-button block *ngIf="edited" (click)="saveMediaOrder()">Save media order</button>
   <ion-list *ngIf="groupMedia">
-    <ion-item *ngFor="let media of groupMedia">
+    <ion-item *ngFor="let media of groupMedia; let i = index">
       <ion-thumbnail item-left (click)="itemTapped($event, media.id)">
         <img *ngIf="media.media_type == 'image'" [alt]="media.title" [src]='api_url + "small/" + media.file_name'/>
         <img *ngIf="media.media_type == 'audio'" [alt]="media.title" [src]='api_url + "thumbnails/audio.jpg"'/>
@@ -37,7 +36,13 @@
       </ion-thumbnail>
       <h2>{{ media.title }}</h2>
       <p>{{ media.description }}</p>
-      <p item-right>{{ media.tag }}</p>
+      <span item-right>
+        <button *ngIf="i > 0" ion-button (click)="upArrowPressed(i)">
+          <ion-icon name="arrow-up"></ion-icon>
+        </button>
+        <button *ngIf="i < groupMedia.length -1" ion-button (click)="downArrowPressed(i)">
+          <ion-icon name="arrow-down"></ion-icon>
+        </button></span>
       <button ion-button clear item-right (click)="itemTapped($event, media.id)">View</button>
     </ion-item>
   </ion-list>
