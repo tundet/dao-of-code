@@ -17,6 +17,7 @@ export class Page1 {
 
   JWT_KEY: string = 'dao_token';
   JWT_USER: string = 'dao_user';
+  JWT_USER_ID: string = 'dao_user_id';
 
   newUser = {
     username: '',
@@ -26,12 +27,12 @@ export class Page1 {
 
   signinUser = {
     username: '',
-    password: ''
+    password: '',
   };
 
   loggedinUser = {
     username: '',
-    token: ''
+    token: '',
   };
 
   private resetJson(json) {
@@ -79,7 +80,7 @@ export class Page1 {
         return;
       }
 
-      this.setJwt(response.api_token, this.signinUser.username);
+      this.setJwt(response.api_token, this.signinUser.username, response.id);
       this.loggedinUser.username = this.signinUser.username;
       this.loggedinUser.token = response.api_token;
       this.loggedinMode = true;
@@ -93,6 +94,7 @@ export class Page1 {
     this.httpApi.logout();
     window.localStorage.removeItem(this.JWT_KEY);
     window.localStorage.removeItem(this.JWT_USER);
+    window.localStorage.removeItem(this.JWT_USER_ID);
     this.httpApi.headers.delete('x-access-token');
     this.resetAllJsons();
     this.loggedinMode = false;
@@ -103,8 +105,9 @@ export class Page1 {
   constructor(private httpApi: HttpApi, public navCtrl: NavController) {
     const token = window.localStorage.getItem(this.JWT_KEY);
     const userN = window.localStorage.getItem(this.JWT_USER);
+    const userId = window.localStorage.getItem(this.JWT_USER_ID);
     if (token) {
-      this.setJwt(token, userN);
+      this.setJwt(token, userN, userId);
       this.loggedinUser.username = userN;
       this.loggedinUser.token = token;
       this.loggedinMode = true;
@@ -112,9 +115,10 @@ export class Page1 {
     }
   }
 
-  setJwt(jwt: string, user: string) {
+  setJwt(jwt: string, user: string, userId: string) {
     window.localStorage.setItem(this.JWT_KEY, jwt);
     window.localStorage.setItem(this.JWT_USER, user);
+    window.localStorage.setItem(this.JWT_USER_ID, userId);
   }
 
   ngOnInit() {
