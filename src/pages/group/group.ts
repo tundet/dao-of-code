@@ -58,6 +58,10 @@ export class GroupPage {
     })
   }
 
+  /**
+   * Change edit mode on and off. If backup is true it will revert all changes
+   * @param backup
+   */
   changeEdit(backup:boolean) {
     if (this.edit) {
       this.edit = false;
@@ -72,6 +76,10 @@ export class GroupPage {
     }
   }
 
+  /**
+   * Moves given index in list one stage higher, and turns on group_priority saveing on media
+   * @param index
+   */
   upArrowPressed(index: number) {
     this.edited = true;
     let newList = [];
@@ -98,6 +106,10 @@ export class GroupPage {
     this.groupMedia = newList;
   }
 
+  /**
+   * Moves given index in list one stage lower, and turns on group_priority saveing on media
+   * @param index
+   */
   downArrowPressed(index: number) {
     this.edited = true;
     let newList = [];
@@ -125,6 +137,9 @@ export class GroupPage {
     this.groupMedia = newList;
   }
 
+  /**
+   * Saves changes in group and if needed triggers group_priority save allso
+   */
   save() {
     this.httpApi.patch(`/groups/${this.groupInfo.id}`, this.groupInfo).subscribe(response => {
       console.log(response);
@@ -135,6 +150,9 @@ export class GroupPage {
     }
   }
 
+  /**
+   * Saves group_prioritys to media
+   */
   saveMediaOrder() {
     for (let media of this.groupMedia) {
       this.httpApi.patch(`/media/${media.id}`, media).subscribe(response => {
@@ -145,6 +163,11 @@ export class GroupPage {
     this.edited = false;
   }
 
+  /**
+   * Opens tapped single media in new layer by id
+   * @param event
+   * @param id
+   */
   itemTapped(event, id) {
     // That's right, we're pushing to ourselves!
     this.navCtrl.push(SinglePage, {

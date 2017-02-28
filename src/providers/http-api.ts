@@ -21,10 +21,20 @@ export class HttpApi {
   constructor(private http: Http) {
   }
 
+  /**
+   * Turns response to Json
+   * @param response
+   * @returns {any}
+   */
   private getJson(response: Response) {
     return response.json();
   }
 
+  /**
+   * Checks response for errors
+   * @param response
+   * @returns {Response}
+   */
   private checkForError(response: Response): Response {
     if (response.status >= 200 && response.status < 300) {
       return response;
@@ -36,6 +46,10 @@ export class HttpApi {
     }
   }
 
+  /**
+   * Sends logout order to backend
+   * @returns {Observable<R>}
+   */
   logout(): Observable<any> {
     this.setXAccessToken();
     return this.http.post(`${this.api_url}signout`, {})
@@ -44,6 +58,11 @@ export class HttpApi {
       .map(this.getJson);
   }
 
+  /**
+   * Gets all user info by username or id (MIGHT BE USELESS) maybe convert to list collector...? :D
+   * @param value
+   * @returns {Observable<R>}
+   */
   getUserName = (value: any) => {
     this.setXAccessToken();
     return this.http.get(`${this.api_url}users/` + value, {headers: this.headers})
@@ -52,18 +71,33 @@ export class HttpApi {
       .map(this.getJson);
   }
 
+  /**
+   * Gets X amount of new posts
+   * @param amount
+   * @returns {Observable<Response>}
+   */
   getNew = (amount: number) => {
     //GET http://[BASE-URL]/media?start=10&limit=10
     this.setXAccessToken();
     return this.http.get(this.api_url + `media/latest/${amount}`, {headers: this.headers});
   };
-
+git
+  /**
+   * Might be useless... mostlikely
+   * @param filename
+   * @returns {Observable<Response>}
+   */
   getText = (filename: string) => {
     console.log(this.api_url + `uploads/original/${filename}`);
     //this.setXAccessToken();
     return this.http.get(this.api_url + `uploads/original/${filename}`);
   };
 
+  /**
+   * Makes new group for posts
+   * @param body
+   * @returns {Observable<R>}
+   */
   makeGroup(body): Observable<any> {
     this.setXAccessToken();
     console.log(body);
@@ -76,6 +110,12 @@ export class HttpApi {
       .map((res: Response) => res.json())
   }
 
+  /**
+   * Post upload duno why need path...
+   * @param path
+   * @param body
+   * @returns {Observable<R>}
+   */
   postUpload(path: string, body): Observable<any> {
     this.setXAccessToken();
     return this.http.post(
