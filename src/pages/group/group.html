@@ -18,13 +18,35 @@
 
 <ion-content padding>
   <ion-card *ngIf="groupInfo">
-    <ion-item *ngIf="userInfo">
+    <ion-item *ngIf="userInfo && !edit">
       <h1>{{ groupInfo.name }}</h1>
       <h2 item-right ion-text color="primary">{{ groupInfo.tag | language }}</h2>
-      <p>Made by: {{ userInfo.username }}</p>
+      <p><span ion-text color="primary">Creator:</span> {{ userInfo.username }}</p>
     </ion-item>
+    <ion-card-title *ngIf="edit">
+      <ion-input [(ngModel)]="groupInfo.name"></ion-input>
+    </ion-card-title>
+    <ion-item *ngIf="edit">
+      <ion-label color="primary">Language</ion-label>
+      <ion-select
+        [(ngModel)]="groupInfo.tag"
+      >
+        <ion-option
+          *ngFor="let lng of languages"
+          [value]="lng.value"
+        >
+          {{ lng.name }}
+        </ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-card-content>
+      <ion-label stacked color="primary">Description</ion-label>
+      <p *ngIf="!edit">{{ groupInfo.description }}</p>
+      <ion-textarea *ngIf="edit" [(ngModel)]="groupInfo.description"></ion-textarea>
+    </ion-card-content>
   </ion-card>
-  <button ion-button block *ngIf="edited" (click)="saveMediaOrder()">Save media order</button>
+  <button ion-button block *ngIf="edit" (click)="save()">Save</button>
+  <button ion-button block *ngIf="owner" (click)="changeEdit()">{{ changeEditButton }}</button>
   <ion-list *ngIf="groupMedia">
     <ion-item *ngFor="let media of groupMedia; let i = index">
       <ion-thumbnail item-left (click)="itemTapped($event, media.id)">
@@ -36,7 +58,7 @@
       </ion-thumbnail>
       <h2>{{ media.title }}</h2>
       <p>{{ media.description }}</p>
-      <span item-right>
+      <span item-right *ngIf="owner && edit">
         <button *ngIf="i > 0" ion-button (click)="upArrowPressed(i)">
           <ion-icon name="arrow-up"></ion-icon>
         </button>

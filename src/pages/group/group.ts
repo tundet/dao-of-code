@@ -18,23 +18,58 @@ export class GroupPage {
   api_url: string = 'https://dao-api.othnet.ga/uploads/';
 
   private groupInfo;
+  private groupInfoBackup;
   private groupMedia;
   private userInfo;
-  private firstMedia;
+  private owner: boolean = false;
+  private changeEditButton: string = "Edit";
+  private edit: boolean = false;
   private edited: boolean = false;
+
+  private languages: any = [
+    {"name": "Java", "value": "java"},
+    {"name": "C", "value": "c"},
+    {"name": "C++", "value": "cpp"},
+    {"name": "C#", "value": "cs"},
+    {"name": "Php", "value": "php"},
+    {"name": "SQL", "value": "sql"},
+    {"name": "HTML", "value": "html"},
+    {"name": "HTML5", "value": "html5"},
+    {"name": "Css", "value": "css"},
+    {"name": "JavaScript", "value": "javascript"},
+    {"name": "Angular", "value": "angular"},
+    {"name": "React", "value": "react"}
+  ];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private httpApi: HttpApi) {
     // Get group info
-    this.httpApi.get(`groups/4`).subscribe(response => {
+    this.httpApi.get(`groups/3`).subscribe(response => {
       this.groupInfo = response;
-      this.httpApi.get(`groups/4/media`).subscribe(response => {
+      this.httpApi.get(`groups/3/media`).subscribe(response => {
+        //console.log(this.groupMedia);
         this.groupMedia = response;
-        console.log(this.groupMedia);
       });
       this.httpApi.getUserName(this.groupInfo.user_id).subscribe(response => {
         this.userInfo = response;
+        if (this.userInfo.username == window.localStorage.getItem("dao_user")) {
+          this.owner = true;
+        }
       });
     })
+  }
+
+  changeEdit(backup:boolean) {
+    if (this.edit) {
+      this.edit = false;
+      this.changeEditButton = "Edit";
+      if (backup) {
+        this.groupInfo = JSON.parse(JSON.stringify(this.groupInfo));
+      }
+    } else {
+      this.edit = true;
+      this.groupInfoBackup = JSON.parse(JSON.stringify(this.groupInfo));
+      this.changeEditButton = "Cancel edit";
+    }
   }
 
   upArrowPressed(index: number) {
@@ -90,12 +125,24 @@ export class GroupPage {
     this.groupMedia = newList;
   }
 
+  save() {
+    this.httpApi.patch(`/groups/${this.groupInfo.id}`, this.groupInfo).subscribe(response => {
+      console.log(response);
+      this.changeEdit(false);
+    })
+    if (this.edited) {
+      this.saveMediaOrder();
+    }
+  }
+
   saveMediaOrder() {
     for (let media of this.groupMedia) {
       this.httpApi.patch(`/media/${media.id}`, media).subscribe(response => {
         console.log("media " + media.id + " updated! " + response);
       });
     }
+    this.changeEdit(false);
+    this.edited = false;
   }
 
   itemTapped(event, id) {
