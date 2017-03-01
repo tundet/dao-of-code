@@ -17,8 +17,8 @@
   <div *ngSwitchCase="false">
     <ion-card *ngIf="mediaInfo">
         <ion-item>
-          <h2 *ngIf="groupInfo">{{ groupInfo.name }}</h2>
-          <h2 ion-text item-right color="primary">{{ username }}</h2>
+          <h2 *ngIf="groupInfo" color="primary" (click)="loadGroup(groupInfo.id)">{{ groupInfo.name }}</h2>
+          <h2 ion-text item-right color="secondary">{{ username }}</h2>
         </ion-item>
 
       <ion-card-content>

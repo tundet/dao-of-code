@@ -43,9 +43,10 @@ export class GroupPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private httpApi: HttpApi) {
     // Get group info
-    this.httpApi.get(`groups/3`).subscribe(response => {
+    let id = this.navParams.get("id");
+    this.httpApi.get(`groups/${id}`).subscribe(response => {
       this.groupInfo = response;
-      this.httpApi.get(`groups/3/media`).subscribe(response => {
+      this.httpApi.get(`groups/${id}/media`).subscribe(response => {
         //console.log(this.groupMedia);
         this.groupMedia = response;
       });

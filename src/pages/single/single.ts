@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {NavController, NavParams} from 'ionic-angular';
 import {HttpApi} from "../../providers/http-api";
+import {GroupPage} from "../group/group";
 
 /*
  Generated class for the Single page.
@@ -185,6 +186,12 @@ export class SinglePage {
     this.txtcomment = "";
   }
 
+  loadGroup(id) {
+    // That's right, we're pushing to ourselves!
+    this.navCtrl.push(GroupPage, {
+      id: id
+    });
+  }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad SinglePage');
