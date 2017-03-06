@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {NavController, NavParams} from 'ionic-angular';
 import {HttpApi} from "../../providers/http-api";
 import {GroupPage} from "../group/group";
-import { global } from '../app/global';
+import { global } from '../../app/global';
 
 /*
  Generated class for the Single page.

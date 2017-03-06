@@ -33,7 +33,7 @@ export class UploadPage {
   private formnewgroupname: string;
   private formlang: any = 'java';
 
-  languages = global.languages;
+  private languages = global.languages;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private httpApi: HttpApi) {
     let userN = window.localStorage.getItem(this.JWT_USER);

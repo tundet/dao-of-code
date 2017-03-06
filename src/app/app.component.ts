@@ -26,7 +26,7 @@ export class MyApp {
     this.pages = [
       { icon: 'log-in', title: 'Login', component: Page1 },
       { icon: 'home', title: 'Home', component: Page2 },
-      { icon: 'home', title: 'Profile', component: ProfilePage },
+      { icon: 'contact', title: 'Profile', component: ProfilePage },
       { icon: 'share-alt', title: 'Upload', component: UploadPage },
       { icon: 'log-out', title: 'Logout', component: LogoutPage }
     ];
