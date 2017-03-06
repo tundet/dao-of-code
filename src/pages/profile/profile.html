@@ -1,12 +1,17 @@
 <ion-header>
-
   <ion-navbar>
-    <ion-title>Profile </ion-title>
+    <ion-title>Profile of {{ user.username }}</ion-title>
   </ion-navbar>
-
 </ion-header>
 
-
 <ion-content padding>
+  <h2>Media of {{ user.username }}</h2>
+  <ul *ngFor="let medium of media; let i = index">
+    <li>{{ medium.title }}</li>
+  </ul>
 
+  <h2>Groups of {{ user.username }}</h2>
+  <ul *ngFor="let group of groups; let i = index">
+    <li>{{ group.name }}</li>
+  </ul>
 </ion-content>
