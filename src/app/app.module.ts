@@ -1,9 +1,10 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
+import { HttpApi } from '../providers/http-api';
 import { Page1 } from '../pages/page1/page1';
 import { Page2 } from '../pages/page2/page2';
-import { HttpApi } from '../providers/http-api';
+import { BrowsePage } from '../pages/browse/browse';
 import { UploadPage } from "../pages/upload/upload";
 import { SinglePage } from "../pages/single/single";
 import { GroupPage } from "../pages/group/group";
@@ -20,6 +21,7 @@ import { ProfilePage } from "../pages/profile/profile";
     MyApp,
     Page1,
     Page2,
+    BrowsePage,
     SinglePage,
     GroupPage,
     UploadPage,
@@ -38,6 +40,7 @@ import { ProfilePage } from "../pages/profile/profile";
     MyApp,
     Page1,
     Page2,
+    BrowsePage,
     SinglePage,
     GroupPage,
     UploadPage,

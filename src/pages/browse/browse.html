@@ -1,0 +1,28 @@
+<!--
+  Generated template for the Browse page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{ tag | language }} {{ courses_posts }} </ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list *ngIf="contentList">
+    <ion-item *ngFor="let content of contentList">
+      <ion-thumbnail item-left (click)="itemTapped($event, content.id)">
+        <img [alt]="content.name" [src]='api_url + "thumbnails/text.jpg"'/>
+      </ion-thumbnail>
+      <h2>{{ content.name }}</h2>
+      <p>{{ content.description }}</p>
+      <p item-right>{{content.tag | language }}</p>
+      <button ion-button clear item-right (click)="itemTapped($event, content.id)">View</button>
+    </ion-item>
+  </ion-list>
+</ion-content>
