@@ -12,7 +12,7 @@ import { GetUsername } from "../pipes/get-username";
 import { LikeBoxComponent } from "../components/like-box/like-box";
 import { Safe } from "../pipes/safe";
 import { Language } from "../pipes/language"
-import {ProfilePage} from "../pages/profile/profile";
+import { ProfilePage } from "../pages/profile/profile";
 
 
 @NgModule({
@@ -41,7 +41,8 @@ import {ProfilePage} from "../pages/profile/profile";
     SinglePage,
     GroupPage,
     UploadPage,
-    LogoutPage
+    LogoutPage,
+    ProfilePage
   ],
   providers: [
     {provide: ErrorHandler, useClass: IonicErrorHandler},
