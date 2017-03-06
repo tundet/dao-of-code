@@ -2,13 +2,8 @@ import {Component} from '@angular/core';
 import {NavController, NavParams} from 'ionic-angular';
 import {HttpApi} from "../../providers/http-api";
 import {SinglePage} from "../single/single";
+import { global } from '../../app/global';
 
-/*
- Generated class for the Group page.
-
- See http://ionicframework.com/docs/v2/components/#navigation for more info on
- Ionic pages and navigation.
- */
 @Component({
   selector: 'page-group',
   templateUrl: 'group.html'
@@ -25,21 +20,7 @@ export class GroupPage {
   private changeEditButton: string = "Edit";
   private edit: boolean = false;
   private edited: boolean = false;
-
-  private languages: any = [
-    {"name": "Java", "value": "java"},
-    {"name": "C", "value": "c"},
-    {"name": "C++", "value": "cpp"},
-    {"name": "C#", "value": "cs"},
-    {"name": "Php", "value": "php"},
-    {"name": "SQL", "value": "sql"},
-    {"name": "HTML", "value": "html"},
-    {"name": "HTML5", "value": "html5"},
-    {"name": "Css", "value": "css"},
-    {"name": "JavaScript", "value": "javascript"},
-    {"name": "Angular", "value": "angular"},
-    {"name": "React", "value": "react"}
-  ];
+  private languages = global.languages;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private httpApi: HttpApi) {
     // Get group info

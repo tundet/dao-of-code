@@ -21,7 +21,7 @@
     <ion-item *ngIf="userInfo && !edit">
       <h1>{{ groupInfo.name }}</h1>
       <h2 item-right ion-text color="primary">{{ groupInfo.tag | language }}</h2>
-      <p><span ion-text color="primary">Creator:</span> {{ userInfo.username }}</p>
+      <p><span ion-text color="primary">Creator:</span> {{ userInfo.id | GetUsername}}</p>
     </ion-item>
     <ion-card-title *ngIf="edit">
       <ion-input [(ngModel)]="groupInfo.name"></ion-input>

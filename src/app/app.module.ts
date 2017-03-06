@@ -12,6 +12,7 @@ import { GetUsername } from "../pipes/get-username";
 import { LikeBoxComponent } from "../components/like-box/like-box";
 import { Safe } from "../pipes/safe";
 import { Language } from "../pipes/language"
+import {ProfilePage} from "../pages/profile/profile";
 
 
 @NgModule({
@@ -23,6 +24,7 @@ import { Language } from "../pipes/language"
     GroupPage,
     UploadPage,
     LogoutPage,
+    ProfilePage,
     GetUsername,
     LikeBoxComponent,
     Safe,

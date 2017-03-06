@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {NavController, NavParams} from 'ionic-angular';
 import {HttpApi} from "../../providers/http-api";
 import {GroupPage} from "../group/group";
+import { global } from '../app/global';
 
 /*
  Generated class for the Single page.
@@ -37,20 +38,7 @@ export class SinglePage {
     tag: ''
   };
 
-  private languages: any = [
-    {"name": "Java", "value": "java"},
-    {"name": "C", "value": "c"},
-    {"name": "C++", "value": "cpp"},
-    {"name": "C#", "value": "cs"},
-    {"name": "Php", "value": "php"},
-    {"name": "SQL", "value": "sql"},
-    {"name": "HTML", "value": "html"},
-    {"name": "HTML5", "value": "html5"},
-    {"name": "Css", "value": "css"},
-    {"name": "JavaScript", "value": "javascript"},
-    {"name": "Angular", "value": "angular"},
-    {"name": "React", "value": "react"}
-  ];
+  private languages = global.languages;
 
   api_url: string = 'https://dao-api.othnet.ga/uploads/original/';
 

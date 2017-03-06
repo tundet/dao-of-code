@@ -1,4 +1,5 @@
 import { Injectable, Pipe } from '@angular/core';
+import { global } from '../app/global';
 
 /*
   Generated class for the Language pipe.
@@ -14,20 +15,7 @@ export class Language {
   /*
     Takes a value and makes it lowercase.
    */
-  private languages: any = [
-    {"name": "Java", "value": "java"},
-    {"name": "C", "value": "c"},
-    {"name": "C++", "value": "cpp"},
-    {"name": "C#", "value": "cs"},
-    {"name": "Php", "value": "php"},
-    {"name": "SQL", "value": "sql"},
-    {"name": "HTML", "value": "html"},
-    {"name": "HTML5", "value": "html5"},
-    {"name": "Css", "value": "css"},
-    {"name": "JavaScript", "value": "javascript"},
-    {"name": "Angular", "value": "angular"},
-    {"name": "React", "value": "react"}
-  ];
+  private languages = global.languages;
 
   transform(value, args) {
     for (let lng of this.languages) {

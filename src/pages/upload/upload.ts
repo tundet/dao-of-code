@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {NavController, NavParams} from 'ionic-angular';
 import {HttpApi} from "../../providers/http-api";
 import {Page2} from "../page2/page2";
+import {global} from "../../app/global";
 
 /*
  Generated class for the Upload page.
@@ -32,20 +33,7 @@ export class UploadPage {
   private formnewgroupname: string;
   private formlang: any = 'java';
 
-  languages: any = [
-    {"name": "Java", "value": "java"},
-    {"name": "C", "value": "c"},
-    {"name": "C++", "value": "cpp"},
-    {"name": "C#", "value": "cs"},
-    {"name": "Php", "value": "php"},
-    {"name": "SQL", "value": "sql"},
-    {"name": "HTML", "value": "html"},
-    {"name": "HTML5", "value": "html5"},
-    {"name": "Css", "value": "css"},
-    {"name": "JavaScript", "value": "javascript"},
-    {"name": "Angular", "value": "angular"},
-    {"name": "React", "value": "react"}
-  ];
+  languages = global.languages;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private httpApi: HttpApi) {
     let userN = window.localStorage.getItem(this.JWT_USER);
