@@ -61,6 +61,7 @@ export class GroupPage {
 
   /**
    * Change edit mode on and off. If backup is true it will revert all changes
+   *
    * @param backup
    */
   changeEdit(backup:boolean) {
@@ -78,7 +79,8 @@ export class GroupPage {
   }
 
   /**
-   * Moves given index in list one stage higher, and turns on group_priority saveing on media
+   * Moves given index in list one stage higher, and turns on group_priority saving on media
+   *
    * @param index
    */
   upArrowPressed(index: number) {
@@ -108,7 +110,8 @@ export class GroupPage {
   }
 
   /**
-   * Moves given index in list one stage lower, and turns on group_priority saveing on media
+   * Moves given index in list one stage lower, and turns on group_priority saving on media
+   *
    * @param index
    */
   downArrowPressed(index: number) {
@@ -166,6 +169,7 @@ export class GroupPage {
 
   /**
    * Opens tapped single media in new layer by id
+   *
    * @param event
    * @param id
    */

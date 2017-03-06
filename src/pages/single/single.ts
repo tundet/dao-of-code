@@ -65,7 +65,7 @@ export class SinglePage {
       }
       console.log(this.mediaInfo);
       if (this.mediaInfo.media_type == "text") {
-        this.httpApi.getText(this.mediaInfo.file_name).subscribe(response => {
+        this.httpApi.get(`uploads/original/${this.mediaInfo.file_name}`).subscribe(response => {
           this.textMediaContent = response.text();
           console.log(response.text());
         })

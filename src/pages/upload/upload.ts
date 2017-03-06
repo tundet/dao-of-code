@@ -152,7 +152,7 @@ export class UploadPage {
         this.httpApi.makeGroup(newGroupFormData).subscribe(response => {
           console.log(response);
           formData.append("group_id", response.id);
-          this.httpApi.postUpload("media", formData).subscribe(response => {
+          this.httpApi.postUpload(formData).subscribe(response => {
             console.log(response);
             if (response.message.startsWith("Medium") && response.message.endsWith("has been created.")) {
               this.navCtrl.setRoot(Page2);
@@ -162,14 +162,14 @@ export class UploadPage {
       }
     } else if (this.groupOld && this.oldGroupsSelectedId) {
       formData.append("group_id", this.oldGroupsSelectedId);
-      this.httpApi.postUpload("media", formData).subscribe(response => {
+      this.httpApi.postUpload(formData).subscribe(response => {
         console.log(response);
         if (response.message.startsWith("Medium") && response.message.endsWith("has been created.")) {
           this.navCtrl.setRoot(Page2);
         }
       });
     } else {
-      this.httpApi.postUpload("media", formData).subscribe(response => {
+      this.httpApi.postUpload(formData).subscribe(response => {
         console.log(response);
         if (response.message.startsWith("Medium") && response.message.endsWith("has been created.")) {
           this.navCtrl.setRoot(Page2);
