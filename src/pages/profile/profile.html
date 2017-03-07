@@ -8,7 +8,7 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-segment [(ngModel)]="courses_posts" color="primary">
+  <ion-segment color="primary">
     <ion-segment-button value="media" (ionSelect)="showMedia()">
       <ion-icon name="book"> </ion-icon>
       Media
@@ -35,7 +35,7 @@
     </ion-item>
   </ion-list>
 
-  <ion-list *ngIf="groupsAreVisible">
+  <ion-list *ngIf="!mediaAreVisible">
     <ion-item *ngFor="let group of groups">
       <ion-thumbnail item-left (click)="showGroup($event, group.id)">
         <!-- TODO: Add pictures of languages using ngIf when they are done. -->

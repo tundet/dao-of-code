@@ -17,7 +17,6 @@ export class ProfilePage {
   private media: any;
   private groups: any;
   private mediaAreVisible: boolean;
-  private groupsAreVisible: boolean;
 
   /**
    * Profile page constructor.
@@ -44,16 +43,13 @@ export class ProfilePage {
     });
 
     this.mediaAreVisible = true;
-    this.groupsAreVisible = false;
   }
 
   showMedia() {
     this.mediaAreVisible = true;
-    this.groupsAreVisible = false;
   }
 
   showGroups() {
-    this.groupsAreVisible = true;
     this.mediaAreVisible = false;
   }
 
