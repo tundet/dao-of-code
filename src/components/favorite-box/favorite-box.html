@@ -1,0 +1,15 @@
+<ion-grid>
+  <ion-row>
+    <ion-col *ngIf="!mediumHasBeenFavorited">
+      <button ion-button full color="secondary" (click)="favorite()">
+        <ion-icon name="star"></ion-icon> <span>Favorite</span>
+      </button>
+    </ion-col>
+
+    <ion-col *ngIf="mediumHasBeenFavorited">
+      <button ion-button full color="dark" (click)="removeFavorite()">
+        <ion-icon name="star-outline"></ion-icon><span>Remove Favorite</span>
+      </button>
+    </ion-col>
+  </ion-row>
+</ion-grid>

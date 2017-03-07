@@ -14,6 +14,7 @@ import { LikeBoxComponent } from "../components/like-box/like-box";
 import { Safe } from "../pipes/safe";
 import { Language } from "../pipes/language"
 import { ProfilePage } from "../pages/profile/profile";
+import { FavoriteBoxComponent } from "../components/favorite-box/favorite-box";
 
 
 @NgModule({
@@ -29,6 +30,7 @@ import { ProfilePage } from "../pages/profile/profile";
     ProfilePage,
     GetUsername,
     LikeBoxComponent,
+    FavoriteBoxComponent,
     Safe,
     Language
   ],
