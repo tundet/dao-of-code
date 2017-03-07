@@ -5,21 +5,23 @@
     </button>
     <ion-title>Browse</ion-title>
   </ion-navbar>
-  <ion-toolbar>
-    <ion-title>Trending</ion-title>
-  </ion-toolbar>
 </ion-header>
 
 <ion-content>
 
+  <ion-refresher (ionRefresh)="refresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
   <ion-list-header color="light">
-      Trending
+    Trending
   </ion-list-header>
 
   <div class="trending">
     <ion-slides>
-      <ion-slide *ngFor="let pic of newPics" (ionSlideDidChange)="slideChanged()">
-        <ion-item width="50%">
+      <ion-slide *ngFor="let pic of newPics; let i = index" (ionSlideDidChange)="slideChanged()">
+        <ion-item width="50%" no-lines>
+          <ion-icon *ngIf="i != 0" item-left name="ios-arrow-back"></ion-icon>
           <ion-thumbnail item-top (click)="itemTapped($event, pic.id)">
             <img *ngIf="pic.media_type == 'image'" [alt]="pic.title" [src]='api_url + "small/" + pic.file_name'/>
             <img *ngIf="pic.media_type == 'audio'" [alt]="pic.title" [src]='api_url + "thumbnails/audio.jpg"'/>
@@ -29,48 +31,40 @@
           </ion-thumbnail>
           <h2 item-bottom>{{ pic.title }}</h2>
           <p item-bottom>{{ pic.tag | language }}</p>
+          <ion-icon *ngIf="i < newPics.length -1" item-right name="ios-arrow-forward"></ion-icon>
         </ion-item>
       </ion-slide>
     </ion-slides>
   </div>
 
   <ion-segment [(ngModel)]="courses_posts" color="primary">
-    <ion-segment-button value="courses" (ionSelect)="selectedCourses()">
-      <ion-icon name="book"> </ion-icon>
+    <ion-segment-button value="courses">
+      <ion-icon name="book"></ion-icon>
       Courses
     </ion-segment-button>
-    <ion-segment-button value="posts" (ionSelect)="selectedPosts()">
-    <ion-icon name="clipboard" item-top></ion-icon>
+    <ion-segment-button value="posts">
+      <ion-icon name="clipboard" item-top></ion-icon>
       Posts
     </ion-segment-button>
   </ion-segment>
-
-
-  <ion-list>
-    <ion-item *ngFor="let pic of newPics">
-      <ion-thumbnail item-left (click)="itemTapped($event, pic.id)">
-        <img *ngIf="pic.media_type == 'image'" [alt]="pic.title" [src]='api_url + "small/" + pic.file_name'/>
-        <img *ngIf="pic.media_type == 'audio'" [alt]="pic.title" [src]='api_url + "thumbnails/audio.jpg"'/>
-        <img *ngIf="pic.media_type == 'video'" [alt]="pic.title" [src]='api_url + "thumbnails/video.jpg"'/>
-        <img *ngIf="pic.media_type == 'text'" [alt]="pic.title" [src]='api_url + "thumbnails/text.jpg"'/>
-        <img *ngIf="pic.media_type == 'youtube'" [alt]="pic.title" [src]='api_url + "thumbnails/youtube.jpg"'/>
-      </ion-thumbnail>
-      <h2>{{ pic.title }}</h2>
-      <p>{{ pic.description }}</p>
-      <p item-right>{{ pic.tag | language }}</p>
-      <button ion-button clear item-right (click)="itemTapped($event, pic.id)">View</button>
-    </ion-item>
-  </ion-list>
-
-  <!--<ion-list>
-    <button ion-item *ngFor="let pic of newPics" (click)="itemTapped($event, pic.id)">
-      <img *ngIf="pic.media_type == 'image'" [alt]="pic.title" [src]='api_url + pic.file_name'/>
-      <img *ngIf="pic.media_type == 'audio'" [alt]="pic.title" [src]='soundimgurl'/>
-      <img *ngIf="pic.media_type == 'video'" [alt]="pic.title" [src]='soundimgurl'/>
-    </button>
-  </ion-list>
-  <div *ngIf="selectedItem" padding>
-    You navigated here from <b>{{selectedItem.title}}</b>
-  </div>-->
-
+  <ion-grid>
+    <ion-row *ngFor="let row of shownLanguageList">
+      <ion-col>
+        <ion-item (click)="langTapped($event, row[0].value)" no-lines>
+          <ion-thumbnail>
+            <img [alt]="row[0].name" [src]='api_url + "thumbnails/text.jpg"'/>
+          </ion-thumbnail>
+          <h2>{{ row[0].name }}</h2>
+        </ion-item>
+      </ion-col>
+      <ion-col>
+        <ion-item (click)="langTapped($event, row[0].value)" no-lines>
+          <ion-thumbnail>
+            <img [alt]="row[1].title" [src]='api_url + "thumbnails/text.jpg"'/>
+          </ion-thumbnail>
+          <h2>{{ row[1].name }}</h2>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

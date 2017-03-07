@@ -18,16 +18,23 @@ export class BrowsePage {
 
   api_url: string = 'https://dao-api.othnet.ga/uploads/';
 
-  private courses_posts: string = "courses";
+  private courses_posts: string = "posts";
   private tag: string = "php";
 
   private contentList;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private httpApi: HttpApi) {
+    this.courses_posts = this.navParams.get("type");
+    this.tag = this.navParams.get("tag");
     if (this.courses_posts == "courses") {
       this.httpApi.getNewGroupsByTag(this.tag, 10).subscribe(response => {
         this.contentList = response;
         console.log("Got groups by: " + this.tag + " content: " + response);
+      })
+    } else if (this.courses_posts == "posts") {
+      this.httpApi.getNewPostsByTag(this.tag, 10).subscribe(response => {
+        this.contentList = response;
+        console.log("Got posts by: " + this.tag + " content: " + response);
       })
     }
   }

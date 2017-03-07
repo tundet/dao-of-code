@@ -117,6 +117,24 @@ export class HttpApi {
   };
 
   /**
+   * Sends get requests to API for X amount of new posts by tag
+   *
+   * @param tag Language tag of groups
+   * @param amount Amount of groups wanted
+   * @returns {Observable<any>}
+   */
+  getNewPostsByTag = (tag: string, amount: number) => {
+    this.setXAccessToken();
+    return this.http.get(
+      this.api_url + `media/latest/ungrouped/${tag}/${amount}`,
+      {headers: this.headers}
+    )
+      .map(HttpApi.checkForError)
+      .catch(err => Observable.throw(err))
+      .map(HttpApi.getJson);
+  };
+
+  /**
    * Sends requests to make new group to API
    *
    * @param body
@@ -143,7 +161,7 @@ export class HttpApi {
   postUpload(body): Observable<any> {
     this.setXAccessToken();
     return this.http.post(
-      `${this.api_url}`,
+      this.api_url + `media/`,
       body,
       {headers: this.headers2}
     )
