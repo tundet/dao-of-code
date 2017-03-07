@@ -1,17 +1,50 @@
 <ion-header>
   <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
     <ion-title>Profile of {{ user.username }}</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <h2>Media of {{ user.username }}</h2>
-  <ul *ngFor="let medium of media; let i = index">
-    <li>{{ medium.title }}</li>
-  </ul>
+  <ion-segment [(ngModel)]="courses_posts" color="primary">
+    <ion-segment-button value="media" (ionSelect)="showMedia()">
+      <ion-icon name="book"> </ion-icon>
+      Media
+    </ion-segment-button>
+    <ion-segment-button value="groups" (ionSelect)="showGroups()">
+      <ion-icon name="clipboard" item-top></ion-icon>
+      Groups
+    </ion-segment-button>
+  </ion-segment>
 
-  <h2>Groups of {{ user.username }}</h2>
-  <ul *ngFor="let group of groups; let i = index">
-    <li>{{ group.name }}</li>
-  </ul>
+  <ion-list *ngIf="mediaAreVisible">
+    <ion-item *ngFor="let medium of media">
+      <ion-thumbnail item-left (click)="showMedium($event, medium.id)">
+        <img *ngIf="medium.media_type == 'image'" [alt]="medium.title" [src]='BASE_URL + "small/" + medium.file_name'/>
+        <img *ngIf="medium.media_type == 'audio'" [alt]="medium.title" [src]='BASE_URL + "thumbnails/audio.jpg"'/>
+        <img *ngIf="medium.media_type == 'video'" [alt]="medium.title" [src]='BASE_URL + "thumbnails/video.jpg"'/>
+        <img *ngIf="medium.media_type == 'text'" [alt]="medium.title" [src]='BASE_URL + "thumbnails/text.jpg"'/>
+        <img *ngIf="medium.media_type == 'youtube'" [alt]="medium.title" [src]='BASE_URL + "thumbnails/youtube.jpg"'/>
+      </ion-thumbnail>
+      <h2>{{ medium.title }}</h2>
+      <p>{{ medium.description }}</p>
+      <p item-right>{{ medium.tag | language }}</p>
+      <button ion-button clear item-right (click)="showMedium($event, medium.id)">View</button>
+    </ion-item>
+  </ion-list>
+
+  <ion-list *ngIf="groupsAreVisible">
+    <ion-item *ngFor="let group of groups">
+      <ion-thumbnail item-left (click)="showGroup($event, group.id)">
+        <!-- TODO: Add pictures of languages using ngIf when they are done. -->
+        <img [alt]="group.name" [src]='BASE_URL + "thumbnails/audio.jpg"'/>
+      </ion-thumbnail>
+      <h2>{{ group.name }}</h2>
+      <p>{{ group.description }}</p>
+      <p item-right>{{ group.tag | language }}</p>
+      <button ion-button clear item-right (click)="showGroup($event, group.id)">View</button>
+    </ion-item>
+  </ion-list>
 </ion-content>

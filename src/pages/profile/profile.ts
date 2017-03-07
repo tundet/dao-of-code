@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { HttpApi } from "../../providers/http-api";
+import { SinglePage } from "../single/single";
+import { GroupPage } from "../group/group";
 
 @Component({
   selector: 'page-profile',
@@ -8,10 +10,14 @@ import { HttpApi } from "../../providers/http-api";
 })
 export class ProfilePage {
 
+  readonly BASE_URL: string = 'https://dao-api.othnet.ga/uploads/';
+
   private id: number;
   private user: any = {};
   private media: any;
   private groups: any;
+  private mediaAreVisible: boolean;
+  private groupsAreVisible: boolean;
 
   /**
    * Profile page constructor.
@@ -35,6 +41,34 @@ export class ProfilePage {
     this.httpApi.get(`users/${this.id}/groups`).subscribe(response => {
       this.groups = response;
       console.log('Groups: ' + JSON.stringify(this.groups));
+    });
+
+    this.mediaAreVisible = true;
+    this.groupsAreVisible = false;
+  }
+
+  showMedia() {
+    this.mediaAreVisible = true;
+    this.groupsAreVisible = false;
+  }
+
+  showGroups() {
+    this.groupsAreVisible = true;
+    this.mediaAreVisible = false;
+  }
+
+
+  showMedium(event, id) {
+    // That's right, we're pushing to ourselves!
+    this.navCtrl.push(SinglePage, {
+      id: id
+    });
+  }
+
+  showGroup(event, id) {
+    // That's right, we're pushing to ourselves!
+    this.navCtrl.push(GroupPage, {
+      id: id
     });
   }
 
