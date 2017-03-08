@@ -36,6 +36,7 @@ export class Page2 {
   }
 
   refresh(refresher = null) {
+    this.featured = [];
     this.httpApi.get(`users/1/favorites`).subscribe(response => {
       for (let medium of response) {
         this.httpApi.get(`media/` + medium.medium_id).subscribe(response2 => {
