@@ -11,9 +11,10 @@ import {BrowsePage} from "../browse/browse";
 })
 export class Page2 {
   @ViewChild(Slides) slides: Slides;
+  private invisibleArrowColor = 'white';
   selectedItem: any;
   private courses_posts = "courses";
-  private newPics = [];
+  private featured = [];
   api_url: string = 'https://dao-api.othnet.ga/uploads/';
   private languages = global.languages;
   private shownLanguageList = [];
@@ -35,14 +36,16 @@ export class Page2 {
   }
 
   refresh(refresher = null) {
-    this.httpApi.getNew(10).subscribe(
-      resp => {
-        //console.log(resp.json());
-        this.newPics = resp.json();
-        if (refresher) {
-          refresher.complete();
-        }
-      },
+    this.httpApi.get(`users/1/favorites`).subscribe(response => {
+      for (let medium of response) {
+        this.httpApi.get(`media/` + medium.medium_id).subscribe(response2 => {
+          this.featured.push(response2);
+        })
+      }
+      if (refresher) {
+        refresher.complete();
+      }
+    },
       error => {
         console.log(error);
       }
@@ -71,12 +74,14 @@ export class Page2 {
     });
   }
 
-  goToSlide() {
-    this.slides.slideTo(2, 500);
-  }
-
-  slideChanged() {
+  changeSlide(direction: boolean) {
     let currentIndex = this.slides.getActiveIndex();
-    console.log("Current index is", currentIndex);
+    if (direction) {
+      this.slides.slideTo(currentIndex +1);
+    }
+    if (!direction) {
+      this.slides.slideTo(currentIndex -1);
+    }
+    console.log(currentIndex);
   }
 }

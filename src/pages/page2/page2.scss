@@ -1,8 +1,13 @@
 page-page2 {
 
+  $colors: (
+    white: #ffffff
+  );
+
   .slider {
     height: 100%;
   }
+
   .slider-slide {
     padding-top: 120px;
     color: #000;
@@ -11,11 +16,11 @@ page-page2 {
     font-weight: 300;
   }
 
-  img {
-    margin: auto;
-  }
-
-  ion-label {
-    text-align: center;
+  .centeringSlide {
+    .item-inner {
+      .input-wrapper {
+        margin-right: 13px;
+      }
+    }
   }
 }
