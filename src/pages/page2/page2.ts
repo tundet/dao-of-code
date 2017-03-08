@@ -75,13 +75,18 @@ export class Page2 {
     });
   }
 
-  changeSlide(direction: boolean) {
+  changeSlide(direction: any) {
     let currentIndex = this.slides.getActiveIndex();
-    if (direction) {
-      this.slides.slideTo(currentIndex +1);
+    if (typeof(direction) === "number") {
+      this.slides.slideTo(direction);
     }
-    if (!direction) {
-      this.slides.slideTo(currentIndex -1);
+    if (typeof(direction) === "boolean") {
+      if (direction) {
+        this.slides.slideTo(currentIndex + 1);
+      }
+      if (!direction) {
+        this.slides.slideTo(currentIndex - 1);
+      }
     }
     console.log(currentIndex);
   }
