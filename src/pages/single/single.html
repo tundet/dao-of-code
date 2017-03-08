@@ -42,7 +42,7 @@
                         [innerHtml]="textMediaContent">
       </ion-card-content>
       <ion-card-content *ngIf="mediaInfo.media_type == 'text'">
-        <a ion-button [href]="api_url + mediaInfo.file_name" [target]="_blank">{{mediaInfo.title}}</a>
+        <a ion-button [href]="api_url + mediaInfo.file_name" [target]="_blank">Download</a>
       </ion-card-content>
       <ion-item><h2>{{ mediaInfo.title }}</h2><span ion-text item-right
                                                     color="primary">{{mediaInfo.tag | language}}</span></ion-item>

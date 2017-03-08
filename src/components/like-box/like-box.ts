@@ -14,6 +14,9 @@ export class LikeBoxComponent {
   private mediumId: number;
   private userId: string;
   private likeId: number;
+  private likes;
+  private likescount = 0;
+  private dislikescount = 0;
 
   private mediumHasBeenLiked: boolean;
   private mediumHasBeenDisliked: boolean;
@@ -36,7 +39,18 @@ export class LikeBoxComponent {
     this.mediumId = this.navParams.get('id');
 
     this.httpApi.get(`media/${this.mediumId}/likes`).subscribe(response => {
-      for (let like in response) {
+      this.likes = response;
+      console.log(this.likes);
+
+      for (let like of this.likes){
+        if(like.like == "1") {
+          this.likescount++;
+        }else{
+          this.dislikescount++;
+        }
+      }
+
+      for (let like in this.likes) {
         if (response.hasOwnProperty(like)) {
           if (response[like]['user_id'] == this.userId) {
             if (response[like]['user_id'] == 1) {
@@ -100,4 +114,17 @@ export class LikeBoxComponent {
       this.mediumHasBeenDisliked = false;
     });
   }
+}
+
+function getLength(likes)
+{
+  var length = 0;
+  for ( var p in this.likes )
+  {
+    if ( this.likes.hasOwnProperty( p ) )
+    {
+      length++;
+    }
+  }
+  return length;
 }

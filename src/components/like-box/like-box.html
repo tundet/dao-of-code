@@ -1,4 +1,9 @@
 <ion-grid>
+
+  <ion-row>
+    <ion-col width-50><p><ion-icon name="happy"></ion-icon>{{ likescount }} likes</p></ion-col>
+    <ion-col width-50><p class="text-right"><ion-icon name="sad"></ion-icon>{{ dislikescount }} dislikes</p></ion-col>
+  </ion-row>
   <ion-row>
     <ion-col width-50 *ngIf="(!mediumHasBeenLiked && !mediumHasBeenDisliked) || mediumHasBeenDisliked">
       <button ion-button full color="secondary" (click)="like()">
@@ -18,4 +23,5 @@
       </button>
     </ion-col>
   </ion-row>
+
 </ion-grid>
