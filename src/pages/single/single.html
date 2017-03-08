@@ -142,8 +142,8 @@
   </div>
 
   <div id='comments'>
-      <ion-list *ngIf="comments" cache-view="false">
-        <ion-list-header><h2>Comments</h2></ion-list-header>
+      <ion-list *ngIf="comments">
+        <ion-item><ion-title>Comments</ion-title></ion-item>
         <ion-item>
           <ion-label color="primary" floating>Your comment</ion-label>
           <ion-input
@@ -155,6 +155,7 @@
           <h3>{{ comnt.comment}}</h3>
           <p>{{ comnt.user_id }}</p>
           <p>{{ comnt.created_at}}</p>
+          <ion-icon *ngIf="userid == comnt.user_id" name="close" item-right (click)="deleteComment(comnt.id)"></ion-icon>
         </ion-item>
       </ion-list>
   </div>

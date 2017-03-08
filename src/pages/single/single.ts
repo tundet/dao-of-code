@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {NavController, NavParams} from 'ionic-angular';
 import {HttpApi} from "../../providers/http-api";
 import {GroupPage} from "../group/group";
-import { global } from '../../app/global';
+import {global} from '../../app/global';
 
 /*
  Generated class for the Single page.
@@ -26,6 +26,7 @@ export class SinglePage {
   private groupInfo;
   private textMediaContent;
   private username;
+  private userid;
   private userGroups;
   private userGroupsInSelectedTag: any = {};
   private owner: boolean = false;
@@ -43,6 +44,8 @@ export class SinglePage {
   api_url: string = 'https://dao-api.othnet.ga/uploads/original/';
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private httpApi: HttpApi) {
+    this.userid = window.localStorage.getItem('dao_user_id');
+
     let id = this.navParams.get('id');
     console.log(id);
 
@@ -81,11 +84,11 @@ export class SinglePage {
     });
   }
 
-  getComments(id){
-      this.httpApi.get((`media/${id}/comments`)).subscribe(response => {
-        this.comments = response;
-      });
-    }
+  getComments(id) {
+    this.httpApi.get((`media/${id}/comments`)).subscribe(response => {
+      this.comments = response;
+    });
+  }
 
   editClick() {
     this.editMedia = JSON.parse(JSON.stringify(this.mediaInfo));
@@ -140,7 +143,7 @@ export class SinglePage {
           this.saveMediaChanges(data);
         });
       }
-    } else if (this.groupOld && this.userGroupsSelectedId){
+    } else if (this.groupOld && this.userGroupsSelectedId) {
       data["group_id"] = this.userGroupsSelectedId;
       this.updateGroupInfo(this.userGroupsSelectedId);
       this.saveMediaChanges(data);
@@ -175,12 +178,18 @@ export class SinglePage {
     console.log(this.commentInfo);
     this.httpApi.post("comments", this.commentInfo).subscribe(response => {
       console.log(response);
+      this.getComments(this.mediaInfo.id);
     });
     console.log(this.comments);
     this.txtcomment = "";
-    this.getComments(this.mediaInfo.id);
   }
 
+  deleteComment(id) {
+    this.httpApi.delete(`comments/` + id).subscribe(response => {
+      console.log(response);
+      this.getComments(this.mediaInfo.id);
+    });
+  }
 
 
   loadGroup(id) {
