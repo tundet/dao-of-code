@@ -1,13 +1,10 @@
 import { Component } from '@angular/core';
-import {HttpApi} from "../../providers/http-api";
-import {NavParams} from "ionic-angular";
+import { HttpApi } from "../../providers/http-api";
+import { NavParams } from "ionic-angular";
 
-/*
-  Generated class for the FavoriteBox component.
-
-  See https://angular.io/docs/ts/latest/api/core/index/ComponentMetadata-class.html
-  for more info on Angular 2 Components.
-*/
+/**
+ * An element that contains a button that allows users to mark media as their favorites.
+ */
 @Component({
   selector: 'favorite-box',
   templateUrl: 'favorite-box.html'
@@ -22,7 +19,11 @@ export class FavoriteBoxComponent {
   private mediumHasBeenUnfavorited: boolean;
 
   /**
-   * FavoriteBoxComponent constructor
+   * FavoriteBoxComponent constructor.
+   *
+   * Make a GET request to get a list of users who have added the opened medium to their favorites.
+   * Set initial state for the button based on whether the current user has
+   * added the medium to their favorites.
    *
    * @param httpApi Injected HttpApi service
    * @param navParams Injected NavParams
@@ -52,7 +53,10 @@ export class FavoriteBoxComponent {
   }
 
   /**
-   * Favorite a medium.
+   * Add a favorite.
+   *
+   * Add a medium to the user's favorites and change the state of
+   * the favorite button to show an unfavorite button instead.
    */
   favorite() {
     if (this.mediumHasBeenFavorited || this.mediumHasBeenUnfavorited) {
@@ -66,12 +70,14 @@ export class FavoriteBoxComponent {
   }
 
   /**
-   * Remove favorite from a medium.
+   * Remove a favorite.
+   *
+   * Remove a medium from the user's favorites and change the state
+   * of the unfavorite button to show a favorite button instead.
    */
   removeFavorite() {
     this.httpApi.delete(`favorites/${this.favoriteId}`).subscribe(() => {
       this.mediumHasBeenFavorited = false;
     });
   }
-
 }
