@@ -81,6 +81,12 @@ export class SinglePage {
     });
   }
 
+  getComments(id){
+      this.httpApi.get((`media/${id}/comments`)).subscribe(response => {
+        this.comments = response;
+      });
+    }
+
   editClick() {
     this.editMedia = JSON.parse(JSON.stringify(this.mediaInfo));
     this.edit = true;
@@ -172,7 +178,10 @@ export class SinglePage {
     });
     console.log(this.comments);
     this.txtcomment = "";
+    this.getComments(this.mediaInfo.id);
   }
+
+
 
   loadGroup(id) {
     // That's right, we're pushing to ourselves!
