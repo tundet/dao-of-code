@@ -86,6 +86,19 @@ export class HttpApi {
       .map(HttpApi.getJson);
   };
 
+  getUserNames = (medias: any) => {
+    let ids = [];
+    for (let media of medias) {
+      ids.push(media.user_id);
+    }
+    let body = { id: ids };
+    this.setXAccessToken();
+    return this.http.post(this.api_url + "get-usernames", body, {headers: this.headers})
+      .map(HttpApi.checkForError)
+      .catch(err => Observable.throw(err))
+      .map(HttpApi.getJson);
+  };
+
   /**
    * Sends get requests to API for X amount of new posts
    *

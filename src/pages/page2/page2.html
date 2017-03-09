@@ -32,7 +32,7 @@
         <div (click)="itemTapped($event, medium.id)">
           <h2>{{ medium.title }}</h2>
           <p>{{ medium.description }}</p>
-          <p>&nbsp;</p>
+          <p>{{ featuredUsers[i] }}</p>
           <p ion-text color="primary">{{ medium.tag | language }}</p>
         </div>
         <ion-icon *ngIf="i < featured.length -1" item-right name="ios-arrow-forward"

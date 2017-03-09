@@ -1,9 +1,5 @@
 page-page2 {
 
-  $colors: (
-    white: #ffffff
-  );
-
   .slider {
     height: 100%;
   }
@@ -21,6 +17,17 @@ page-page2 {
       .input-wrapper {
         margin-right: 13px;
       }
+    }
+  }
+
+  ion-col {
+    ion-thumbnail {
+      img {
+        margin: auto;
+      }
+    }
+    h2 {
+      text-align: center;
     }
   }
 }

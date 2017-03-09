@@ -15,6 +15,7 @@ export class Page2 {
   selectedItem: any;
   private courses_posts = "courses";
   private featured = [];
+  private featuredUsers = [];
   api_url: string = 'https://dao-api.othnet.ga/uploads/';
   private languages = global.languages;
   private shownLanguageList = [];
@@ -37,16 +38,23 @@ export class Page2 {
 
   refresh(refresher = null) {
     this.featured = [];
+    this.featuredUsers = [];
     this.httpApi.get(`users/1/favorites`).subscribe(response => {
-      for (let medium of response) {
-        this.httpApi.get(`media/` + medium.medium_id).subscribe(response2 => {
-          this.featured.push(response2);
-        })
-      }
-      if (refresher) {
-        refresher.complete();
-      }
-    },
+        for (let medium of response) {
+          this.httpApi.get(`media/` + medium.medium_id).subscribe(response2 => {
+            this.featured.push(response2);
+            if (response[response.length - 1] == medium) {
+              this.httpApi.getUserNames(this.featured).subscribe(response3 => {
+                this.featuredUsers = response3;
+              });
+            }
+          });
+        }
+
+        if (refresher) {
+          refresher.complete();
+        }
+      },
       error => {
         console.log(error);
       }
