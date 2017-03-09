@@ -5,6 +5,9 @@
     </button>
     <ion-title>Browse</ion-title>
   </ion-navbar>
+  <button ion-button menuToggle>
+    <ion-icon name="home"></ion-icon>
+  </button>
 </ion-header>
 
 <ion-content>
@@ -32,7 +35,7 @@
         <div (click)="itemTapped($event, medium.id)">
           <h2>{{ medium.title }}</h2>
           <p>{{ medium.description }}</p>
-          <p>{{ featuredUsers[i] }}</p>
+          <p>By: <span ion-text color="secondary">{{ featuredUsers[i] }}</span></p>
           <p ion-text color="primary">{{ medium.tag | language }}</p>
         </div>
         <ion-icon *ngIf="i < featured.length -1" item-right name="ios-arrow-forward"
