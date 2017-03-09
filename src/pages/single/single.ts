@@ -87,6 +87,7 @@ export class SinglePage {
   getComments(id) {
     this.httpApi.get((`media/${id}/comments`)).subscribe(response => {
       this.comments = response;
+      this.comments.reverse();
     });
   }
 

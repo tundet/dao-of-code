@@ -44,6 +44,8 @@
       <p *ngIf="!edit">{{ groupInfo.description }}</p>
       <ion-textarea *ngIf="edit" [(ngModel)]="groupInfo.description"></ion-textarea>
     </ion-card-content>
+    <like-box></like-box>
+    <favorite-box></favorite-box>
   </ion-card>
   <button ion-button block *ngIf="edit" (click)="save()">Save</button>
   <button ion-button block *ngIf="owner" (click)="changeEdit()">{{ changeEditButton }}</button>

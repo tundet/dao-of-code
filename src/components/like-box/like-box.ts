@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
-import { HttpApi } from "../../providers/http-api";
-import { NavParams } from "ionic-angular";
+import {Component} from '@angular/core';
+import {HttpApi} from "../../providers/http-api";
+import {NavParams} from "ionic-angular";
+import {NavController} from 'ionic-angular';
 
 /**
  * An element that contains buttons that allows users to like or dislike media.
@@ -17,6 +18,7 @@ export class LikeBoxComponent {
   private likes;
   private likescount = 0;
   private dislikescount = 0;
+  private path: string = "media";
 
   private mediumHasBeenLiked: boolean;
   private mediumHasBeenDisliked: boolean;
@@ -31,26 +33,38 @@ export class LikeBoxComponent {
    * @param httpApi Injected HttpApi service
    * @param navParams Injected NavParams
    */
-  constructor(private httpApi: HttpApi, public navParams: NavParams) {
+  constructor(private httpApi: HttpApi, public navParams: NavParams, public navCtrl: NavController) {
     this.mediumHasBeenLiked = false;
     this.mediumHasBeenDisliked = false;
 
     this.userId = localStorage.getItem('dao_user_id');
     this.mediumId = this.navParams.get('id');
 
-    this.httpApi.get(`media/${this.mediumId}/likes`).subscribe(response => {
+    if (this.navCtrl.getActive().name == "GroupPage") {
+      this.path = "groups";
+    }
+    this.getLikes();
+  }
+
+  getLikes() {
+
+    this.likes = '';
+    this.likescount = 0;
+    this.dislikescount = 0;
+
+    this.httpApi.get(`${this.path}/${this.mediumId}/likes`).subscribe(response => {
       this.likes = response;
       console.log(this.likes);
 
-      for (let like of this.likes){
-        if(like.like == "1") {
+      for (let like of this.likes) {
+        if (like.like == "1") {
           this.likescount++;
-        }else{
+        } else {
           this.dislikescount++;
         }
       }
 
-      for (let like in this.likes) {
+      for (let like in this.likes) {
         if (response.hasOwnProperty(like)) {
           if (response[like]['user_id'] == this.userId) {
             if (response[like]['user_id'] == 1) {
@@ -77,13 +91,14 @@ export class LikeBoxComponent {
    * the like button to show a dislike button instead.
    */
   like() {
-    if (this.mediumHasBeenLiked || this.mediumHasBeenDisliked) {
+    if (this.mediumHasBeenLiked || this.mediumHasBeenDisliked) {
       this.removeLike();
     }
 
-    this.httpApi.post("likes", { medium_id: this.mediumId, like: 1 }).subscribe(response => {
+    this.httpApi.post("likes", {medium_id: this.mediumId, like: 1}).subscribe(response => {
       this.likeId = response.id;
       this.mediumHasBeenLiked = true;
+      this.getLikes();
     });
   }
 
@@ -98,9 +113,10 @@ export class LikeBoxComponent {
       this.removeLike();
     }
 
-    this.httpApi.post("likes", { medium_id: this.mediumId, like: 0 }).subscribe(response => {
+    this.httpApi.post("likes", {medium_id: this.mediumId, like: 0}).subscribe(response => {
       this.likeId = response.id;
       this.mediumHasBeenDisliked = true;
+      this.getLikes();
 
     });
   }
@@ -112,19 +128,7 @@ export class LikeBoxComponent {
     this.httpApi.delete(`likes/${this.likeId}`).subscribe(() => {
       this.mediumHasBeenLiked = false;
       this.mediumHasBeenDisliked = false;
+      this.getLikes();
     });
   }
-}
-
-function getLength(likes)
-{
-  var length = 0;
-  for ( var p in this.likes )
-  {
-    if ( this.likes.hasOwnProperty( p ) )
-    {
-      length++;
-    }
-  }
-  return length;
 }
