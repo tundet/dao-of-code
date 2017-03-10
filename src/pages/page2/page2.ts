@@ -38,7 +38,7 @@ export class Page2 {
   }
 
   /**
-   * Get usernames by id
+   * Get featured content
    */
   refresh(refresher = null) {
     this.featured = [];
@@ -65,6 +65,12 @@ export class Page2 {
     );
   }
 
+  /**
+   * Language icon is tapped, redirects to posts or courses, using this.courses_posts value
+   *
+   * @param event
+   * @param value value corresponding to icons tag
+   */
   langTapped(event, value) {
     // That's right, we're pushing to ourselves!
     if (this.courses_posts == "courses") {
@@ -80,6 +86,9 @@ export class Page2 {
     }
   }
 
+  /**
+   * Sets view and root to home
+   */
   toHome() {
     this.navCtrl.setRoot(Page2);
   }
@@ -92,6 +101,12 @@ export class Page2 {
     }
   }
 
+  /**
+   * Shows tapped featured items page
+   *
+   * @param event
+   * @param id of tapped featured item
+   */
   itemTapped(event, id) {
     // That's right, we're pushing to ourselves!
     this.navCtrl.push(SinglePage, {
@@ -99,6 +114,11 @@ export class Page2 {
     });
   }
 
+  /**
+   * Changes slide based on button click
+   *
+   * @param direction index number of featured list or boolean for slide direction
+   */
   changeSlide(direction: any) {
     let currentIndex = this.slides.getActiveIndex();
     if (typeof(direction) === "number") {

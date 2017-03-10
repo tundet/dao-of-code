@@ -86,6 +86,12 @@ export class HttpApi {
       .map(HttpApi.getJson);
   };
 
+  /**
+   * Sends post requests to API for given ids
+   *
+   * @param medias List of medias that contain user_id fields
+   * @returns {Observable<any>}
+   */
   getUserNames = (medias: any) => {
     let ids = [];
     for (let media of medias) {
