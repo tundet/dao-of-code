@@ -67,12 +67,11 @@ export class LikeBoxComponent {
       for (let like in this.likes) {
         if (response.hasOwnProperty(like)) {
           if (response[like]['user_id'] == this.userId) {
-            if (response[like]['user_id'] == 1) {
+            if (response[like]['like'] == 1) {
               this.mediumHasBeenLiked = true;
-            } else {
+            } else if (response[like]['like'] == 0) {
               this.mediumHasBeenDisliked = true;
             }
-
             this.likeId = response[like]['id'];
 
             break;
@@ -91,15 +90,16 @@ export class LikeBoxComponent {
    * the like button to show a dislike button instead.
    */
   like() {
-    if (this.mediumHasBeenLiked || this.mediumHasBeenDisliked) {
-      this.removeLike();
+    if (this.mediumHasBeenDisliked) {
+      this.removeLike(1);
+    } else {
+      this.httpApi.post("likes", {medium_id: this.mediumId, like: 1}).subscribe(response => {
+        this.likeId = response.id;
+        this.mediumHasBeenLiked = true;
+        this.mediumHasBeenDisliked = false;
+        this.getLikes();
+      });
     }
-
-    this.httpApi.post("likes", {medium_id: this.mediumId, like: 1}).subscribe(response => {
-      this.likeId = response.id;
-      this.mediumHasBeenLiked = true;
-      this.getLikes();
-    });
   }
 
   /**
@@ -109,26 +109,47 @@ export class LikeBoxComponent {
    * the dislike button to show a like button instead.
    */
   dislike() {
-    if (this.mediumHasBeenLiked || this.mediumHasBeenDisliked) {
-      this.removeLike();
+    if (this.mediumHasBeenLiked) {
+      this.removeLike(0);
+    } else {
+      this.httpApi.post("likes", {medium_id: this.mediumId, like: 0}).subscribe(response => {
+        this.likeId = response.id;
+        this.mediumHasBeenDisliked = true;
+        this.mediumHasBeenLiked = false;
+        this.getLikes();
+
+      });
     }
-
-    this.httpApi.post("likes", {medium_id: this.mediumId, like: 0}).subscribe(response => {
-      this.likeId = response.id;
-      this.mediumHasBeenDisliked = true;
-      this.getLikes();
-
-    });
   }
 
   /**
    * Remove a like from a medium.
    */
-  removeLike() {
-    this.httpApi.delete(`likes/${this.likeId}`).subscribe(() => {
-      this.mediumHasBeenLiked = false;
-      this.mediumHasBeenDisliked = false;
-      this.getLikes();
-    });
+  removeLike(type: number = 2) {
+    if (type == 2){
+      this.httpApi.delete(`likes/${this.likeId}`).subscribe(() => {
+        this.mediumHasBeenLiked = false;
+        this.mediumHasBeenDisliked = false;
+        this.getLikes();
+      });
+    } else if (type == 1) {
+      this.httpApi.delete(`likes/${this.likeId}`).subscribe(() => {
+        this.httpApi.post("likes", {medium_id: this.mediumId, like: 1}).subscribe(response => {
+          this.likeId = response.id;
+          this.mediumHasBeenLiked = true;
+          this.mediumHasBeenDisliked = false;
+          this.getLikes();
+        });
+      });
+    } else if (type == 0) {
+      this.httpApi.delete(`likes/${this.likeId}`).subscribe(() => {
+        this.httpApi.post("likes", {medium_id: this.mediumId, like: 0}).subscribe(response => {
+          this.likeId = response.id;
+          this.mediumHasBeenDisliked = true;
+          this.mediumHasBeenLiked = false;
+          this.getLikes();
+        });
+      });
+    }
   }
 }

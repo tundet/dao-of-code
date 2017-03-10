@@ -76,6 +76,10 @@ export class Page2 {
     }
   }
 
+  toHome() {
+    this.navCtrl.setRoot(Page2);
+  }
+
   itemTapped(event, id) {
     // That's right, we're pushing to ourselves!
     this.navCtrl.push(SinglePage, {

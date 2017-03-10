@@ -1,13 +1,15 @@
 <ion-header>
   <ion-navbar>
-    <button ion-button menuToggle>
+    <button ion-button menuToggle item-left>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Browse</ion-title>
+    <ion-title>Home</ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="toHome()">
+        <ion-icon name="home"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
-  <button ion-button menuToggle>
-    <ion-icon name="home"></ion-icon>
-  </button>
 </ion-header>
 
 <ion-content>
@@ -17,34 +19,38 @@
   </ion-refresher>
 
   <ion-list-header color="light">
-    Trending
+    <h2>
+      Trending
+    </h2>
   </ion-list-header>
   <div>
-  <ion-slides *ngIf="featured[0]">
-    <ion-slide *ngFor="let medium of featured; let i = index" (ionSlideDidChange)="slideChanged()">
-      <ion-item no-lines class="centeringSlide">
-        <ion-icon *ngIf="i != 0" item-left name="ios-arrow-back" (click)="changeSlide(false)"></ion-icon>
-        <ion-icon *ngIf="i == 0" item-left name="ios-arrow-back" (click)="changeSlide(featured.length -1)"></ion-icon>
-        <ion-thumbnail item-left (click)="itemTapped($event, medium.id)">
-          <img *ngIf="medium.media_type == 'image'" [alt]="medium.title" [src]='api_url + "small/" + medium.file_name'/>
-          <img *ngIf="medium.media_type == 'audio'" [alt]="medium.title" [src]='api_url + "thumbnails/audio.jpg"'/>
-          <img *ngIf="medium.media_type == 'video'" [alt]="medium.title" [src]='api_url + "thumbnails/video.jpg"'/>
-          <img *ngIf="medium.media_type == 'text'" [alt]="medium.title" [src]='api_url + "thumbnails/text.jpg"'/>
-          <img *ngIf="medium.media_type == 'youtube'" [alt]="medium.title" [src]='api_url + "thumbnails/youtube.jpg"'/>
-        </ion-thumbnail>
-        <div (click)="itemTapped($event, medium.id)">
-          <h2>{{ medium.title }}</h2>
-          <p>{{ medium.description }}</p>
-          <p>By: <span ion-text color="secondary">{{ featuredUsers[i] }}</span></p>
-          <p ion-text color="primary">{{ medium.tag | language }}</p>
-        </div>
-        <ion-icon *ngIf="i < featured.length -1" item-right name="ios-arrow-forward"
-                  (click)="changeSlide(true)"></ion-icon>
-        <ion-icon *ngIf="i == (featured.length - 1)" item-right name="ios-arrow-forward"
-                  (click)="changeSlide(0)"></ion-icon>
-      </ion-item>
-    </ion-slide>
-  </ion-slides>
+    <ion-slides *ngIf="featured[0]">
+      <ion-slide *ngFor="let medium of featured; let i = index" (ionSlideDidChange)="slideChanged()">
+        <ion-item no-lines class="centeringSlide">
+          <ion-icon *ngIf="i != 0" item-left name="ios-arrow-back" (click)="changeSlide(false)"></ion-icon>
+          <ion-icon *ngIf="i == 0" item-left name="ios-arrow-back" (click)="changeSlide(featured.length -1)"></ion-icon>
+          <ion-thumbnail item-left (click)="itemTapped($event, medium.id)">
+            <img *ngIf="medium.media_type == 'image'" [alt]="medium.title"
+                 [src]='api_url + "small/" + medium.file_name'/>
+            <img *ngIf="medium.media_type == 'audio'" [alt]="medium.title" [src]='api_url + "thumbnails/audio.jpg"'/>
+            <img *ngIf="medium.media_type == 'video'" [alt]="medium.title" [src]='api_url + "thumbnails/video.jpg"'/>
+            <img *ngIf="medium.media_type == 'text'" [alt]="medium.title" [src]='api_url + "thumbnails/text.jpg"'/>
+            <img *ngIf="medium.media_type == 'youtube'" [alt]="medium.title"
+                 [src]='api_url + "thumbnails/youtube.jpg"'/>
+          </ion-thumbnail>
+          <div (click)="itemTapped($event, medium.id)">
+            <h2>{{ medium.title }}</h2>
+            <p>{{ medium.description }}</p>
+            <p>By: <span ion-text color="secondary">{{ featuredUsers[i] }}</span></p>
+            <p ion-text color="primary">{{ medium.tag | language }}</p>
+          </div>
+          <ion-icon *ngIf="i < featured.length -1" item-right name="ios-arrow-forward"
+                    (click)="changeSlide(true)"></ion-icon>
+          <ion-icon *ngIf="i == (featured.length - 1)" item-right name="ios-arrow-forward"
+                    (click)="changeSlide(0)"></ion-icon>
+        </ion-item>
+      </ion-slide>
+    </ion-slides>
   </div>
 
   <ion-segment [(ngModel)]="courses_posts" color="primary">
