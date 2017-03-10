@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { HttpApi } from "../../providers/http-api";
-import { NavParams } from "ionic-angular";
+import {NavParams, NavController} from "ionic-angular";
 
 /**
  * An element that contains a button that allows users to mark media as their favorites.
@@ -18,6 +18,8 @@ export class FavoriteBoxComponent {
   private mediumHasBeenFavorited: boolean;
   private mediumHasBeenUnfavorited: boolean;
 
+  private mediumType: string;
+
   /**
    * FavoriteBoxComponent constructor.
    *
@@ -27,29 +29,52 @@ export class FavoriteBoxComponent {
    *
    * @param httpApi Injected HttpApi service
    * @param navParams Injected NavParams
+   * @param navCtrl Injected NavController
    */
-  constructor(private httpApi: HttpApi, public navParams: NavParams) {
+  constructor(private httpApi: HttpApi, public navParams: NavParams, public navCtrl: NavController) {
     this.mediumHasBeenFavorited = false;
     this.mediumHasBeenUnfavorited = false;
 
     this.userId = localStorage.getItem('dao_user_id');
     this.mediumId = this.navParams.get('id');
 
-    this.httpApi.get(`media/${this.mediumId}/favorites`).subscribe(response => {
-      console.log('Favorites: ' + JSON.stringify(response));
-      for (let favorite in response) {
-        if (response.hasOwnProperty(favorite)) {
-          if (response[favorite]['user_id'] == this.userId) {
-            this.mediumHasBeenFavorited = true;
-            this.favoriteId = response[favorite]['id'];
+    console.log('ID: ' + this.mediumId);
 
-            break;
+    if (this.navCtrl.getActive().name === 'GroupPage') {
+      this.mediumType = 'group';
+    } else {
+      this.mediumType = 'medium';
+    }
+
+    if (this.mediumType === 'medium') {
+      this.httpApi.get(`media/${this.mediumId}/favorites`).subscribe(response => {
+        console.log('Favorites: ' + JSON.stringify(response));
+        for (let favorite in response) {
+          if (response.hasOwnProperty(favorite)) {
+            if (response[favorite]['user_id'] == this.userId) {
+              this.mediumHasBeenFavorited = true;
+              this.favoriteId = response[favorite]['id'];
+
+              break;
+            }
           }
-        } else {
-          // TODO: Show a toast telling the favorite could not be registered.
         }
-      }
-    });
+      });
+    } else {
+      this.httpApi.get(`groups/${this.mediumId}/favorites`).subscribe(response => {
+        console.log('Favorites: ' + JSON.stringify(response));
+        for (let favorite in response) {
+          if (response.hasOwnProperty(favorite)) {
+            if (response[favorite]['user_id'] == this.userId) {
+              this.mediumHasBeenFavorited = true;
+              this.favoriteId = response[favorite]['id'];
+
+              break;
+            }
+          }
+        }
+      });
+    }
   }
 
   /**
@@ -63,10 +88,17 @@ export class FavoriteBoxComponent {
       this.removeFavorite();
     }
 
-    this.httpApi.post("favorites", { medium_id: this.mediumId }).subscribe(response => {
-      this.favoriteId = response.id;
-      this.mediumHasBeenFavorited = true;
-    });
+    if (this.mediumType === 'medium') {
+      this.httpApi.post("favorites", { medium_id: this.mediumId }).subscribe(response => {
+        this.favoriteId = response.id;
+        this.mediumHasBeenFavorited = true;
+      });
+    } else {
+      this.httpApi.post("favorites", { group_id: this.mediumId }).subscribe(response => {
+        this.favoriteId = response.id;
+        this.mediumHasBeenFavorited = true;
+      });
+    }
   }
 
   /**
