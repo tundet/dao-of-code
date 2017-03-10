@@ -16,7 +16,11 @@ export class ProfilePage {
   private user: any = {};
   private media: any;
   private groups: any;
+  private favoriteMedia: any = [];
+  private favoriteGroups: any = [];
   private mediaAreVisible: boolean;
+  private groupsAreVisible: boolean;
+  private favoritesAreVisible: boolean;
 
   /**
    * Profile page constructor.
@@ -34,12 +38,28 @@ export class ProfilePage {
 
     this.httpApi.get(`users/${this.id}/media`).subscribe(response => {
       this.media = response;
-      console.log('Media: ' + JSON.stringify(this.media));
     });
 
     this.httpApi.get(`users/${this.id}/groups`).subscribe(response => {
       this.groups = response;
-      console.log('Groups: ' + JSON.stringify(this.groups));
+    });
+
+    this.httpApi.get(`users/${this.id}/favorites`).subscribe(response => {
+      if (response instanceof Array) {
+        for (let favorite in response) {
+          if (response.hasOwnProperty(favorite)) {
+            if (response[favorite].hasOwnProperty('medium_id') && response[favorite]['medium_id'] !== null) {
+              this.httpApi.get(`media/${response[favorite]['medium_id']}`).subscribe(response => {
+                this.favoriteMedia.push(response);
+              });
+            } else if (response[favorite].hasOwnProperty('group_id') && response[favorite]['group_id'] !== null) {
+              this.httpApi.get(`media/${response[favorite]['group_id']}`).subscribe(response => {
+                this.favoriteGroups.push(response);
+              });
+            }
+          }
+        }
+      }
     });
 
     this.mediaAreVisible = true;
@@ -47,10 +67,20 @@ export class ProfilePage {
 
   showMedia() {
     this.mediaAreVisible = true;
+    this.groupsAreVisible = false;
+    this.favoritesAreVisible = false;
   }
 
   showGroups() {
     this.mediaAreVisible = false;
+    this.groupsAreVisible = true;
+    this.favoritesAreVisible = false;
+  }
+
+  showFavorites() {
+    this.mediaAreVisible = false;
+    this.groupsAreVisible = false;
+    this.favoritesAreVisible = true;
   }
 
 
