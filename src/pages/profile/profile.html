@@ -39,7 +39,7 @@
     <ion-item *ngFor="let group of groups">
       <ion-thumbnail item-left (click)="showGroup($event, group.id)">
         <!-- TODO: Add pictures of languages using ngIf when they are done. -->
-        <img [alt]="group.name" [src]='BASE_URL + "thumbnails/audio.jpg"'/>
+        <img [alt]="group.name" [src]='BASE_URL + "icons/" + group.tag + ".jpg"'/>
       </ion-thumbnail>
       <h2>{{ group.name }}</h2>
       <p>{{ group.description }}</p>
