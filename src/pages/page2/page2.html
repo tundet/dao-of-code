@@ -12,16 +12,17 @@
         <ion-icon name="home"></ion-icon>
       </button>
     </ion-buttons>
+    <div class="bar bar-header item-input-inset">
+      <label class="item-input-wrapper" *ngIf="searchbar">
+        <i class="icon ion-ios-search placeholder-icon"></i>
+        <input type="search" placeholder="Search">
+      </label>
+      <button class="button button-clear">
+        Cancel
+      </button>
+    </div>
   </ion-navbar>
-  <div class="bar bar-header item-input-inset">
-    <label class="item-input-wrapper">
-      <i class="icon ion-ios-search placeholder-icon"></i>
-      <input type="search" placeholder="Search">
-    </label>
-    <button class="button button-clear">
-      Cancel
-    </button>
-  </div>
+
 </ion-header>
 
 <ion-content>

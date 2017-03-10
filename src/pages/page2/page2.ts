@@ -19,6 +19,7 @@ export class Page2 {
   api_url: string = 'https://dao-api.othnet.ga/uploads/';
   private languages = global.languages;
   private shownLanguageList = [];
+  private searchbar: boolean = false;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private httpApi: HttpApi) {
     let a = [];
@@ -81,6 +82,14 @@ export class Page2 {
 
   toHome() {
     this.navCtrl.setRoot(Page2);
+  }
+
+  search() {
+    if (this.searchbar == false) {
+      this.searchbar = true;
+    } else {
+      this.searchbar = false;
+    }
   }
 
   itemTapped(event, id) {
