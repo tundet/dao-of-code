@@ -85,7 +85,7 @@
         </ion-item>
       </ion-col>
       <ion-col>
-        <ion-item (click)="langTapped($event, row[0].value)" no-lines>
+        <ion-item (click)="langTapped($event, row[1].value)" no-lines>
           <ion-thumbnail>
             <img [alt]="row[1].title" [src]="api_url + 'icons/' + row[1].value + '.jpg '"/>
           </ion-thumbnail>
