@@ -4,6 +4,7 @@ import {NavController, NavParams, Slides} from 'ionic-angular';
 import {HttpApi} from "../../providers/http-api";
 import {global} from "../../app/global";
 import {BrowsePage} from "../browse/browse";
+import {SearchPage} from "../search/search";
 
 @Component({
   selector: 'page-page2',
@@ -93,12 +94,8 @@ export class Page2 {
     this.navCtrl.setRoot(Page2);
   }
 
-  search() {
-    if (this.searchbar == false) {
-      this.searchbar = true;
-    } else {
-      this.searchbar = false;
-    }
+  toSearch() {
+    this.navCtrl.setRoot(SearchPage);
   }
 
   /**

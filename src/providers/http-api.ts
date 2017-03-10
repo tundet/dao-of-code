@@ -157,6 +157,57 @@ export class HttpApi {
   };
 
   /**
+   * Sends get requests to API to search for posts of a specific language
+   *
+   * @param value request keyword
+   * @returns {Observable<any>}
+   */
+  searchTags = (keyword: string) => {
+    this.setXAccessToken();
+    return this.http.get(this.api_url + `media/?tag=${keyword}`,
+      {headers: this.headers}
+    )
+      .map(HttpApi.checkForError)
+      .catch(err => Observable.throw(err))
+      .map(HttpApi.getJson);
+  };
+
+  /**
+   * Sends get requests to API to search for titles with
+   * specific language and keyword
+   *
+   * @param value request keyword and tag as string
+   * @returns {Observable<any>}
+   */
+  searchTitle = (keyword: string, tag: string) => {
+    this.setXAccessToken();
+    return this.http.get(this.api_url + `media/?title=${keyword}&tag=${tag}`,
+      {headers: this.headers}
+    )
+      .map(HttpApi.checkForError)
+      .catch(err => Observable.throw(err))
+      .map(HttpApi.getJson);
+  };
+
+  /**
+   * Sends get requests to API to search for descriptions
+   * with specific language and keyword
+   *
+   * @param value request keyword and tag as string
+   * @returns {Observable<any>}
+   */
+
+  searchDescription = (keyword: string, tag: string) => {
+    this.setXAccessToken();
+    return this.http.get(this.api_url + `media/?description=${keyword}&tag=${tag}`,
+      {headers: this.headers}
+    )
+      .map(HttpApi.checkForError)
+      .catch(err => Observable.throw(err))
+      .map(HttpApi.getJson);
+  };
+
+  /**
    * Sends requests to make new group to API
    *
    * @param body
