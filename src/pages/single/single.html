@@ -55,7 +55,7 @@
     <ion-card *ngIf="editMedia">
       <ion-item>
         <h2 *ngIf="groupInfo">{{ groupInfo.name }}</h2>
-        <h2 item-right>{{ username }}</h2>
+        <h2 item-right>{{ postUsers[i] }}</h2>
       </ion-item>
       <ion-card-content>
         <img *ngIf="mediaInfo.media_type == 'image'" [src]="api_url + mediaInfo.file_name" [alt]="mediaInfo.title"/>

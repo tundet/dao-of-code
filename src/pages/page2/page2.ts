@@ -36,6 +36,9 @@ export class Page2 {
     this.refresh();
   }
 
+  /**
+   * Get usernames by id
+   */
   refresh(refresher = null) {
     this.featured = [];
     this.featuredUsers = [];

@@ -22,6 +22,8 @@ export class SinglePage {
     medium_id: "",
     comment: ""
   };
+  private posts = [];
+  private postUsers = [];
   private mediaInfo;
   private groupInfo;
   private textMediaContent;
@@ -73,6 +75,35 @@ export class SinglePage {
       this.comments = response;
       console.log(this.comments);
     });
+    this.refresh();
+  }
+
+  /**
+   * Get usernames by id
+   */
+  refresh(refresher = null) {
+    this.posts = [];
+    this.postUsers = [];
+    this.httpApi.get(`users/1`).subscribe(response => {
+        for (let medium of response) {
+          this.httpApi.get(`media/` + medium.medium_id).subscribe(response2 => {
+            this.posts.push(response2);
+            if (response[response.length - 1] == medium) {
+              this.httpApi.getUserNames(this.posts).subscribe(response3 => {
+                this.postUsers = response3;
+              });
+            }
+          });
+        }
+
+        if (refresher) {
+          refresher.complete();
+        }
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
 
   updateGroupInfo(id) {
