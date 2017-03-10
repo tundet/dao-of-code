@@ -137,6 +137,7 @@ export class UploadPage {
         let newGroupFormData = {};
         newGroupFormData["name"] = this.formnewgroupname.trim();
         newGroupFormData["tag"] = this.formlang;
+        newGroupFormData["description"] = "";
         this.httpApi.makeGroup(newGroupFormData).subscribe(response => {
           console.log(response);
           formData.append("group_id", response.id);

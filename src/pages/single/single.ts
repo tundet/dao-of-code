@@ -168,6 +168,7 @@ export class SinglePage {
         let newGroupFormData = {};
         newGroupFormData["name"] = this.newGroupName.trim();
         newGroupFormData["tag"] = this.editMedia.tag;
+        newGroupFormData["description"] = "";
         this.httpApi.makeGroup(newGroupFormData).subscribe(response => {
           console.log(response);
           data["group_id"] = response.id;
