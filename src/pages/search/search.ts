@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import {HttpApi} from "../../providers/http-api";
+import {SinglePage} from "../single/single";
+import {GroupPage} from "../group/group";
 
 /*
   Generated class for the Search page.
@@ -13,10 +16,26 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 export class SearchPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+  api_url: string = 'https://dao-api.othnet.ga/uploads/';
+
+  private contentList;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, private httpApi: HttpApi) {
+
+    this.httpApi.getNew(15).subscribe(response => {
+        this.contentList = response;
+        console.log(response);
+      })
+    }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad SearchPage');
   }
 
+  itemTapped(event, id) {
+    // That's right, we're pushing to ourselves!
+      this.navCtrl.push(SinglePage, {
+        id: id
+      });
+  }
 }
