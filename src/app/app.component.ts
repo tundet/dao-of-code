@@ -6,6 +6,7 @@ import { Page2 } from '../pages/page2/page2';
 import { UploadPage } from "../pages/upload/upload";
 import { LogoutPage } from "../pages/logout/logout";
 import { ProfilePage } from "../pages/profile/profile";
+import {SearchPage} from "../pages/search/search";
 
 @Component({
   templateUrl: 'app.html'
@@ -26,6 +27,7 @@ export class MyApp {
       { icon: 'home', title: 'Home', component: Page2 },
       { icon: 'contact', title: 'Profile', component: ProfilePage },
       { icon: 'share-alt', title: 'Upload', component: UploadPage },
+      { icon: 'search', title: 'Search', component: SearchPage },
       { icon: 'log-out', title: 'Logout', component: LogoutPage }
     ];
 

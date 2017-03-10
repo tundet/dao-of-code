@@ -15,6 +15,7 @@ import { Safe } from "../pipes/safe";
 import { Language } from "../pipes/language"
 import { ProfilePage } from "../pages/profile/profile";
 import { FavoriteBoxComponent } from "../components/favorite-box/favorite-box";
+import {SearchPage} from "../pages/search/search";
 
 
 @NgModule({
@@ -26,6 +27,7 @@ import { FavoriteBoxComponent } from "../components/favorite-box/favorite-box";
     SinglePage,
     GroupPage,
     UploadPage,
+    SearchPage,
     LogoutPage,
     ProfilePage,
     GetUsername,
@@ -46,6 +48,7 @@ import { FavoriteBoxComponent } from "../components/favorite-box/favorite-box";
     SinglePage,
     GroupPage,
     UploadPage,
+    SearchPage,
     LogoutPage,
     ProfilePage
   ],

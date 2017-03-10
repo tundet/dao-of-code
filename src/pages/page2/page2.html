@@ -5,11 +5,23 @@
     </button>
     <ion-title>Home</ion-title>
     <ion-buttons end>
+      <button ion-button (click)="search()">
+        <ion-icon name="search"></ion-icon>
+      </button>
       <button ion-button (click)="toHome()">
         <ion-icon name="home"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
+  <div class="bar bar-header item-input-inset">
+    <label class="item-input-wrapper">
+      <i class="icon ion-ios-search placeholder-icon"></i>
+      <input type="search" placeholder="Search">
+    </label>
+    <button class="button button-clear">
+      Cancel
+    </button>
+  </div>
 </ion-header>
 
 <ion-content>
