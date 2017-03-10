@@ -108,7 +108,10 @@ export class HttpApi {
   getNew = (amount: number) => {
     //GET http://[BASE-URL]/media?start=10&limit=10
     this.setXAccessToken();
-    return this.http.get(this.api_url + `media/latest/${amount}`, {headers: this.headers});
+    return this.http.get(this.api_url + `media/latest/${amount}`, {headers: this.headers})
+      .map(HttpApi.checkForError)
+      .catch(err => Observable.throw(err))
+      .map(HttpApi.getJson);
   };
 
   /**
