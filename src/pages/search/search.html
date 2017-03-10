@@ -15,7 +15,7 @@
 
 <ion-content>
   <ion-list *ngIf="contentList">
-    <ion-item *ngFor="let content of contentList.id">
+    <ion-item *ngFor="let content of contentList">
       <ion-thumbnail *ngIf="content.name" item-left (click)="itemTapped($event, content.id)">
         <img [alt]="content.name" [src]='api_url + "thumbnails/text.jpg"'/>
       </ion-thumbnail>
