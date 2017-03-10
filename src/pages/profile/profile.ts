@@ -65,18 +65,27 @@ export class ProfilePage {
     this.mediaAreVisible = true;
   }
 
+  /**
+   * Show the media the user has uploaded.
+   */
   showMedia() {
     this.mediaAreVisible = true;
     this.groupsAreVisible = false;
     this.favoritesAreVisible = false;
   }
 
+  /**
+   * Show the groups the user has created.
+   */
   showGroups() {
     this.mediaAreVisible = false;
     this.groupsAreVisible = true;
     this.favoritesAreVisible = false;
   }
 
+  /**
+   * Show the media and groups the user has added to their favorites.
+   */
   showFavorites() {
     this.mediaAreVisible = false;
     this.groupsAreVisible = false;
@@ -84,6 +93,12 @@ export class ProfilePage {
   }
 
 
+  /**
+   * Show a medium.
+   *
+   * @param event
+   * @param id
+   */
   showMedium(event, id) {
     // That's right, we're pushing to ourselves!
     this.navCtrl.push(SinglePage, {
@@ -91,6 +106,12 @@ export class ProfilePage {
     });
   }
 
+  /**
+   * Show a group.
+   *
+   * @param event
+   * @param id
+   */
   showGroup(event, id) {
     // That's right, we're pushing to ourselves!
     this.navCtrl.push(GroupPage, {
