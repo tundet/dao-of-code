@@ -26,13 +26,14 @@
     <ion-card *ngIf="mediaInfo">
       <ion-item>
         <h2 *ngIf="groupInfo" color="primary" (click)="loadGroup(groupInfo.id)">{{ groupInfo.name }}</h2>
-        <h2 ion-text item-right color="secondary">{{ username }}</h2>
-      </ion-item>
+        <h2 ion-text item-right color="secondary">{{ username }}</h2></ion-item>
+        <ion-item><h2>{{ mediaInfo.title }}</h2><span ion-text item-right
+                                                      color="primary">{{mediaInfo.tag | language}}</span></ion-item>
+
 
       <ion-card-content>
         <img *ngIf="mediaInfo.media_type == 'image'" [src]="api_url + mediaInfo.file_name" [alt]="mediaInfo.title"/>
-        <like-box></like-box>
-        <favorite-box></favorite-box>
+
 
         <video *ngIf="mediaInfo.media_type == 'video'" width="100%" controls>
           <source [src]='api_url + mediaInfo.file_name'>
@@ -52,9 +53,9 @@
       <ion-card-content *ngIf="mediaInfo.media_type == 'text'">
         <a ion-button [href]="api_url + mediaInfo.file_name" [target]="_blank">Download</a>
       </ion-card-content>
-      <ion-item><h2>{{ mediaInfo.title }}</h2><span ion-text item-right
-                                                    color="primary">{{mediaInfo.tag | language}}</span></ion-item>
-      <ion-card-content>{{ mediaInfo.description }}</ion-card-content>
+      <ion-card-content><p>{{ mediaInfo.description }}</p></ion-card-content>
+      <like-box></like-box>
+      <favorite-box></favorite-box>
     </ion-card>
     <button *ngIf="owner" ion-button block (click)="editClick()">Edit</button>
   </div>
