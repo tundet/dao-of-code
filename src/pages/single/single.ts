@@ -3,6 +3,8 @@ import {NavController, NavParams} from 'ionic-angular';
 import {HttpApi} from "../../providers/http-api";
 import {GroupPage} from "../group/group";
 import {global} from '../../app/global';
+import {Page2} from "../page2/page2";
+import {SearchPage} from "../search/search";
 
 /*
  Generated class for the Single page.
@@ -235,6 +237,14 @@ export class SinglePage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad SinglePage');
 
+  }
+
+  toHome() {
+    this.navCtrl.setRoot(Page2);
+  }
+
+  toSearch() {
+    this.navCtrl.setRoot(SearchPage);
   }
 
 }
