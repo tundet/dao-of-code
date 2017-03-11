@@ -93,6 +93,7 @@
 
     .segment-button.segment-activated {
       color: color($colors, light);
+      background-color: color($colors, primary);
     }
   }
 
