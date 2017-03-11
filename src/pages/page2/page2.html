@@ -24,9 +24,9 @@
   </ion-refresher>
 
   <ion-list-header>
-    <h2 color="secondary">
+    <h1 color="secondary">
       Trending
-    </h2>
+    </h1>
   </ion-list-header>
   <div>
     <ion-slides *ngIf="featured[0]">
@@ -59,12 +59,12 @@
   </div>
 
   <ion-item-divider class="thin"></ion-item-divider>
-    <ion-list-header>
-      <h2 color="secondary">
-        Browse
-      </h2>
-    </ion-list-header>
-
+  <ion-list-header>
+    <h1 color="secondary">
+      Browse
+    </h1>
+  </ion-list-header>
+  <ion-list-header>
     <ion-segment [(ngModel)]="courses_posts" color="primary">
       <ion-segment-button value="courses">
         <h5>
@@ -79,22 +79,23 @@
         </h5>
       </ion-segment-button>
     </ion-segment>
-    <ion-grid>
-      <ion-row *ngFor="let row of shownLanguageList">
-        <ion-col>
-          <ion-item (click)="langTapped($event, row[0].value)" no-lines>
-            <ion-thumbnail>
-              <img [alt]="row[0].name" [src]="api_url + 'icons/' + row[0].value + '.jpg '">
-            </ion-thumbnail>
-          </ion-item>
-        </ion-col>
-        <ion-col>
-          <ion-item (click)="langTapped($event, row[1].value)" no-lines>
-            <ion-thumbnail>
-              <img [alt]="row[1].title" [src]="api_url + 'icons/' + row[1].value + '.jpg '"/>
-            </ion-thumbnail>
-          </ion-item>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
+  </ion-list-header>
+  <ion-grid>
+    <ion-row *ngFor="let row of shownLanguageList">
+      <ion-col>
+        <ion-item (click)="langTapped($event, row[0].value)" no-lines>
+          <ion-thumbnail>
+            <img [alt]="row[0].name" [src]="api_url + 'icons/' + row[0].value + '.jpg '">
+          </ion-thumbnail>
+        </ion-item>
+      </ion-col>
+      <ion-col>
+        <ion-item (click)="langTapped($event, row[1].value)" no-lines>
+          <ion-thumbnail>
+            <img [alt]="row[1].title" [src]="api_url + 'icons/' + row[1].value + '.jpg '"/>
+          </ion-thumbnail>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

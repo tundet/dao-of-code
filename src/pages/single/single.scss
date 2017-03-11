@@ -1,6 +1,6 @@
 page-single {
 
-  .center{
+  .center {
     display: -webkit-box;
     display: -moz-box;
     display: -ms-flexbox;
@@ -31,4 +31,12 @@ page-single {
     align-items: center;
   }
 
+  ion-list-header {
+    justify-content: center;
+    text-align: center;
+    h1 {
+      font-weight: bold;
+      text-transform: capitalize;
+    }
+  }
 }

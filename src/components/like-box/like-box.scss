@@ -11,4 +11,11 @@ like-box {
   span {
     padding: 3px 3px 3px 5px;
   }
+
+  button:last-of-type {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    font-size: 2.5rem;
+  }
 }

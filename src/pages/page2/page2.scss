@@ -23,8 +23,11 @@
     }
 
     ion-list-header {
-      label {
-        justify-content: center;
+      justify-content: center;
+      text-align: center;
+      text-transform: capitalize;
+      h1 {
+        font-weight: bold;
       }
     }
 
@@ -61,7 +64,8 @@
       border-style: none;
       color: grey;
       h5 {
-        margin-top: 1rem;
+        margin-top: 0.2rem;
+        margin-bottom: 0.6rem;
       }
     }
 
@@ -103,6 +107,12 @@
         width: 100px;
         height: 100px;
       }
+    }
+  }
+
+  ion-label {
+    h2 {
+      color: color($colors, primary);
     }
   }
 }

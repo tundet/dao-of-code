@@ -6,7 +6,7 @@
 -->
 <ion-header>
 
-  <ion-navbar>
+  <ion-navbar color="light">
     <ion-title>Media</ion-title>
   </ion-navbar>
 
@@ -143,7 +143,12 @@
 
   <div id='comments'>
       <ion-list *ngIf="comments">
-        <ion-item><ion-title>Comments</ion-title></ion-item>
+        <ion-item-divider class="thin"></ion-item-divider>
+        <ion-list-header>
+          <h1 color="secondary">
+            Comments
+          </h1>
+        </ion-list-header>
         <ion-item>
           <ion-label color="primary" floating>Your comment</ion-label>
           <ion-input

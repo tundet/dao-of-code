@@ -3,19 +3,19 @@
   <ion-row>
     <ion-col width-25><p><ion-icon name="happy"></ion-icon>{{ likescount }} Likes</p></ion-col>
     <ion-col width-25 *ngIf="!mediumHasBeenLiked">
-      <button ion-button full color="secondary" (click)="like()">
+      <button ion-button full color="like" (click)="like()">
         <ion-icon name="thumbs-up"></ion-icon>
       </button>
     </ion-col>
 
     <ion-col width-25 *ngIf="mediumHasBeenLiked || mediumHasBeenDisliked">
-      <button ion-button full color="dark" (click)="removeLike()">
+      <button ion-button full color="dislike" (click)="removeLike()">
         <ion-icon name="remove-circle"></ion-icon>
       </button>
     </ion-col>
 
     <ion-col width-25 *ngIf="!mediumHasBeenDisliked">
-      <button ion-button full color="danger" (click)="dislike()">
+      <button ion-button full color="lightbrown" (click)="dislike()">
         <ion-icon name="thumbs-down"></ion-icon>
       </button>
     </ion-col>
