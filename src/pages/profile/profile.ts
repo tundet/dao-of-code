@@ -3,6 +3,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import { HttpApi } from "../../providers/http-api";
 import { SinglePage } from "../single/single";
 import { GroupPage } from "../group/group";
+import {Page2} from "../page2/page2";
 
 @Component({
   selector: 'page-profile',
@@ -121,6 +122,10 @@ export class ProfilePage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProfilePage');
+  }
+
+  toHome() {
+    this.navCtrl.setRoot(Page2);
   }
 
 }

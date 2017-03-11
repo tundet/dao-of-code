@@ -167,4 +167,8 @@ export class UploadPage {
     }
   }
 
+  toHome() {
+    this.navCtrl.setRoot(Page2);
+  }
+
 }

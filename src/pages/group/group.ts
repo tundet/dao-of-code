@@ -3,6 +3,7 @@ import {NavController, NavParams} from 'ionic-angular';
 import {HttpApi} from "../../providers/http-api";
 import {SinglePage} from "../single/single";
 import { global } from '../../app/global';
+import {Page2} from "../page2/page2";
 
 @Component({
   selector: 'page-group',
@@ -198,6 +199,10 @@ export class GroupPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad GroupPage');
+  }
+
+  toHome() {
+    this.navCtrl.setRoot(Page2);
   }
 
 }

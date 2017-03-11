@@ -4,6 +4,7 @@ import {HttpApi} from "../../providers/http-api";
 import {SinglePage} from "../single/single";
 import {GroupPage} from "../group/group";
 import {isNumber} from "util";
+import {Page2} from "../page2/page2";
 
 /*
  Generated class for the Browse page.
@@ -93,6 +94,10 @@ export class BrowsePage {
         id: id
       });
     }
+  }
+
+  toHome() {
+    this.navCtrl.setRoot(Page2);
   }
 
 }

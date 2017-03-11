@@ -7,7 +7,15 @@
 <ion-header>
 
   <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
     <ion-title>{{ tag | language }} {{ courses_posts }}</ion-title>
+    <ion-buttons class="light" end>
+      <button ion-button strong (click)="toHome()">
+        <img src="http://users.metropolia.fi/~tundet/web/images/daicon.svg" alt="DAO OF CODE">
+      </button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>

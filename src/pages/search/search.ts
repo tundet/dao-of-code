@@ -3,6 +3,7 @@ import {NavController, NavParams} from 'ionic-angular';
 import {HttpApi} from "../../providers/http-api";
 import {SinglePage} from "../single/single";
 import {global} from "../../app/global";
+import {Page2} from "../page2/page2";
 
 /*
  Generated class for the Search page.
@@ -62,5 +63,9 @@ export class SearchPage {
     this.navCtrl.push(SinglePage, {
       id: id
     });
+  }
+
+  toHome() {
+    this.navCtrl.setRoot(Page2);
   }
 }
