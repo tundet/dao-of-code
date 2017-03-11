@@ -17,9 +17,56 @@
 ion-title {
   .toolbar-title {
     text-align: center;
+    color: color($colors, light);
   }
 }
 
-ion-icon {
-  padding-right: 5px;
+.menu-inner {
+  .toolbar-background {
+    background-color: color($colors, primary);
+  }
+  .toolbar-title {
+    color: color($colors, light);
+  }
+
+  .scroll-content {
+    background: linear-gradient(to bottom,  color($colors, primary) 45%, color($colors, peach) 100%);
+    .item{
+      background-color: color($colors, primary);
+      color: color($colors, light);
+    }
+  }
+
+}
+
+
+
+ion-navbar {
+  .toolbar {
+    min-height: 50px;
+  }
+
+  .red, .toolbar-background {
+    background: linear-gradient(to right,  color($colors, primary) 0%, color($colors, peach) 100%);
+  }
+  .light {
+    color: color($colors, light);
+  }
+  .bar-button {
+    font-size: 3rem;
+  }
+  img {
+    padding-top: 4px;
+    width: 40px;
+  }
+  ion-icon {
+    padding-right: 5px;
+    color: color($colors, light);
+  }
+}
+
+.thin {
+  min-height: 1px;
+  max-height: 2px;
+  background-color: color($colors, peach);
 }

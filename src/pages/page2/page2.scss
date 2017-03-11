@@ -1,39 +1,107 @@
-page-page2 {
+.ios, .md {
 
-  .slider {
-    height: 100%;
-  }
+  page-page2 {
 
-  .slider-slide {
-    padding-top: 120px;
-    color: #000;
-    background-color: #fff;
-    text-align: center;
-    font-weight: 300;
-  }
+    .slider {
+      height: 100%;
+    }
 
-  .centeringSlide {
-    .item-inner {
-      .input-wrapper {
-        margin-right: 13px;
+    .slider-slide {
+      padding-top: 120px;
+      color: #000;
+      background-color: #fff;
+      text-align: center;
+      font-weight: 300;
+    }
+
+    .centeringSlide {
+      .item-inner {
+        .input-wrapper {
+          margin-right: 13px;
+        }
       }
     }
-  }
 
-  ion-list-header {
-    label {
-      justify-content: center;
+    ion-list-header {
+      label {
+        justify-content: center;
+      }
+    }
+
+    ion-col {
+      ion-thumbnail {
+        img {
+          margin: auto;
+        }
+      }
+      h2 {
+        text-align: center;
+      }
+      ion-item {
+        background-color: fff;
+        border-bottom: none !important;
+      }
+
+      ion-label {
+        white-space: normal;
+      }
+
+      ion-item-sliding {
+        margin: 10px;
+      }
+    }
+
+    ion-segment-button {
+      max-width: 150px;
+      border-style: solid;
+      color: color($colors, light);
+    }
+
+    .segment-button {
+      border-style: none;
+      color: grey;
+      h5 {
+        margin-top: 1rem;
+      }
+    }
+
+    .segment-button:first-of-type {
+      border-radius: 200px;
+      margin: 10px 20px 0 0;
+      line-height: 3.4rem;
+      height: 100%;
+      width: 100%
+    }
+    .segment-button:not(:first-of-type) {
+      border-radius: 50%;
+      margin-right: 20px;
+      margin-top: 5px;
+      margin-left: 20px;
+      line-height: 3.4rem;
+      height: 100%;
+      width: 100%;
+    }
+    .segment-button:last-of-type {
+      border-radius: 200px;
+      margin-right: 0px;
+      margin-top: 5px;
+      margin-left: 20px;
+      line-height: 3.4rem;
+      height: 100%;
+      width: 100%;
+    }
+
+    .segment-button.segment-activated {
+      color: color($colors, light);
     }
   }
 
   ion-col {
     ion-thumbnail {
       img {
-        margin: auto;
+        width: 100px;
+        height: 100px;
       }
-    }
-    h2 {
-      text-align: center;
     }
   }
 }

@@ -3,13 +3,14 @@
     <button ion-button menuToggle item-left>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Home</ion-title>
-    <ion-buttons end>
-      <button ion-button (click)="toSearch()">
+    <ion-title class="red"><img src="http://users.metropolia.fi/~tundet/web/images/daicon.svg" alt="DAO OF CODE">
+    </ion-title>
+    <ion-buttons class="light" end>
+      <button ion-button strong (click)="toSearch()">
         <ion-icon name="search"></ion-icon>
       </button>
-      <button ion-button (click)="toHome()">
-        <ion-icon name="home"></ion-icon>
+      <button ion-button strong (click)="toProfile()">
+        <ion-icon name="md-person"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
@@ -22,8 +23,8 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
-  <ion-list-header color="light">
-    <h2>
+  <ion-list-header>
+    <h2 color="secondary">
       Trending
     </h2>
   </ion-list-header>
@@ -57,32 +58,43 @@
     </ion-slides>
   </div>
 
-  <ion-segment [(ngModel)]="courses_posts" color="primary">
-    <ion-segment-button value="courses">
-      <ion-icon name="book"></ion-icon>
-      Courses
-    </ion-segment-button>
-    <ion-segment-button value="posts">
-      <ion-icon name="clipboard" item-top></ion-icon>
-      Posts
-    </ion-segment-button>
-  </ion-segment>
-  <ion-grid>
-    <ion-row *ngFor="let row of shownLanguageList">
-      <ion-col>
-        <ion-item (click)="langTapped($event, row[0].value)" no-lines>
-          <ion-thumbnail>
-            <img [alt]="row[0].name" [src]="api_url + 'icons/' + row[0].value + '.jpg '">
-          </ion-thumbnail>
-        </ion-item>
-      </ion-col>
-      <ion-col>
-        <ion-item (click)="langTapped($event, row[1].value)" no-lines>
-          <ion-thumbnail>
-            <img [alt]="row[1].title" [src]="api_url + 'icons/' + row[1].value + '.jpg '"/>
-          </ion-thumbnail>
-        </ion-item>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+  <ion-item-divider class="thin"></ion-item-divider>
+    <ion-list-header>
+      <h2 color="secondary">
+        Browse
+      </h2>
+    </ion-list-header>
+
+    <ion-segment [(ngModel)]="courses_posts" color="primary">
+      <ion-segment-button value="courses">
+        <h5>
+          <ion-icon name="book"></ion-icon>
+          Courses
+        </h5>
+      </ion-segment-button>
+      <ion-segment-button value="posts">
+        <h5>
+          <ion-icon name="clipboard" item-top></ion-icon>
+          Posts
+        </h5>
+      </ion-segment-button>
+    </ion-segment>
+    <ion-grid>
+      <ion-row *ngFor="let row of shownLanguageList">
+        <ion-col>
+          <ion-item (click)="langTapped($event, row[0].value)" no-lines>
+            <ion-thumbnail>
+              <img [alt]="row[0].name" [src]="api_url + 'icons/' + row[0].value + '.jpg '">
+            </ion-thumbnail>
+          </ion-item>
+        </ion-col>
+        <ion-col>
+          <ion-item (click)="langTapped($event, row[1].value)" no-lines>
+            <ion-thumbnail>
+              <img [alt]="row[1].title" [src]="api_url + 'icons/' + row[1].value + '.jpg '"/>
+            </ion-thumbnail>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
 </ion-content>

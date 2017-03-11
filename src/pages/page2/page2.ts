@@ -5,6 +5,7 @@ import {HttpApi} from "../../providers/http-api";
 import {global} from "../../app/global";
 import {BrowsePage} from "../browse/browse";
 import {SearchPage} from "../search/search";
+import {ProfilePage} from "../profile/profile";
 
 @Component({
   selector: 'page-page2',
@@ -51,6 +52,7 @@ export class Page2 {
             if (response[response.length - 1] == medium) {
               this.httpApi.getUserNames(this.featured).subscribe(response3 => {
                 this.featuredUsers = response3;
+                console.log(this.featuredUsers);
               });
             }
           });
@@ -96,6 +98,10 @@ export class Page2 {
 
   toSearch() {
     this.navCtrl.setRoot(SearchPage);
+  }
+
+  toProfile(){
+    this.navCtrl.setRoot(ProfilePage);
   }
 
   /**
