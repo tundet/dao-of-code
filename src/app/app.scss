@@ -37,7 +37,6 @@ button, h1, h2, h3, h4, h5, h6, ion-title {
 // --------------------------------------------------
 ion-title {
   .toolbar-title {
-    padding-left: 40px;
     text-align: center;
     color: color($colors, light);
   }
@@ -49,6 +48,11 @@ ion-title {
   }
   .toolbar-title {
     color: color($colors, light);
+    padding: 0px;
+  }
+
+  .item-md{
+    padding-left: 16px;
   }
 
   .scroll-content {
@@ -99,4 +103,8 @@ ion-navbar {
   min-height: 1px;
   max-height: 2px;
   background-color: color($colors, peach);
+}
+
+.item-md {
+  padding: 0px;
 }
