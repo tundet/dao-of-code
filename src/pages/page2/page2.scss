@@ -114,6 +114,12 @@
     }
   }
 
+  ion-title {
+    .toolbar-title {
+      padding-left: 0px;
+    }
+  }
+
   ion-label {
     h2 {
       color: color($colors, primary);

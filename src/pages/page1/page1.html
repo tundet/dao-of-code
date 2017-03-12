@@ -2,13 +2,17 @@
   <ion-navbar>
     <ion-title *ngIf="signInMode">Signin</ion-title>
     <ion-title *ngIf="!signInMode">Signup</ion-title>
+    <ion-buttons class="light" end>
+    <img class="side" src="http://users.metropolia.fi/~tundet/web/images/daicon.svg" alt="DAO OF CODE">
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
   <div *ngIf="!loggedinMode">
     <div *ngIf="newUserHasBeenMade">
-      New user has been made! Username: {{ newUser.username }}, Email: {{ newUser.email }}
+      <h3>New user has been made!</h3>
+      <p>Username: {{ newUser.username }}, Email: {{ newUser.email }}</p>
     </div>
     <ion-list *ngIf="signInMode">
       <ion-item>
