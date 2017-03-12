@@ -13,7 +13,7 @@
     <ion-title>{{ tag | language }} {{ courses_posts }}</ion-title>
     <ion-buttons class="light" end>
       <button ion-button strong (click)="toHome()">
-        <img src="http://users.metropolia.fi/~tundet/web/images/daicon.svg" alt="DAO OF CODE">
+        <img class="side" src="http://users.metropolia.fi/~tundet/web/images/daicon.svg" alt="DAO OF CODE">
       </button>
     </ion-buttons>
   </ion-navbar>
@@ -55,7 +55,7 @@
     </ion-slides>
   </div>
   <ion-list *ngIf="contentList">
-    <ion-item *ngFor="let content of contentList">
+    <ion-item *ngFor="let content of contentList" >
       <ion-thumbnail *ngIf="content.name" item-left (click)="itemTapped($event, content.id)">
         <img [alt]="content.name" [src]='api_url + "thumbnails/text.jpg"'/>
       </ion-thumbnail>
@@ -67,8 +67,8 @@
         <img *ngIf="content.media_type == 'text'" [alt]="content.title" [src]='api_url + "thumbnails/text.jpg"'/>
         <img *ngIf="content.media_type == 'youtube'" [alt]="content.title" [src]='api_url + "thumbnails/youtube.jpg"'/>
       </ion-thumbnail>
-      <h2>{{ content.name ? content.name : content.title }}</h2>
-      <p>{{ content.description }}</p>
+      <h2 (click)="itemTapped($event, content.id)">{{ content.name ? content.name : content.title }}</h2>
+      <p (click)="itemTapped($event, content.id)">{{ content.description }}</p>
       <p item-right>{{content.tag | language }}</p>
       <button ion-button clear item-right (click)="itemTapped($event, content.id)">View</button>
     </ion-item>

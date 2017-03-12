@@ -1,7 +1,7 @@
 <ion-header>
   <ion-navbar>
-    <ion-title *ngIf="signInMode">Singin</ion-title>
-    <ion-title *ngIf="!signInMode">Singup</ion-title>
+    <ion-title *ngIf="signInMode">Signin</ion-title>
+    <ion-title *ngIf="!signInMode">Signup</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -57,8 +57,8 @@
         ></ion-input>
       </ion-item>
     </ion-list>
-    <button *ngIf="signInMode" ion-button block (click)="onSignin()">Singin</button>
-    <button *ngIf="!signInMode" ion-button block (click)="onSignup()">Singup</button>
+    <button *ngIf="signInMode" ion-button block (click)="onSignin()">Signin</button>
+    <button *ngIf="!signInMode" ion-button block (click)="onSignup()">Signup</button>
     <button ion-button small full outline (click)="changeSignupMode()" class="mode-change-link">
       {{ linkText }}
     </button>
