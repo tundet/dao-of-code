@@ -113,7 +113,11 @@ export class SinglePage {
       }
     );
   }
-
+  /**
+   * Update group information of post
+   *
+   * @param id id corresponding to group id
+   */
   updateGroupInfo(id) {
     this.httpApi.get(`groups/${id}`).subscribe(response => {
       this.groupInfo = response;
@@ -123,6 +127,11 @@ export class SinglePage {
     });
   }
 
+  /**
+   * Get post's comments
+   *
+   * @param id id corresponding to posts id
+   */
   getComments(id) {
     this.httpApi.get((`media/${id}/comments`)).subscribe(response => {
         this.comments = response;
@@ -135,6 +144,9 @@ export class SinglePage {
     });
   }
 
+  /**
+   * Enables editing of the current post
+   */
   editClick() {
     this.editMedia = JSON.parse(JSON.stringify(this.mediaInfo));
     this.edit = true;
@@ -144,6 +156,9 @@ export class SinglePage {
     });
   }
 
+  /**
+   * Changes the language tag of current post
+   */
   langChange() {
     this.userGroupsInSelectedTag = [];
     for (let group of this.userGroups) {
@@ -216,6 +231,11 @@ export class SinglePage {
     });
   }
 
+  /**
+   * Posting a comment on current post
+   *
+   * @param event event corresponding to comment info
+   */
   comment(event: any) {
     this.commentInfo = {
       medium_id: this.mediaInfo.id,
@@ -229,6 +249,11 @@ export class SinglePage {
     this.txtcomment = "";
   }
 
+  /**
+   * Deleting your own comment from current post
+   *
+   * @param id id corresponding to comment id to delete
+   */
   deleteComment(id) {
     this.httpApi.delete(`comments/` + id).subscribe(response => {
       console.log(response);
@@ -249,6 +274,9 @@ export class SinglePage {
 
   }
 
+  /**
+   * Changes view and root to target
+   */
   toHome() {
     this.navCtrl.setRoot(Page2);
   }

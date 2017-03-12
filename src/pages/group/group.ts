@@ -201,6 +201,9 @@ export class GroupPage {
     console.log('ionViewDidLoad GroupPage');
   }
 
+  /**
+   * Changes view and root to home
+   */
   toHome() {
     this.navCtrl.setRoot(Page2);
   }

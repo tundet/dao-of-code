@@ -49,6 +49,9 @@ export class BrowsePage {
     console.log('ionViewDidLoad BrowsePage');
   }
 
+  /**
+   * Get featured content
+   */
   refresh(refresher = null) {
     this.featured = [];
     this.httpApi.get(`users/1/favorites/` + this.tag).subscribe(response => {
@@ -67,6 +70,11 @@ export class BrowsePage {
     );
   }
 
+  /**
+   * Changes slide based on button click
+   *
+   * @param direction index number of featured list or boolean for slide direction
+   */
   changeSlide(direction: any) {
     let currentIndex = this.slides.getActiveIndex();
     if (typeof(direction) === "number") {
@@ -83,6 +91,12 @@ export class BrowsePage {
     console.log(currentIndex);
   }
 
+  /**
+   * Shows tapped featured items page
+   *
+   * @param event
+   * @param id of tapped featured item
+   */
   itemTapped(event, id) {
     // That's right, we're pushing to ourselves!
     if (this.courses_posts == 'posts') {
@@ -96,6 +110,9 @@ export class BrowsePage {
     }
   }
 
+  /**
+   * Changes view and root to home
+   */
   toHome() {
     this.navCtrl.setRoot(Page2);
   }

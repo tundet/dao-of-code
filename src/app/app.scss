@@ -14,6 +14,9 @@
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
 
+
+// Fonts
+// --------------------------------------------------
 @font-face {
   font-family: Bitter-Regular;
   src: url("../assets/fonts/Bitter-Regular.ttf");
@@ -29,6 +32,9 @@ button, h1, h2, h3, h4, h5, h6, ion-title {
   font-weight: bold;
 }
 
+
+// Navigation
+// --------------------------------------------------
 ion-title {
   .toolbar-title {
     padding-left: 40px;
@@ -58,8 +64,6 @@ ion-title {
   }
 }
 
-
-
 ion-navbar {
   .toolbar {
     min-height: 50px;
@@ -67,6 +71,7 @@ ion-navbar {
 
   .side {
     padding: 0;
+    content:url("https://dao-api.othnet.ga/uploads/icons/daicon.svg")
   }
 
   .red, .toolbar-background {
@@ -88,6 +93,8 @@ ion-navbar {
   }
 }
 
+// Item divider class
+// --------------------------------------------------
 .thin {
   min-height: 1px;
   max-height: 2px;

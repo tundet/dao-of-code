@@ -45,6 +45,9 @@ export class Page1 {
     this.resetJson(this.signinUser);
   }
 
+  /**
+   * Creates new user and goes to sign in page
+   */
   onSignup() {
     //console.log("Signup! start");
     this.httpApi.post("users", this.newUser).subscribe(response => {
@@ -56,6 +59,9 @@ export class Page1 {
     //console.log("Signup! end");
   }
 
+  /**
+   * Signs user in and goes to home page
+   */
   onSignin() {
     //console.log("Signin! start");
     this.httpApi.post("signin/", this.signinUser).subscribe(response => {
@@ -74,6 +80,9 @@ export class Page1 {
     //console.log("Signin! end");
   }
 
+  /**
+   * Signs user out
+   */
   signout() {
     this.httpApi.logout();
     window.localStorage.removeItem(this.JWT_KEY);
@@ -95,6 +104,9 @@ export class Page1 {
     }
   }
 
+  /**
+   * Saves user login information to local storage
+   */
   setJwt(jwt: string, user: string, userId: string) {
     window.localStorage.setItem(this.JWT_KEY, jwt);
     window.localStorage.setItem(this.JWT_USER, user);

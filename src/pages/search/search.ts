@@ -38,7 +38,10 @@ export class SearchPage {
     console.log('ionViewDidLoad SearchPage');
   }
 
-
+  /**
+   * Get content that user wants to search for
+   * @param event
+   */
   getContent(event) {
     this.contentList = [];
     console.log(this.tag);
@@ -58,6 +61,12 @@ export class SearchPage {
     }
   }
 
+  /**
+   * Language icon is tapped, redirects to posts or courses, using this.courses_posts value
+   *
+   * @param event
+   * @param value value corresponding to icons tag
+   */
   itemTapped(event, id) {
     // That's right, we're pushing to ourselves!
     this.navCtrl.push(SinglePage, {
@@ -65,6 +74,9 @@ export class SearchPage {
     });
   }
 
+  /**
+   * Changes view and root to home
+   */
   toHome() {
     this.navCtrl.setRoot(Page2);
   }
