@@ -90,7 +90,7 @@ export class Page2 {
   }
 
   /**
-   * Sets view and root to home
+   * Changes view and Root to target
    */
   toHome() {
     this.navCtrl.setRoot(Page2);

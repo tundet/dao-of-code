@@ -2,6 +2,9 @@
 
   page-page2 {
 
+    // Trending
+    // --------------------------------------------------
+
     .slider {
       height: 100%;
     }
@@ -22,6 +25,21 @@
       }
     }
 
+    ion-label {
+      h2 {
+        color: color($colors, primary);
+      }
+    }
+
+    // Title and List Header
+    // --------------------------------------------------
+
+    ion-title {
+      .toolbar-title {
+        padding-left: 0px;
+      }
+    }
+
     ion-list-header {
       justify-content: center;
       text-align: center;
@@ -35,10 +53,15 @@
       }
     }
 
+    // Column
+    // --------------------------------------------------
+
     ion-col {
       ion-thumbnail {
         img {
           margin: auto;
+          width: 100px;
+          height: 100px;
         }
       }
       h2 {
@@ -57,6 +80,9 @@
         margin: 10px;
       }
     }
+
+    // Segment
+    // --------------------------------------------------
 
     ion-segment-button {
       max-width: 150px;
@@ -102,27 +128,6 @@
     .segment-button.segment-activated {
       color: color($colors, light);
       background-color: color($colors, primary);
-    }
-  }
-
-  ion-col {
-    ion-thumbnail {
-      img {
-        width: 100px;
-        height: 100px;
-      }
-    }
-  }
-
-  ion-title {
-    .toolbar-title {
-      padding-left: 0px;
-    }
-  }
-
-  ion-label {
-    h2 {
-      color: color($colors, primary);
     }
   }
 }
