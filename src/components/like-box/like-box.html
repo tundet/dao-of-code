@@ -1,26 +1,33 @@
 <ion-grid>
 
   <ion-row>
-    <ion-col width-25><p><ion-icon name="happy"></ion-icon>{{ likescount }} Likes</p></ion-col>
+    <ion-col width-25>
+      <p>
+        <ion-icon name="happy"></ion-icon>
+        {{ likescount }} Likes
+      </p>
+    </ion-col>
     <ion-col width-25 *ngIf="!mediumHasBeenLiked">
-      <button ion-button full color="like" (click)="like()">
+      <button ion-button color="like" (click)="like()">
         <ion-icon name="thumbs-up"></ion-icon>
       </button>
     </ion-col>
 
     <ion-col width-25 *ngIf="mediumHasBeenLiked || mediumHasBeenDisliked">
-      <button ion-button full color="dislike" (click)="removeLike()">
-        <ion-icon name="remove-circle"></ion-icon>
-      </button>
+        <button ion-button color="dislike" (click)="removeLike()">
+          <ion-icon name="remove-circle"></ion-icon>
+        </button>
     </ion-col>
 
     <ion-col width-25 *ngIf="!mediumHasBeenDisliked">
-      <button ion-button full color="lightbrown" (click)="dislike()">
+      <button ion-button color="lightbrown" (click)="dislike()">
         <ion-icon name="thumbs-down"></ion-icon>
       </button>
     </ion-col>
     <ion-col width-25>
-      <p class="text-right">Dislikes {{ dislikescount }} <ion-icon name="sad"></ion-icon></p>
+      <p class="text-right">Dislikes {{ dislikescount }}
+        <ion-icon name="sad"></ion-icon>
+      </p>
     </ion-col>
   </ion-row>
 
