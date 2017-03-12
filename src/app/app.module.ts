@@ -15,7 +15,8 @@ import { Safe } from "../pipes/safe";
 import { Language } from "../pipes/language"
 import { ProfilePage } from "../pages/profile/profile";
 import { FavoriteBoxComponent } from "../components/favorite-box/favorite-box";
-import {SearchPage} from "../pages/search/search";
+import { SearchPage } from "../pages/search/search";
+import { AboutPage } from "../pages/about/about";
 
 
 @NgModule({
@@ -30,6 +31,7 @@ import {SearchPage} from "../pages/search/search";
     SearchPage,
     LogoutPage,
     ProfilePage,
+    AboutPage,
     GetUsername,
     LikeBoxComponent,
     FavoriteBoxComponent,
@@ -50,7 +52,8 @@ import {SearchPage} from "../pages/search/search";
     UploadPage,
     SearchPage,
     LogoutPage,
-    ProfilePage
+    ProfilePage,
+    AboutPage
   ],
   providers: [
     {provide: ErrorHandler, useClass: IonicErrorHandler},

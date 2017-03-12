@@ -53,7 +53,12 @@ ion-title {
     }
   }
 
+  ion-footer {
+     background: color($colors, peach);
+  }
 }
+
+
 
 ion-navbar {
   .toolbar {

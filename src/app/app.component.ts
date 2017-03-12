@@ -7,6 +7,7 @@ import { UploadPage } from "../pages/upload/upload";
 import { LogoutPage } from "../pages/logout/logout";
 import { ProfilePage } from "../pages/profile/profile";
 import {SearchPage} from "../pages/search/search";
+import {AboutPage} from "../pages/about/about";
 
 @Component({
   templateUrl: 'app.html'
@@ -23,7 +24,6 @@ export class MyApp {
 
     // used for an example of ngFor and navigation
     this.pages = [
-      { icon: 'log-in', title: 'Login', component: Page1 },
       { icon: 'home', title: 'Home', component: Page2 },
       { icon: 'contact', title: 'Profile', component: ProfilePage },
       { icon: 'share-alt', title: 'Upload', component: UploadPage },
@@ -48,4 +48,7 @@ export class MyApp {
     this.nav.setRoot(page.component);
   }
 
+  showHelp() {
+    this.nav.setRoot(AboutPage);
+  }
 }
