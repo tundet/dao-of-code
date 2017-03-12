@@ -167,7 +167,7 @@
         </ion-item>
         <ion-item text-wrap *ngFor="let comnt of comments">
           <h3>{{ comnt.comment}}</h3>
-          <p>{{ comnt.user_id }}</p>
+          <p>By: {{ commentUsers }}</p>
           <p>{{ comnt.created_at}}</p>
           <ion-icon *ngIf="userid == comnt.user_id" name="close" item-right (click)="deleteComment(comnt.id)"></ion-icon>
         </ion-item>

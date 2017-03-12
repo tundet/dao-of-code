@@ -26,6 +26,7 @@ export class SinglePage {
   };
   private posts = [];
   private postUsers = [];
+  private commentUsers = [];
   private mediaInfo;
   private groupInfo;
   private textMediaContent;
@@ -76,7 +77,13 @@ export class SinglePage {
     this.httpApi.get(`media/${id}/comments`).subscribe(response => {
       this.comments = response;
       console.log(this.comments);
+      this.httpApi.getUserNames(this.comments).subscribe(response2 => {
+        this.commentUsers = response2;
+      });
     });
+
+    /*Jos laitan ton yläpuolel olevan kohan tilalle getComments(id); niin toi refresh valittaa jostain lengthist*/
+
     this.refresh();
   }
 
@@ -97,7 +104,6 @@ export class SinglePage {
             }
           });
         }
-
         if (refresher) {
           refresher.complete();
         }
@@ -119,8 +125,13 @@ export class SinglePage {
 
   getComments(id) {
     this.httpApi.get((`media/${id}/comments`)).subscribe(response => {
-      this.comments = response;
-      this.comments.reverse();
+        this.comments = response;
+        this.comments.reverse();
+        console.log(this.comments.user_id);
+      }
+    );
+    this.httpApi.getUserNames(this.comments).subscribe(response2 => {
+      this.commentUsers = response2;
     });
   }
 
@@ -215,7 +226,6 @@ export class SinglePage {
       console.log(response);
       this.getComments(this.mediaInfo.id);
     });
-    console.log(this.comments);
     this.txtcomment = "";
   }
 
