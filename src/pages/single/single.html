@@ -165,9 +165,9 @@
           ></ion-input>
           <button ion-button round item-right (click)="comment($event)">Send</button>
         </ion-item>
-        <ion-item text-wrap *ngFor="let comnt of comments">
+        <ion-item text-wrap *ngFor="let comnt of comments; let i = index">
           <h3>{{ comnt.comment}}</h3>
-          <p>By: {{ commentUsers }}</p>
+          <p>By: {{ commentUsers[i] }}</p>
           <p>{{ comnt.created_at}}</p>
           <ion-icon *ngIf="userid == comnt.user_id" name="close" item-right (click)="deleteComment(comnt.id)"></ion-icon>
         </ion-item>
