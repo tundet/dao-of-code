@@ -10,10 +10,8 @@ import {Page2} from "../page2/page2";
 })
 export class Page1 {
 
-  loggedinMode: boolean = false;
+  showMode = "signin";
   newUserHasBeenMade: boolean = false;
-  signInMode: boolean = true;
-  linkText: string = 'Don\'t have an account?';
 
   JWT_KEY: string = 'dao_token';
   JWT_USER: string = 'dao_user';
@@ -41,24 +39,10 @@ export class Page1 {
     }
   }
 
-  private resetAllJsons() {
+  resetAllJsons() {
     this.resetJson(this.newUser);
     this.resetJson(this.loggedinUser);
     this.resetJson(this.signinUser);
-  }
-
-  changeSignupMode() {
-    if (this.signInMode === true) {
-      this.signInMode = false;
-      this.newUserHasBeenMade = false;
-      this.linkText = 'Already have an account?';
-      this.resetAllJsons();
-    } else {
-      this.signInMode = true;
-      this.newUserHasBeenMade = false;
-      this.linkText = 'Don\'t have an account?';
-      this.resetAllJsons();
-    }
   }
 
   onSignup() {
@@ -66,7 +50,8 @@ export class Page1 {
     this.httpApi.post("users", this.newUser).subscribe(response => {
       console.log(response);
       this.newUserHasBeenMade = true;
-      this.signInMode = true;
+      this.signinUser.username = this.newUser.username;
+      this.showMode = 'signin';
     });
     //console.log("Signup! end");
   }
@@ -83,7 +68,6 @@ export class Page1 {
       this.setJwt(response.api_token, this.signinUser.username, response.id);
       this.loggedinUser.username = this.signinUser.username;
       this.loggedinUser.token = response.api_token;
-      this.loggedinMode = true;
       this.resetJson(this.signinUser);
       this.navCtrl.setRoot(Page2);
     });
@@ -97,7 +81,6 @@ export class Page1 {
     window.localStorage.removeItem(this.JWT_USER_ID);
     this.httpApi.headers.delete('x-access-token');
     this.resetAllJsons();
-    this.loggedinMode = false;
     //console.log(this.httpApi.headers.toJSON());
     //console.log("Signout end!");
   }
@@ -108,9 +91,6 @@ export class Page1 {
     const userId = window.localStorage.getItem(this.JWT_USER_ID);
     if (token) {
       this.setJwt(token, userN, userId);
-      this.loggedinUser.username = userN;
-      this.loggedinUser.token = token;
-      this.loggedinMode = true;
       this.navCtrl.setRoot(Page2);
     }
   }

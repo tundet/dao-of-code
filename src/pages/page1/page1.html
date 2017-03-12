@@ -6,15 +6,20 @@
     <img class="side" src="http://users.metropolia.fi/~tundet/web/images/daicon.svg" alt="DAO OF CODE">
     </ion-buttons>
   </ion-navbar>
+  <ion-toolbar>
+  <ion-segment [(ngModel)]="showMode" (click)="resetAllJsons()">
+    <ion-segment-button value="signin">Signin</ion-segment-button>
+    <ion-segment-button value="signup">Signup</ion-segment-button>
+  </ion-segment>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
-  <div *ngIf="!loggedinMode">
-    <div *ngIf="newUserHasBeenMade">
-      <h3>New user has been made!</h3>
-      <p>Username: {{ newUser.username }}, Email: {{ newUser.email }}</p>
-    </div>
-    <ion-list *ngIf="signInMode">
+    <ion-list *ngIf="newUserHasBeenMade">
+      <ion-list-header>New user has been made!</ion-list-header>
+      <ion-item>Username: {{ newUser.username }}, Email: {{ newUser.email }}</ion-item>
+    </ion-list>
+    <ion-list *ngIf="showMode == 'signin'">
       <ion-item>
         <ion-label color="primary" stacked>
           Username:
@@ -32,8 +37,12 @@
           [(ngModel)]="signinUser.password"
         ></ion-input>
       </ion-item>
+      <ion-item>
+        <button ion-button block (click)="onSignin()">Signin</button>
+      </ion-item>
     </ion-list>
-    <ion-list *ngIf="!signInMode">
+
+    <ion-list *ngIf="showMode == 'signup'">
       <ion-item>
         <ion-label color="primary" stacked>
           Username:
@@ -60,17 +69,8 @@
           [(ngModel)]="newUser.email"
         ></ion-input>
       </ion-item>
+      <ion-item>
+        <button ion-button block (click)="onSignup()">Signup</button>
+      </ion-item>
     </ion-list>
-    <button *ngIf="signInMode" ion-button block (click)="onSignin()">Signin</button>
-    <button *ngIf="!signInMode" ion-button block (click)="onSignup()">Signup</button>
-    <button ion-button small full outline (click)="changeSignupMode()" class="mode-change-link">
-      {{ linkText }}
-    </button>
-  </div>
-  <div *ngIf="loggedinMode">
-    Username: {{ loggedinUser.username }}, Token: {{ loggedinUser.token }}<br>
-    <a (click)="signout()" class="mode-change-link">
-      Signout
-    </a>
-  </div>
 </ion-content>
