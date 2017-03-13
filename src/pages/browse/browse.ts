@@ -55,15 +55,22 @@ export class BrowsePage {
   /**
    * Get featured content
    */
+
   refresh(refresher = null) {
     this.featured = [];
     this.featuredUsers = [];
-    this.httpApi.get(`users/1/favorites/` + this.tag).subscribe(response => {
-        for (let medium of response) {
+    this.httpApi.get(`users/1/favorites/` + this.tag).subscribe(resp => {
+        let mediums = [];
+        for (let medium of resp) {
+          if (medium.medium_id) {
+            mediums.push(medium);
+          }
+        }
+        for (let medium of mediums) {
           this.httpApi.get(`media/` + medium.medium_id).subscribe(response2 => {
             this.featured.push(response2);
             console.log(this.featured);
-            if (response[response.length - 1] == medium) {
+            if (this.featured.length == mediums.length) {
               this.httpApi.getUserNames(this.featured).subscribe(response3 => {
                 this.featuredUsers = response3;
                 console.log(this.featuredUsers);
