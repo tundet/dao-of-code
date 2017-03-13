@@ -1,15 +1,14 @@
 <ion-header>
   <ion-navbar>
-    <ion-title *ngIf="signInMode">Signin</ion-title>
-    <ion-title *ngIf="!signInMode">Signup</ion-title>
+    <ion-title>Welcome!</ion-title>
     <ion-buttons class="light" end>
       <img class="side" alt="DAO OF CODE">
     </ion-buttons>
   </ion-navbar>
   <ion-toolbar>
   <ion-segment [(ngModel)]="showMode" (click)="resetAllJsons()">
-    <ion-segment-button value="signin">Signin</ion-segment-button>
-    <ion-segment-button value="signup">Signup</ion-segment-button>
+    <ion-segment-button value="signin">Sign in</ion-segment-button>
+    <ion-segment-button value="signup">Sign up</ion-segment-button>
   </ion-segment>
   </ion-toolbar>
 </ion-header>
@@ -38,7 +37,7 @@
         ></ion-input>
       </ion-item>
       <ion-item>
-        <button ion-button block round (click)="onSignin()">Signin</button>
+        <button ion-button block round (click)="onSignin()">Sign in</button>
       </ion-item>
     </ion-list>
 
@@ -70,7 +69,7 @@
         ></ion-input>
       </ion-item>
       <ion-item>
-        <button ion-button block round (click)="onSignup()">Signup</button>
+        <button ion-button block round (click)="onSignup()">Sign up</button>
       </ion-item>
     </ion-list>
 </ion-content>
