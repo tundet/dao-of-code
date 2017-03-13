@@ -42,18 +42,24 @@ export class Page2 {
   refresh(refresher = null) {
     this.featured = [];
     this.featuredUsers = [];
-    this.httpApi.get(`users/1/favorites`).subscribe(response => {
-        for (let medium of response) {
+    this.httpApi.get(`users/1/favorites`).subscribe(resp => {
+        let mediums = [];
+        for (let medium of resp) {
+          if (medium.medium_id) {
+            mediums.push(medium);
+          }
+        }
+        for (let medium of mediums) {
           this.httpApi.get(`media/` + medium.medium_id).subscribe(response2 => {
             this.featured.push(response2);
-            if (response[response.length - 1] == medium) {
+            if (this.featured.length == mediums.length) {
               this.httpApi.getUserNames(this.featured).subscribe(response3 => {
                 this.featuredUsers = response3;
                 console.log(this.featuredUsers);
               });
             }
           });
-        }
+        };
 
         if (refresher) {
           refresher.complete();
