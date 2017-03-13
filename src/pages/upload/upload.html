@@ -26,7 +26,6 @@
   </ion-segment>
 </ion-header>
 <ion-content padding>
-  <form>
     <ion-list [ngSwitch]="uploadType">
       <ion-item *ngSwitchCase="'file'">
         <input
@@ -65,7 +64,6 @@
         <ion-label color="primary" stacked>Youtube video link</ion-label>
         <ion-input
           type="text"
-          name="formyoutubeLink"
           (change)="youtubeLinkChange()"
           [(ngModel)]="formyoutubeLink"
         ></ion-input>
@@ -74,7 +72,6 @@
         <ion-label color="primary" stacked>Minimum 4 letters, maximum 50 letters</ion-label>
         <ion-input
           type="text"
-          name="formtitle"
           [(ngModel)]="formtitle"
           placeholder="title"
           pattern=".{4,50}"
@@ -84,7 +81,6 @@
       <ion-item>
         <ion-label color="primary" stacked>Description</ion-label>
         <ion-textarea
-          name="formdescription"
           [(ngModel)]="formdescription"
           required
         ></ion-textarea>
@@ -92,7 +88,6 @@
       <ion-item>
         <ion-label color="primary">Language</ion-label>
         <ion-select
-          name="formlangselect"
           [(ngModel)]="formlang"
           (ionChange)="formLangChange()"
           required
@@ -101,30 +96,35 @@
         </ion-select>
       </ion-item>
       <ion-item>
-        <ion-label color="primary">New Course</ion-label>
+        <ion-label color="primary">Single Post</ion-label>
         <ion-checkbox
-          name="formnewgroupcb"
-          [(ngModel)]="groupNew"
-          (click)="newGroupChange($event)"
+          [(ngModel)]="groupSingle"
+          (click)="singleGroupChange()"
         ></ion-checkbox>
       </ion-item>
       <ion-item>
-        <ion-label color="primary" stacked>Optional, minimum 4 letters, maximum 50 letters</ion-label>
+        <ion-label color="primary">New Course</ion-label>
+        <ion-checkbox
+          [(ngModel)]="groupNew"
+          (click)="newGroupChange()"
+        ></ion-checkbox>
+      </ion-item>
+      <ion-item>
+        <ion-label color="primary" stacked>Minimum 4 letters, maximum 50 letters</ion-label>
         <ion-input
           type="text"
-          name="newgroupname"
           [(ngModel)]="formnewgroupname"
           [disabled]="!groupNew"
           placeholder="New group name"
+          required
           pattern=".{4,50}"
         ></ion-input>
       </ion-item>
       <ion-item *ngIf="formOldGroupsInSelectedTag[0]">
         <ion-label color="primary">Old Course</ion-label>
         <ion-checkbox
-          name="formoldgroupcb"
           [(ngModel)]="groupOld"
-          (click)="oldGroupChange($event)"
+          (click)="oldGroupChange()"
         ></ion-checkbox>
       </ion-item>
       <ion-item *ngIf="formOldGroupsInSelectedTag[0]">
@@ -143,5 +143,4 @@
       </ion-item>
     </ion-list>
     <button ion-button block (click)="submitNewMedia()">Upload</button>
-  </form>
 </ion-content>

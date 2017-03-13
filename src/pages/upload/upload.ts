@@ -3,6 +3,8 @@ import {NavController, NavParams} from 'ionic-angular';
 import {HttpApi} from "../../providers/http-api";
 import {Page2} from "../page2/page2";
 import {global} from "../../app/global";
+import {GroupPage} from "../group/group";
+import {SinglePage} from "../single/single";
 
 /*
  Generated class for the Upload page.
@@ -19,7 +21,8 @@ export class UploadPage {
   private JWT_USER: string = 'dao_user';
 
   private uploadType: string = 'file';
-  private groupNew: boolean = true;
+  private groupSingle: boolean = true;
+  private groupNew: boolean = false;
   private groupOld: boolean = false;
   private oldGroups = [];
   private formOldGroupsInSelectedTag: any = [];
@@ -57,15 +60,40 @@ export class UploadPage {
   /**
    * Checkbox clicked
    */
+  singleGroupChange() {
+    if (this.groupSingle) {
+      this.groupOld = false;
+      this.groupNew = false;
+    } else {
+      this.groupNew = true;
+      this.groupOld = false;
+    }
+  }
+
+  /**
+   * Checkbox clicked
+   */
   newGroupChange() {
-    this.groupOld = !this.groupNew;
+    if (this.groupNew) {
+      this.groupOld = false;
+      this.groupSingle = false;
+    } else {
+      this.groupSingle = true;
+      this.groupOld = false;
+    }
   }
 
   /**
    * Checkbox clicked
    */
   oldGroupChange() {
-    this.groupNew = !this.groupOld;
+    if (this.groupOld) {
+      this.groupNew = false;
+      this.groupSingle = false;
+    } else {
+      this.groupSingle = true;
+      this.groupNew = false;
+    }
   }
 
   /**
@@ -128,6 +156,8 @@ export class UploadPage {
 
   /**
    * When upload button is pressed collects form data and sends it to back end
+   *
+   * Todo: functionalize upload part like in single media edit
    */
   submitNewMedia() {
     let formData = new FormData();
@@ -147,7 +177,14 @@ export class UploadPage {
     if (this.formlang) {
       formData.append("tag", this.formlang);
     }
-    if (this.groupNew && this.formnewgroupname) {
+    if (this.groupSingle) {
+      this.httpApi.postUpload(formData).subscribe(response => {
+        console.log(response);
+        if (response.message.startsWith("Medium") && response.message.endsWith("has been created.")) {
+          this.navCtrl.setRoot(SinglePage, {id: response.id});
+        }
+      });
+    } else if (this.groupNew && this.formnewgroupname) {
       if (this.formnewgroupname.trim().length >= 4) {
         // make new group and set id and tag in data
         let newGroupFormData = {};
@@ -157,10 +194,10 @@ export class UploadPage {
         this.httpApi.makeGroup(newGroupFormData).subscribe(response => {
           console.log(response);
           formData.append("group_id", response.id);
-          this.httpApi.postUpload(formData).subscribe(response => {
-            console.log(response);
-            if (response.message.startsWith("Medium") && response.message.endsWith("has been created.")) {
-              this.navCtrl.setRoot(Page2);
+          this.httpApi.postUpload(formData).subscribe(response2 => {
+            console.log(response2);
+            if (response2.message.startsWith("Medium") && response2.message.endsWith("has been created.")) {
+              this.navCtrl.setRoot(GroupPage, {id: response.id});
             }
           });
         });
@@ -170,14 +207,7 @@ export class UploadPage {
       this.httpApi.postUpload(formData).subscribe(response => {
         console.log(response);
         if (response.message.startsWith("Medium") && response.message.endsWith("has been created.")) {
-          this.navCtrl.setRoot(Page2);
-        }
-      });
-    } else {
-      this.httpApi.postUpload(formData).subscribe(response => {
-        console.log(response);
-        if (response.message.startsWith("Medium") && response.message.endsWith("has been created.")) {
-          this.navCtrl.setRoot(Page2);
+          this.navCtrl.setRoot(GroupPage, {id: this.oldGroupsSelectedId});
         }
       });
     }
