@@ -24,12 +24,11 @@
 <ion-content padding [ngSwitch]="edit">
   <div *ngSwitchCase="false">
     <ion-card *ngIf="mediaInfo">
+      <ion-card-content>
       <ion-item>
-        <h2 *ngIf="groupInfo" color="primary" (click)="loadGroup(groupInfo.id)">{{ groupInfo.name }}</h2>
+        <h1 *ngIf="groupInfo" color="primary" (click)="loadGroup(groupInfo.id)">{{ groupInfo.name }}</h1>
         <h2 ion-text item-right color="secondary">{{ username }}</h2></ion-item>
-        <ion-item><h2>{{ mediaInfo.title }}</h2><span ion-text item-right
-                                                      color="primary">{{mediaInfo.tag | language}}</span></ion-item>
-
+      </ion-card-content>
 
       <ion-card-content>
         <img *ngIf="mediaInfo.media_type == 'image'" [src]="api_url + mediaInfo.file_name" [alt]="mediaInfo.title"/>
@@ -55,7 +54,10 @@
       <ion-card-content *ngIf="mediaInfo.media_type == 'text'">
         <a ion-button [href]="api_url + mediaInfo.file_name" [target]="_blank">Download</a>
       </ion-card-content>
-      <ion-card-content><p>{{ mediaInfo.description }}</p></ion-card-content>
+      <ion-card-content>
+      <ion-item><h1>{{ mediaInfo.title }}</h1><span ion-text item-right
+                                                    color="primary">{{mediaInfo.tag | language}}</span></ion-item>
+      <p>{{ mediaInfo.description }}</p></ion-card-content>
       <like-box></like-box>
       <favorite-box></favorite-box>
     </ion-card>
