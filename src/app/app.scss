@@ -61,6 +61,14 @@ ion-title {
       background-color: color($colors, primary);
       color: color($colors, light);
     }
+    .help{
+      color: color($colors, light);
+      background-color: transparent;
+      text-shadow: 1px 1px color($colors, primary);
+    }
+    ion-label{
+      padding-top: 5px;
+    }
   }
 
   ion-footer {
