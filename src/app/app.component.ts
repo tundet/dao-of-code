@@ -28,7 +28,7 @@ export class MyApp {
       { icon: 'contact', title: 'Profile', component: ProfilePage },
       { icon: 'share-alt', title: 'Upload', component: UploadPage },
       { icon: 'search', title: 'Search', component: SearchPage },
-      { icon: 'log-out', title: 'Logout', component: LogoutPage }
+      { icon: 'log-out', title: 'Log out', component: LogoutPage }
     ];
 
   }
