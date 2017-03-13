@@ -61,7 +61,6 @@ export class Page1 {
       return;
     }
 
-    //console.log("Signup! start");
     this.httpApi.post("users", this.newUser).subscribe(response => {
       console.log(response);
       this.newUserHasBeenMade = true;
@@ -83,7 +82,6 @@ export class Page1 {
       });
       toast.present();
     });
-    //console.log("Signup! end");
   }
 
   /**
@@ -102,7 +100,6 @@ export class Page1 {
       return;
     }
 
-    //console.log("Signin! start");
     this.httpApi.post("signin/", this.signinUser).subscribe(response => {
       console.log(response);
 
@@ -137,8 +134,6 @@ export class Page1 {
     window.localStorage.removeItem(this.JWT_USER_ID);
     this.httpApi.headers.delete('x-access-token');
     this.resetAllJsons();
-    //console.log(this.httpApi.headers.toJSON());
-    //console.log("Signout end!");
   }
 
   constructor(private httpApi: HttpApi, public navCtrl: NavController, private toastCtrl: ToastController) {
