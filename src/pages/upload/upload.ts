@@ -35,6 +35,14 @@ export class UploadPage {
 
   private languages = global.languages;
 
+  /**
+   * Constructor gets information for initial fill of the page.
+   * Gets all users pre made groups.
+   *
+   * @param navCtrl
+   * @param navParams
+   * @param httpApi
+   */
   constructor(public navCtrl: NavController, public navParams: NavParams, private httpApi: HttpApi) {
     let userN = window.localStorage.getItem(this.JWT_USER);
     this.httpApi.get(`users/${userN}/groups`).subscribe(response => {
@@ -50,6 +58,11 @@ export class UploadPage {
     console.log('ionViewDidLoad UploadPage');
   }
 
+  /**
+   * Checkbox clicked
+   *
+   * @param event
+   */
   newGroupChange(event) {
     if (this.groupNew) {
       this.groupOld = false;
@@ -58,6 +71,11 @@ export class UploadPage {
     }
   }
 
+  /**
+   * Checkbox clicked
+   *
+   * @param event
+   */
   oldGroupChange(event) {
     if (this.groupOld) {
       this.groupNew = false;
@@ -66,6 +84,9 @@ export class UploadPage {
     }
   }
 
+  /**
+   * Chosen language is changed, checks if pre made groups exist.
+   */
   formLangChange() {
     this.formOldGroupsInSelectedTag = [];
     for (let group of this.oldGroups) {
@@ -76,6 +97,11 @@ export class UploadPage {
     }
   }
 
+  /**
+   * When file is chosen, checks the type of item.
+   *
+   * @param fileElement
+   */
   fileChange(fileElement: any) {
     if (fileElement.target.files && fileElement.target.files[0]) {
       this.formFile = fileElement.target.files[0];
@@ -94,6 +120,9 @@ export class UploadPage {
     }
   }
 
+  /**
+   * When link is give, parses given normal youtube link to embed video link
+   */
   youtubeLinkChange() {
     console.log("modifying....");
     let orginal_url = this.formyoutubeLink;
@@ -113,6 +142,9 @@ export class UploadPage {
     this.formyoutubeLink = orginal_url;
   }
 
+  /**
+   * When upload button is pressed collects form data and sends it to back end
+   */
   submitNewMedia() {
     let formData = new FormData();
     if (this.uploadType == "file") {
@@ -167,6 +199,9 @@ export class UploadPage {
     }
   }
 
+  /**
+   * Gets user view to home page
+   */
   toHome() {
     this.navCtrl.setRoot(Page2);
   }
