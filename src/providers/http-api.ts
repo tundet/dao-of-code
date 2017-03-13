@@ -54,7 +54,7 @@ export class HttpApi {
     } else {
       let error = new Error(response.statusText);
       error['response'] = response;
-      console.error("httpApi throws error: " + error);
+      console.error("httpApi throws error: " + error + ", handling example: response => {...}, err => { CODE HERE! }");
       throw error;
     }
   }
