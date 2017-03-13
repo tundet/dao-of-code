@@ -116,7 +116,6 @@ export class Page1 {
       this.resetJson(this.signinUser);
       this.navCtrl.setRoot(Page2);
     }, error =>{
-      console.log("ei saatana" + error);
       let toast = this.toastCtrl.create({
         message: 'Username or password invalid',
         duration: 3000,
@@ -146,9 +145,25 @@ export class Page1 {
     const token = window.localStorage.getItem(this.JWT_KEY);
     const userN = window.localStorage.getItem(this.JWT_USER);
     const userId = window.localStorage.getItem(this.JWT_USER_ID);
-    if (token) {
-      this.setJwt(token, userN, userId);
-      this.navCtrl.setRoot(Page2);
+
+    if (token && userN && userId) {
+      this.httpApi.post("validate", {user_id: userId, username: userN, api_token: token}).subscribe(response => {
+        if (response.authenticated) {
+          if (token) {
+            this.setJwt(token, userN, userId);
+            this.navCtrl.setRoot(Page2);
+          }
+        } else {
+          let toast = this.toastCtrl.create({
+            message: 'Credentials expired. Please sign in again.',
+            duration: 5000,
+            position: 'top'
+          });
+          toast.present();
+
+          return;
+        }
+      });
     }
   }
 
