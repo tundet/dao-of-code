@@ -63,7 +63,7 @@ export class ProfilePage {
                 this.favoriteMedia.push(response);
               });
             } else if (response[favorite].hasOwnProperty('group_id') && response[favorite]['group_id'] !== null) {
-              this.httpApi.get(`media/${response[favorite]['group_id']}`).subscribe(response => {
+              this.httpApi.get(`groups/${response[favorite]['group_id']}`).subscribe(response => {
                 this.favoriteGroups.push(response);
               });
             }
