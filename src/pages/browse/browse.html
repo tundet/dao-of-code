@@ -54,7 +54,7 @@
       </ion-slide>
     </ion-slides>
   </div>
-  <ion-list *ngIf="contentList">
+  <ion-list *ngIf="contentList" padding>
     <ion-item *ngFor="let content of contentList" >
       <ion-thumbnail *ngIf="content.name" item-left (click)="itemTapped($event, content.id)">
         <img [alt]="content.name" [src]='api_url + "thumbnails/text.jpg"'/>

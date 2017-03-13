@@ -64,7 +64,10 @@ ion-title {
   }
 
   ion-footer {
-     background: color($colors, peach);
+      .item {
+        background-color: color($colors, primary);
+        color: color($colors, light);
+      }
   }
 }
 

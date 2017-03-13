@@ -12,14 +12,13 @@
         {{p.title}}
       </button>
     </ion-list>
+    <ion-footer>
+      <button menuClose ion-item icon-left (click)="showHelp()">
+        <ion-icon item-left name="help"></ion-icon>
+        Help
+      </button>
+    </ion-footer>
   </ion-content>
-
-  <ion-footer>
-    <button menuClose ion-item icon-left (click)="showHelp()">
-      <ion-icon item-left name="help"></ion-icon>
-      Help
-    </button>
-  </ion-footer>
 </ion-menu>
 
 <!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
