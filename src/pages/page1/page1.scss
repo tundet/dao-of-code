@@ -1,2 +1,14 @@
-page-page1 {
+.md, .ios, .wp {
+  page-page1 {
+
+  }
+
+  .roundtoast {
+    > div {
+      background-color: color($colors, secondary);
+      border-radius: 25px;
+      color: color($colors, light);
+      text-align: center;
+    }
+  }
 }

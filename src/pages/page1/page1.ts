@@ -57,7 +57,8 @@ export class Page1 {
       let toast = this.toastCtrl.create({
         message: 'User creation successful',
         duration: 3000,
-        position: 'top'
+        position: 'top',
+        cssClass: "roundtoast"
       });
       toast.present();
       this.signinUser.username = this.newUser.username;
@@ -66,7 +67,8 @@ export class Page1 {
       let toast = this.toastCtrl.create({
         message: 'User creation failed',
         duration: 3000,
-        position: 'top'
+        position: 'top',
+        cssClass: "roundtoast"
       });
       toast.present();
     });
@@ -96,7 +98,8 @@ export class Page1 {
       let toast = this.toastCtrl.create({
         message: 'Username or password invalid',
         duration: 3000,
-        position: 'top'
+        position: 'top',
+        cssClass: "roundtoast"
       });
       toast.present();
 
