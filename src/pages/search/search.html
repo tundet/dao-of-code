@@ -37,8 +37,9 @@
       <ion-select
         name="tagselect"
         [(ngModel)]="tag"
+        (ngModelChange)="updateTag()"
       >
-        <ion-option *ngFor="let lang of languages" value="{{ lang.value }}">{{ lang.name }}</ion-option>
+        <ion-option *ngFor="let lang of languages" value="{{ lang.value }}">{{ lang.name }} </ion-option>
       </ion-select>
     </ion-item>
 

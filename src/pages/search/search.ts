@@ -17,7 +17,7 @@ import {Page2} from "../page2/page2";
 })
 export class SearchPage {
 
-  private searchinput;
+  private searchinput: string = "";
   private languages = global.languages;
   private tag: string = "java";
   private title: boolean = true;
@@ -40,6 +40,7 @@ export class SearchPage {
 
   /**
    * Get content that user wants to search for
+   *
    * @param event
    */
   getContent(event) {
@@ -57,6 +58,29 @@ export class SearchPage {
       this.httpApi.searchDescription(this.searchinput, this.tag).subscribe(response => {
         this.contentList.append = response;
         console.log(response);
+      })
+    }
+  }
+
+  /**
+   * Get content that user wants to search for
+   * after changing language
+   *
+   */
+  updateTag() {
+    console.log("update tag called");
+    console.log(this.tag);
+    this.httpApi.getNewPostsByTag(this.tag, 15).subscribe(response => {
+      this.contentList = response;
+      console.log(response);
+    })
+    if (this.searchinput != "" && this.title == true) {
+      this.httpApi.searchTitle(this.searchinput, this.tag).subscribe(response => {
+        this.contentList = response;
+      })
+    } else if (this.searchinput != "" && this.description == true) {
+      this.httpApi.searchDescription(this.searchinput, this.tag).subscribe(response => {
+        this.contentList.append = response;
       })
     }
   }
