@@ -13,15 +13,12 @@ import {ProfilePage} from "../profile/profile";
 })
 export class Page2 {
   @ViewChild(Slides) slides: Slides;
-  private invisibleArrowColor = 'white';
-  selectedItem: any;
   private courses_posts = "courses";
   private featured = [];
   private featuredUsers = [];
   api_url: string = 'https://dao-api.othnet.ga/uploads/';
   private languages = global.languages;
   private shownLanguageList = [];
-  private searchbar: boolean = false;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private httpApi: HttpApi) {
     let a = [];

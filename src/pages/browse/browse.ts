@@ -22,6 +22,7 @@ export class BrowsePage {
 
   @ViewChild(Slides) slides: Slides;
   private featured = [];
+  private featuredUsers = [];
 
   private courses_posts: string = "posts";
   private tag: string = "php";
@@ -43,6 +44,8 @@ export class BrowsePage {
         console.log("Got posts by: " + this.tag + " content: " + response);
       })
     }
+
+    this.refresh();
   }
 
   ionViewDidLoad() {
@@ -54,12 +57,21 @@ export class BrowsePage {
    */
   refresh(refresher = null) {
     this.featured = [];
+    this.featuredUsers = [];
     this.httpApi.get(`users/1/favorites/` + this.tag).subscribe(response => {
         for (let medium of response) {
           this.httpApi.get(`media/` + medium.medium_id).subscribe(response2 => {
             this.featured.push(response2);
+            console.log(this.featured);
+            if (response[response.length - 1] == medium) {
+              this.httpApi.getUserNames(this.featured).subscribe(response3 => {
+                this.featuredUsers = response3;
+                console.log(this.featuredUsers);
+              });
+            }
           });
         }
+
         if (refresher) {
           refresher.complete();
         }
