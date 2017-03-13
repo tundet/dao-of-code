@@ -20,6 +20,8 @@ export class AboutPage {
   private statisticPosts;
   private statisticComments;
 
+  private lmgtfysearch = '';
+
   constructor(public navCtrl: NavController, public navParams: NavParams, private httpApi: HttpApi) {
     this.httpApi.get('users').subscribe(response => {
       this.statisticUsers = response.length;

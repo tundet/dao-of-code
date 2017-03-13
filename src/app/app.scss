@@ -18,17 +18,17 @@
 // Fonts
 // --------------------------------------------------
 @font-face {
-  font-family: Bitter-Regular;
+  font-family: Bitter-Regular ;
   src: url("../assets/fonts/Bitter-Regular.ttf");
-  font-family: Lato-Regular;
+  font-family: Lato-Regular ;
   src: url("../assets/fonts/Lato-Regular.ttf");
 }
 
 body, p {
-  font-family: Bitter-Regular !important;
+  font-family: Bitter-Regular, sans-serif !important;
 }
 button, h1, h2, h3, h4, h5, h6, ion-title {
-  font-family: Lato-Regular !important;
+  font-family: Lato-Regular, sans-serif !important;
   font-weight: bold;
 }
 
@@ -48,7 +48,7 @@ ion-title {
   }
   .toolbar-title {
     color: color($colors, light);
-    padding: 0px;
+    padding: 0;
   }
 
   .item-md{
@@ -75,7 +75,7 @@ ion-navbar {
 
   .side {
     padding: 0;
-    content:url("https://dao-api.othnet.ga/uploads/icons/daicon.svg")
+    content:url("https://dao-api.othnet.ga/uploads/icons/daicon.svg");
   }
 
   .red, .toolbar-background {
@@ -106,5 +106,5 @@ ion-navbar {
 }
 
 .item-md {
-  padding: 0px;
+  padding: 0;
 }

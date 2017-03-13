@@ -23,6 +23,13 @@
   <ion-list no-lines>
     <ion-list-header><h2>In case of problem:</h2></ion-list-header>
     <ion-item>whine-to-your-mom@dao-of-code.com</ion-item>
+    <ion-item>OR</ion-item>
+    <ion-item>
+      <ion-input [(ngModel)]="lmgtfysearch"></ion-input>
+      <a ion-button item-right icon-only [href]="'http://lmgtfy.com/?q=' + lmgtfysearch">
+        &nbsp;<ion-icon name="search"></ion-icon>&nbsp;
+      </a>
+    </ion-item>
     <ion-list-header><h2>Statistics</h2></ion-list-header>
     <ion-item>Users: {{statisticUsers}}</ion-item>
     <ion-item>Favorites: {{statisticFav}}</ion-item>
