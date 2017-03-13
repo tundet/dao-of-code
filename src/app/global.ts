@@ -4,11 +4,11 @@ export let global = {
     {"name": "C", "value": "c"},
     {"name": "C++", "value": "cpp"},
     {"name": "C#", "value": "cs"},
-    {"name": "Php", "value": "php"},
+    {"name": "PHP", "value": "php"},
     {"name": "SQL", "value": "sql"},
     {"name": "HTML", "value": "html"},
     {"name": "HTML5", "value": "html5"},
-    {"name": "Css", "value": "css"},
+    {"name": "CSS", "value": "css"},
     {"name": "JavaScript", "value": "javascript"},
     {"name": "Angular", "value": "angular"},
     {"name": "React", "value": "react"}
