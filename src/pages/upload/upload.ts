@@ -54,34 +54,18 @@ export class UploadPage {
     });
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad UploadPage');
+  /**
+   * Checkbox clicked
+   */
+  newGroupChange() {
+    this.groupOld = !this.groupNew;
   }
 
   /**
    * Checkbox clicked
-   *
-   * @param event
    */
-  newGroupChange(event) {
-    if (this.groupNew) {
-      this.groupOld = false;
-    } else {
-      this.groupOld = true;
-    }
-  }
-
-  /**
-   * Checkbox clicked
-   *
-   * @param event
-   */
-  oldGroupChange(event) {
-    if (this.groupOld) {
-      this.groupNew = false;
-    } else {
-      this.groupNew = true;
-    }
+  oldGroupChange() {
+    this.groupNew = !this.groupOld;
   }
 
   /**
