@@ -32,6 +32,7 @@ export class LikeBoxComponent {
    *
    * @param httpApi Injected HttpApi service
    * @param navParams Injected NavParams
+   * @param navCtrl Injected NavController
    */
   constructor(private httpApi: HttpApi, public navParams: NavParams, public navCtrl: NavController) {
     this.mediumHasBeenLiked = false;
