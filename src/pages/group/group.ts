@@ -41,39 +41,6 @@ export class GroupPage {
         }
       });
     })
-
-    this.refresh();
-  }
-
-  /**
-   * Get usernames by id
-   */
-  refresh(refresher = null) {
-    this.groups = [];
-    this.groupUsers = [];
-    this.httpApi.get(`users/1/groups`).subscribe(response => {
-      console.log(response);
-        for (let group of response) {
-          this.httpApi.get(`groups/` + group.id).subscribe(response2 => {
-            console.log(response2);
-            this.groups.push(response2);
-            if (response[response.length - 1] == group) {
-              this.httpApi.getUserNames(this.groups).subscribe(response3 => {
-                console.log(response3);
-                this.groupUsers = response3;
-              });
-            }
-          });
-        }
-
-        if (refresher) {
-          refresher.complete();
-        }
-      },
-      error => {
-        console.log(error);
-      }
-    );
   }
 
   /**
