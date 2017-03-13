@@ -82,8 +82,6 @@ export class LikeBoxComponent {
 
             break;
           }
-        } else {
-          // TODO: Show a toast telling the like could not be registered.
         }
       }
     });
