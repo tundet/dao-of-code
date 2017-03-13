@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import {HttpApi} from "../../providers/http-api";
+import {Page2} from "../page2/page2";
 
 /*
   Generated class for the About page.
@@ -43,6 +44,13 @@ export class AboutPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AboutPage');
+  }
+
+  /**
+   * Changes view and root to home
+   */
+  toHome() {
+    this.navCtrl.setRoot(Page2);
   }
 
 }
