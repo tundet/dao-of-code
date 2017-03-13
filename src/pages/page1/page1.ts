@@ -54,7 +54,8 @@ export class Page1 {
       let toast = this.toastCtrl.create({
         message: 'Please fill out all the fields.',
         duration: 5000,
-        position: 'top'
+        position: 'top',
+        cssClass: "blacktoast"
       });
       toast.present();
 
@@ -68,7 +69,7 @@ export class Page1 {
         message: 'User creation successful',
         duration: 3000,
         position: 'top',
-        cssClass: "roundtoast"
+        cssClass: "blacktoast"
       });
       toast.present();
       this.signinUser.username = this.newUser.username;
@@ -78,7 +79,7 @@ export class Page1 {
         message: 'User creation failed',
         duration: 3000,
         position: 'top',
-        cssClass: "roundtoast"
+        cssClass: "blacktoast"
       });
       toast.present();
     });
@@ -93,7 +94,8 @@ export class Page1 {
       let toast = this.toastCtrl.create({
         message: 'Please fill out all the fields.',
         duration: 5000,
-        position: 'top'
+        position: 'top',
+        cssClass: "blacktoast"
       });
       toast.present();
 
@@ -117,7 +119,7 @@ export class Page1 {
         message: 'Username or password invalid',
         duration: 3000,
         position: 'top',
-        cssClass: "roundtoast"
+        cssClass: "blacktoast"
       });
       toast.present();
 
@@ -152,7 +154,8 @@ export class Page1 {
           let toast = this.toastCtrl.create({
             message: 'Credentials expired. Please sign in again.',
             duration: 5000,
-            position: 'top'
+            position: 'top',
+            cssClass: "blacktoast"
           });
           toast.present();
 
