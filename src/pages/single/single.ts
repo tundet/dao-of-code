@@ -47,6 +47,13 @@ export class SinglePage {
 
   api_url: string = 'https://dao-api.othnet.ga/uploads/original/';
 
+  /**
+   * Gets page content
+   *
+   * @param navCtrl
+   * @param navParams
+   * @param httpApi
+   */
   constructor(public navCtrl: NavController, public navParams: NavParams, private httpApi: HttpApi) {
     this.userid = window.localStorage.getItem('dao_user_id');
 
@@ -81,7 +88,9 @@ export class SinglePage {
   }
 
   /**
-   * Get usernames by id
+   * Refreshed content data of page
+   *
+   * Todo: add refresh element
    */
   refresh(refresher = null) {
     this.posts = [];
@@ -106,6 +115,7 @@ export class SinglePage {
       }
     );
   }
+
   /**
    * Update group information of post
    *
@@ -161,27 +171,30 @@ export class SinglePage {
     }
   }
 
+  /**
+   * Checkbox is clicked
+   *
+   * @param event
+   */
   newGroupChange(event) {
     if (this.userGroupsInSelectedTag[0]) {
-      if (this.groupNew) {
-        this.groupOld = false;
-      } else {
-        this.groupOld = true;
-      }
+      this.groupOld = !this.groupNew
     } else {
       console.log(event.target.value);
       this.groupNew = true;
     }
   }
 
-  oldGroupChange(event) {
-    if (this.groupOld) {
-      this.groupNew = false;
-    } else {
-      this.groupNew = true;
-    }
+  /**
+   * Checkbox is clicked
+   */
+  oldGroupChange() {
+    this.groupNew = !this.groupOld;
   }
 
+  /**
+   * Checks if group data is changed and redirects to next step saveMediaChages()
+   */
   saveClick() {
     let data = {};
     if (this.groupNew && this.newGroupName) {
@@ -206,6 +219,10 @@ export class SinglePage {
     }
   }
 
+  /**
+   * Step 2 function to saveClick()
+   * @param data
+   */
   saveMediaChanges(data) {
     if (this.mediaInfo.title != this.editMedia.title) {
       data["title"] = this.editMedia.title;
@@ -254,7 +271,10 @@ export class SinglePage {
     });
   }
 
-
+  /**
+   * Course/ group link clicked
+   * @param id Group id
+   */
   loadGroup(id) {
     // That's right, we're pushing to ourselves!
     this.navCtrl.push(GroupPage, {
@@ -262,18 +282,16 @@ export class SinglePage {
     });
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad SinglePage');
-
-  }
-
   /**
-   * Changes view and root to target
+   * Changes user view and root to Home
    */
   toHome() {
     this.navCtrl.setRoot(Page2);
   }
 
+  /**
+   * Changes user view and root to search
+   */
   toSearch() {
     this.navCtrl.setRoot(SearchPage);
   }
