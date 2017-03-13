@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import {NavController, NavParams, ViewController} from 'ionic-angular';
 import { HttpApi } from "../../providers/http-api";
 import { SinglePage } from "../single/single";
 import { GroupPage } from "../group/group";
@@ -30,7 +30,7 @@ export class ProfilePage {
    * @param navParams
    * @param httpApi
    */
-  constructor(public navCtrl: NavController, public navParams: NavParams, private httpApi: HttpApi) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private httpApi: HttpApi,viewCtrl: ViewController) {
     this.id = this.navParams.get('id') ? this.navParams.get('id') : localStorage.getItem('dao_user_id');
 
     this.httpApi.get(`users/${this.id}`).subscribe(response => {
@@ -45,7 +45,6 @@ export class ProfilePage {
     this.groups = [];
     this.favoriteMedia = [];
     this.favoriteGroups = [];
-    this.mediaAreVisible = false;
 
     this.httpApi.get(`users/${this.id}/media`).subscribe(response => {
       this.media = response;
@@ -122,7 +121,7 @@ export class ProfilePage {
    *
    * @param id of medium
    */
-  deleteMedium(id) {
+  deleteMedium(id: string) {
     this.httpApi.delete(`media/` + id).subscribe(response => {
       console.log(response);
       this.refresh();
@@ -147,7 +146,6 @@ export class ProfilePage {
    * @param id of group
    */
   deleteFavorite(id) {
-    console.log(id);
     this.httpApi.delete(`favorites/` + id).subscribe(response => {
       console.log(response);
       this.refresh()
