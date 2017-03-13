@@ -50,6 +50,17 @@ export class Page1 {
    * show toast whether
    */
   onSignup() {
+    if (!this.newUser.username || !this.newUser.password || !this.newUser.email) {
+      let toast = this.toastCtrl.create({
+        message: 'Please fill out all the fields.',
+        duration: 5000,
+        position: 'top'
+      });
+      toast.present();
+
+      return;
+    }
+
     //console.log("Signup! start");
     this.httpApi.post("users", this.newUser).subscribe(response => {
       console.log(response);
@@ -80,6 +91,17 @@ export class Page1 {
    * if authorization failed show toast
    */
   onSignin() {
+    if (!this.signinUser.username || !this.signinUser.password) {
+      let toast = this.toastCtrl.create({
+        message: 'Please fill out all the fields.',
+        duration: 5000,
+        position: 'top'
+      });
+      toast.present();
+
+      return;
+    }
+
     //console.log("Signin! start");
     this.httpApi.post("signin/", this.signinUser).subscribe(response => {
       console.log(response);
