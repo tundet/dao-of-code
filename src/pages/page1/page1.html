@@ -6,70 +6,67 @@
     </ion-buttons>
   </ion-navbar>
   <ion-toolbar>
-  <ion-segment [(ngModel)]="showMode" (click)="resetAllJsons()">
-    <ion-segment-button value="signin">Sign in</ion-segment-button>
-    <ion-segment-button value="signup">Sign up</ion-segment-button>
-  </ion-segment>
+    <ion-segment [(ngModel)]="showMode" (click)="resetAllJsons()">
+      <ion-segment-button value="signin">Sign in</ion-segment-button>
+      <ion-segment-button value="signup">Sign up</ion-segment-button>
+    </ion-segment>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
-    <ion-list *ngIf="newUserHasBeenMade">
-      <ion-list-header>New user has been made!</ion-list-header>
-      <ion-item>Username: {{ newUser.username }}, Email: {{ newUser.email }}</ion-item>
-    </ion-list>
-    <ion-list *ngIf="showMode == 'signin'">
-      <ion-item>
-        <ion-label color="primary" stacked>
-          Username:
-        </ion-label>
-        <ion-input
-          [(ngModel)]="signinUser.username"
-        ></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label color="primary" stacked>
-          Password:
-        </ion-label>
-        <ion-input
-          type="password"
-          [(ngModel)]="signinUser.password"
-        ></ion-input>
-      </ion-item>
-      <ion-item>
-        <button ion-button block round (click)="onSignin()">Sign in</button>
-      </ion-item>
-    </ion-list>
+  <ion-list-header *ngIf="newUserHasBeenMade">New user {{ newUser.username }} has been made!</ion-list-header>
+  <ion-list *ngIf="showMode == 'signin'">
+    <ion-item>
+      <ion-label color="primary" stacked>
+        Username:
+      </ion-label>
+      <ion-input
+        [(ngModel)]="signinUser.username"
+      ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" stacked>
+        Password:
+      </ion-label>
+      <ion-input
+        type="password"
+        [(ngModel)]="signinUser.password"
+      ></ion-input>
+    </ion-item>
+    <ion-item>
+      <button ion-button block round (click)="onSignin()">Sign in</button>
+    </ion-item>
+  </ion-list>
 
-    <ion-list *ngIf="showMode == 'signup'">
-      <ion-item>
-        <ion-label color="primary" stacked>
-          Username:
-        </ion-label>
-        <ion-input
-          [(ngModel)]="newUser.username"
-        ></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label color="primary" stacked>
-          Password:
-        </ion-label>
-        <ion-input
-          type="password"
-          [(ngModel)]="newUser.password"
-        ></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label color="primary" stacked>
-          Email:
-        </ion-label>
-        <ion-input
-          type="email"
-          [(ngModel)]="newUser.email"
-        ></ion-input>
-      </ion-item>
-      <ion-item>
-        <button ion-button block round (click)="onSignup()">Sign up</button>
-      </ion-item>
-    </ion-list>
+  <ion-list *ngIf="showMode == 'signup'">
+    <ion-item>
+      <ion-label color="primary" stacked>
+        Username:
+      </ion-label>
+      <ion-input
+        [(ngModel)]="newUser.username"
+      ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" stacked>
+        Password:
+      </ion-label>
+      <ion-input
+        type="password"
+        [(ngModel)]="newUser.password"
+      ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" stacked>
+        Email:
+      </ion-label>
+      <ion-input
+        type="email"
+        [(ngModel)]="newUser.email"
+      ></ion-input>
+    </ion-item>
+    <ion-item>
+      <button ion-button block round (click)="onSignup()">Sign up</button>
+    </ion-item>
+  </ion-list>
 </ion-content>

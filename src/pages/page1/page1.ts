@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 
-import {NavController} from 'ionic-angular';
+import {NavController, ToastController} from 'ionic-angular';
 import {HttpApi} from '../../providers/http-api';
 import {Page2} from "../page2/page2";
 
@@ -47,20 +47,35 @@ export class Page1 {
 
   /**
    * Creates new user and goes to sign in page
+   * show toast whether
    */
   onSignup() {
     //console.log("Signup! start");
     this.httpApi.post("users", this.newUser).subscribe(response => {
       console.log(response);
       this.newUserHasBeenMade = true;
+      let toast = this.toastCtrl.create({
+        message: 'User creation successful',
+        duration: 3000,
+        position: 'top'
+      });
+      toast.present();
       this.signinUser.username = this.newUser.username;
       this.showMode = 'signin';
+    }, error => {
+      let toast = this.toastCtrl.create({
+        message: 'User creation failed',
+        duration: 3000,
+        position: 'top'
+      });
+      toast.present();
     });
     //console.log("Signup! end");
   }
 
   /**
    * Signs user in and goes to home page
+   * if authorization failed show toast
    */
   onSignin() {
     //console.log("Signin! start");
@@ -76,8 +91,16 @@ export class Page1 {
       this.loggedinUser.token = response.api_token;
       this.resetJson(this.signinUser);
       this.navCtrl.setRoot(Page2);
+    }, error =>{
+      console.log("ei saatana" + error);
+      let toast = this.toastCtrl.create({
+        message: 'Username or password invalid',
+        duration: 3000,
+        position: 'top'
+      });
+      toast.present();
+
     });
-    //console.log("Signin! end");
   }
 
   /**
@@ -94,7 +117,7 @@ export class Page1 {
     //console.log("Signout end!");
   }
 
-  constructor(private httpApi: HttpApi, public navCtrl: NavController) {
+  constructor(private httpApi: HttpApi, public navCtrl: NavController, private toastCtrl: ToastController) {
     const token = window.localStorage.getItem(this.JWT_KEY);
     const userN = window.localStorage.getItem(this.JWT_USER);
     const userId = window.localStorage.getItem(this.JWT_USER_ID);
