@@ -39,10 +39,10 @@
         <img *ngIf="medium.media_type == 'text'" [alt]="medium.title" [src]='BASE_URL + "thumbnails/text.jpg"'/>
         <img *ngIf="medium.media_type == 'youtube'" [alt]="medium.title" [src]='BASE_URL + "thumbnails/youtube.jpg"'/>
       </ion-thumbnail>
-      <h2>{{ medium.title }}</h2>
-      <p>{{ medium.description }}</p>
+      <h2 (click)="showMedium($event, medium.id)">{{ medium.title }}</h2>
+      <p (click)="showMedium($event, medium.id)">{{ medium.description }}</p>
       <p item-right>{{ medium.tag | language }}</p>
-      <button ion-button clear item-right (click)="showMedium($event, medium.id)">View</button>
+      <ion-icon name="close" item-right (click)="deleteMedium(medium.id)"></ion-icon>
     </ion-item>
   </ion-list>
 
@@ -51,10 +51,10 @@
       <ion-thumbnail item-left (click)="showGroup($event, group.id)">
         <img [alt]="group.name" [src]='BASE_URL + "icons/" + group.tag + ".jpg"'/>
       </ion-thumbnail>
-      <h2>{{ group.name }}</h2>
-      <p>{{ group.description }}</p>
+      <h2 (click)="showGroup($event, group.id)">{{ group.name }}</h2>
+      <p (click)="showGroup($event, group.id)">{{ group.description }}</p>
       <p item-right>{{ group.tag | language }}</p>
-      <button ion-button clear item-right (click)="showGroup($event, group.id)">View</button>
+      <ion-icon name="close" item-right (click)="deleteGroup(group.id)"></ion-icon>
     </ion-item>
   </ion-list>
 
@@ -67,20 +67,20 @@
         <img *ngIf="favorite.media_type == 'text'" [alt]="favorite.title" [src]='BASE_URL + "thumbnails/text.jpg"'/>
         <img *ngIf="favorite.media_type == 'youtube'" [alt]="favorite.title" [src]='BASE_URL + "thumbnails/youtube.jpg"'/>
       </ion-thumbnail>
-      <h2>{{ favorite.title }}</h2>
-      <p>{{ favorite.description }}</p>
+      <h2 (click)="showMedium($event, favorite.id)">{{ favorite.title }}</h2>
+      <p (click)="showMedium($event, favorite.id)">{{ favorite.description }}</p>
       <p item-right>{{ favorite.tag | language }}</p>
-      <button ion-button clear item-right (click)="showMedium($event, favorite.id)">View</button>
+      <ion-icon name="close" item-right (click)="deleteFavorite(favorite.id)"></ion-icon>
     </ion-item>
 
     <ion-item *ngFor="let favorite of favoriteGroups">
       <ion-thumbnail item-left (click)="showGroup($event, favorite.id)">
         <img [alt]="favorite.name" [src]='BASE_URL + "icons/" + favorite.tag + ".jpg"'/>
       </ion-thumbnail>
-      <h2>{{ favorite.name }}</h2>
-      <p>{{ favorite.description }}</p>
+      <h2 (click)="showGroup($event, favorite.id)">{{ favorite.name }}</h2>
+      <p (click)="showGroup($event, favorite.id)">{{ favorite.description }}</p>
       <p item-right>{{ favorite.tag | language }}</p>
-      <button ion-button clear item-right (click)="showGroup($event, favorite.id)">View</button>
+      <ion-icon name="close" item-right (click)="deleteFavorite(favorite.id)"></ion-icon>
     </ion-item>
   </ion-list>
 </ion-content>

@@ -37,6 +37,16 @@ export class ProfilePage {
       this.user = response;
     });
 
+    this.refresh();
+  }
+
+  refresh(){
+    this.media = [];
+    this.groups = [];
+    this.favoriteMedia = [];
+    this.favoriteGroups = [];
+    this.mediaAreVisible = false;
+
     this.httpApi.get(`users/${this.id}/media`).subscribe(response => {
       this.media = response;
     });
@@ -104,6 +114,43 @@ export class ProfilePage {
     // That's right, we're pushing to ourselves!
     this.navCtrl.push(SinglePage, {
       id: id
+    });
+  }
+
+  /**
+   * Delete a medium
+   *
+   * @param id of medium
+   */
+  deleteMedium(id) {
+    this.httpApi.delete(`media/` + id).subscribe(response => {
+      console.log(response);
+      this.refresh();
+    });
+  }
+
+  /**
+   * Delete a group
+   *
+   * @param id of group
+   */
+  deleteGroup(id) {
+    this.httpApi.delete(`groups/` + id).subscribe(response => {
+    console.log(response);
+    this.refresh()
+  });
+  }
+
+  /**
+   * Delete a favorite
+   *
+   * @param id of group
+   */
+  deleteFavorite(id) {
+    console.log(id);
+    this.httpApi.delete(`favorites/` + id).subscribe(response => {
+      console.log(response);
+      this.refresh()
     });
   }
 
