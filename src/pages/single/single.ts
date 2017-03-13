@@ -29,7 +29,6 @@ export class SinglePage {
   private commentUsers = [];
   private mediaInfo;
   private groupInfo;
-  private textMediaContent;
   private username;
   private userid;
   private userGroups;
@@ -60,12 +59,6 @@ export class SinglePage {
         this.updateGroupInfo(this.mediaInfo.group_id);
       }
       console.log(this.mediaInfo);
-      if (this.mediaInfo.media_type == "text") {
-        this.httpApi.get(`uploads/original/${this.mediaInfo.file_name}`).subscribe(response => {
-          this.textMediaContent = response.text();
-          console.log(response.text());
-        })
-      }
       this.httpApi.getUserName(this.mediaInfo.user_id).subscribe(response => {
         this.username = response.username;
         if (this.username == window.localStorage.getItem('dao_user')) {

@@ -47,8 +47,10 @@
                 [src]="mediaInfo.youtube_url | safe" frameborder="0" allowfullscreen>
         </iframe>
       </ion-card-content>
-      <ion-card-content *ngIf="mediaInfo.media_type == 'text' && textMediaContent"
-                        [innerHtml]="textMediaContent">
+      <ion-card-content *ngIf="mediaInfo.media_type == 'text' && mediaInfo.snippet_content">
+        <pre>
+          <code [innerHtml]="mediaInfo.snippet_content"></code>
+        </pre>
       </ion-card-content>
       <ion-card-content *ngIf="mediaInfo.media_type == 'text'">
         <a ion-button [href]="api_url + mediaInfo.file_name" [target]="_blank">Download</a>
