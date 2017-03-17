@@ -9,8 +9,6 @@ This is the front end repository. The back end can be found at [https://github.c
 # Application Builds
 
 ## Android
-The latest Android build can be downloaded at
-[https://dao-api.othnet.ga/builds/latest.apk](https://dao-api.othnet.ga/builds/latest.apk).
 
 To build the APK from source, make sure you have Ionic 2 and Cordova installed:
 
