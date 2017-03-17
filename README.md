@@ -4,7 +4,7 @@ Dao of Code is a social platform for those who are interested in learning
 to code. With Dao of Code you can easily share images, videos, audio and
 code snippets with other students.
 
-This is the front end repository. The back end can be found at [https://github.com/jukump/dao-of-code-backend](https://github.com/jukump/dao-of-code-backend).
+This is the front end repository. The back end can be found at [https://github.com/tundet/dao-of-code-backend](https://github.com/tundet/dao-of-code-backend).
 
 # Application Builds
 
